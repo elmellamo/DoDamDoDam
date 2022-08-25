@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "991088109868",
+    "project_id": "dodamdodam-f3450",
+    "storage_bucket": "dodamdodam-f3450.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991088109868:android:3fb50a0479551fe3562489",
+        "android_client_info": {
+          "package_name": "com.example.dodamdodam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991088109868-54f3rqt5386o7ekjtde88agsohhif7e9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIG-v20aIXoIKI3-rAw4wCzsBgpZXB7NQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991088109868-54f3rqt5386o7ekjtde88agsohhif7e9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
