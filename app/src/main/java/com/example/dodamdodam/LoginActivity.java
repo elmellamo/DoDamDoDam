@@ -45,12 +45,13 @@ public class LoginActivity extends AppCompatActivity {
         String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
 
         if (email.length() > 0 && password.length() > 0) {
-            mAuth.createUserWithEmailAndPassword(email, password)
+            mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    startToast("회원가입 성공!");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    startToast("로그인 성공!");
                                 } else {
                                     if (task.getException() != null) {
                                         startToast(task.getException().toString());
@@ -59,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
             } else {
-                startToast("비밀번호가 일치하지 않습니다.");
+                startToast("이메일 또는 비밀번호 입력해주세요!");
             }
     }
 
