@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/emailEditText"
-        android:text="회원가입"
+        android:text="로그인"
         android:textColor="#000000"
         android:textStyle="bold"
         android:id="@+id/signuptext"
@@ -29,46 +29,27 @@
         android:inputType="textEmailAddress"
         android:id="@+id/emailEditText"/>
 
+
     <EditText
-        app:layout_constraintTop_toBottomOf="@+id/emailEditText"
-        app:layout_constraintBottom_toTopOf="@+id/passwordCheckEditText"
+        android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:ems="10"
         android:hint="비밀번호"
         android:inputType="textPassword"
-        android:id="@+id/passwordEditText"/>
-
-    <EditText
+        app:layout_constraintBottom_toTopOf="@+id/loginBtn"
         app:layout_constraintTop_toBottomOf="@+id/emailEditText"
-        app:layout_constraintBottom_toTopOf="@+id/signUpBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint="비밀번호"
-        android:inputType="textPassword"
-        android:id="@+id/passwordCheckEditText"/>
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        app:layout_constraintTop_toBottomOf="@+id/passwordCheckEditText"
-        app:layout_constraintBottom_toTopOf="@+id/goto_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/signUpBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="회원가입"/>
-
-    <Button
-        app:layout_constraintTop_toBottomOf="@+id/signUpBtn"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/goto_login"
+        android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="로그인하기"/>
+        android:text="로그인"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
