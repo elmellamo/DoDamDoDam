@@ -39,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
                     signUp();
                     break;
                 case R.id.goto_login:
-                    myStartActivity(LoginActivity.class);
+                    StartLoginActivity();
                     break;
             }
         }
@@ -77,9 +77,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //리스너에서는 인텐트 못 걸어줘서 따로 함수 만드는 것
-    private void myStartActivity(Class c){
-        Intent intent = new Intent(this, c);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    private void StartLoginActivity(){
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 

@@ -6,13 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+
+    <Button
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/albumbtn"
+        app:layout_constraintBottom_toTopOf="@+id/calendarbtn"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/questionbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="도담도담 시작!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="질문" />
 
+    <Button
+        app:layout_constraintStart_toEndOf="@+id/questionbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/settingbtn"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/albumbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="앨범" />
+
+    <Button
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/settingbtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionbtn"
+        android:id="@+id/calendarbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="캘린더" />
+
+    <Button
+        app:layout_constraintStart_toEndOf="@+id/calendarbtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/albumbtn"
+        android:id="@+id/settingbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="설정" />
 </androidx.constraintlayout.widget.ConstraintLayout>
