@@ -18,14 +18,14 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private static final String TAG = "SignUpActivity";
+    private static final String TAG = "SignUpActivity"; //앱에 뜨게 하려고
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance(); //유저를 받아오기 위해서
 
         findViewById(R.id.signUpBtn).setOnClickListener(onClickListener);
         findViewById(R.id.goto_login).setOnClickListener(onClickListener);
@@ -45,8 +45,10 @@ public class SignUpActivity extends AppCompatActivity {
         }
     };
 
-    private void signUp() {
+    private void signUp() { //회원 가입 로직을 처리하는 함수
         String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
+        //editText 붙인 이유 : getText를 사용하려면 일반 View는 getText를 사용 못함
+        //editText나 textView에서만 사용 가능 > 그래서 형변환 해줌
         String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
         String passwordCheck = ((EditText) findViewById(R.id.passwordCheckEditText)).getText().toString();
 
@@ -58,9 +60,9 @@ public class SignUpActivity extends AppCompatActivity {
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
+                                if (task.isSuccessful()) { //회원가입 성공시
                                     startToast("회원가입 성공!");
-                                } else {
+                                } else { //회원가입 실패시
                                     if (task.getException() != null) {
                                         startToast(task.getException().toString());
                                     }
@@ -85,5 +87,5 @@ public class SignUpActivity extends AppCompatActivity {
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
-
+    //mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener에서는 Toast.makeToast 사용 못해서 함수 선언
 }
