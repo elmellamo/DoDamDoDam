@@ -13,13 +13,13 @@
         android:text="회원가입"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:id="@+id/signuptext"
+        android:id="@+id/memberinfo"
         android:gravity="center"
         android:textSize="24sp"
         android:layout_marginBottom="10dp"/>
 
     <EditText
-        app:layout_constraintTop_toBottomOf="@+id/signuptext"
+        app:layout_constraintTop_toBottomOf="@+id/memberinfo"
         app:layout_constraintBottom_toTopOf="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

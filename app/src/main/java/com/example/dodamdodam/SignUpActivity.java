@@ -39,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
                     signUp();
                     break;
                 case R.id.goto_login:
-                    StartLoginActivity();
+                    myStartActivity(LoginActivity.class);
                     break;
             }
         }
@@ -62,6 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) { //회원가입 성공시
                                     startToast("회원가입 성공!");
+                                    myStartActivity(MainActivity.class);
                                 } else { //회원가입 실패시
                                     if (task.getException() != null) {
                                         startToast(task.getException().toString());
@@ -79,13 +80,15 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     //리스너에서는 인텐트 못 걸어줘서 따로 함수 만드는 것
-    private void StartLoginActivity(){
-        Intent intent = new Intent(this, LoginActivity.class);
+
+    private void myStartActivity(Class c){
+        Intent intent = new Intent(this, c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
-    //mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener에서는 Toast.makeToast 사용 못해서 함수 선언
+
 }

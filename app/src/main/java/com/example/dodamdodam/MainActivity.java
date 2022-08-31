@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,16 +27,29 @@ public class MainActivity extends AppCompatActivity {
         그럴 일이 없을 것 같아 구현하지 않음*/
         
         //로그인 되지 않았다면, 회원가입 화면으로 넘어가기
-        if(FirebaseAuth.getInstance().getCurrentUser() == null){
-            StartSignUpActivity();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if(user == null){
+            myStartActivity(SignUpActivity.class);
         }
-        
+        else{
+            for(UserInfo profile : user.getProviderData()){
+                String name =profile.getDisplayName();
+                if(name != null){
+                    if(name.length()==0){
+                        myStartActivity(MemberInitActivity.class);
+                    }
+                }
+            }
+        }
 
     }
 
 
-    private void StartSignUpActivity(){
-        Intent intent = new Intent(this, SignUpActivity.class);
+    private void myStartActivity(Class c){
+        Intent intent = new Intent(this, c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,15 +25,19 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        findViewById(R.id.loginBtn).setOnClickListener(onClickListener);
+        findViewById(R.id.checkBtn).setOnClickListener(onClickListener);
+        findViewById(R.id.gotoPasswordResetBtn).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.loginBtn:
+                case R.id.checkBtn:
                     login();
+                    break;
+                case R.id.gotoPasswordResetBtn:
+                    myStartActivity(PasswordResetActivity.class);
                     break;
             }
         }
@@ -52,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     startToast("로그인 성공!");
-                                    StartMainActivity();
+                                    finish();
                                 } else {
                                     if (task.getException() != null) {
                                         startToast(task.getException().toString());
@@ -74,8 +77,8 @@ public class LoginActivity extends AppCompatActivity {
     
     //한번 로그인을 하였다면, signup login 등 이전 히스토리가 안 남게 하고 이제 backpressed를 한 번 해도 이전 로그인, 회원가입 화면이 뜨지 않고
     //바로 앱이 종료되도록 하는 것이 addFlags에 FLAG_ACTIVITY_CLEAR_TOP의 역할
-    private void StartMainActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
+    private void myStartActivity(Class c){
+        Intent intent = new Intent(this, c);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
