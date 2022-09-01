@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,7 +45,21 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        findViewById(R.id.logoutbtn).setOnClickListener(onClickListener);
+
     }
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.logoutbtn:
+                    FirebaseAuth.getInstance().signOut();
+                    myStartActivity(LoginActivity.class);
+                    break;
+            }
+        }
+    };
 
 
     private void myStartActivity(Class c){

@@ -9,9 +9,19 @@
 
     <Button
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/questionbtn"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/logoutbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그아웃" />
+
+    <Button
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/albumbtn"
         app:layout_constraintBottom_toTopOf="@+id/calendarbtn"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoutbtn"
         android:id="@+id/questionbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +31,7 @@
         app:layout_constraintStart_toEndOf="@+id/questionbtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/settingbtn"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoutbtn"
         android:id="@+id/albumbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
