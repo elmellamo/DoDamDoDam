@@ -1,7 +1,5 @@
 package com.example.dodamdodam;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -58,19 +56,13 @@ public class MemberInitActivity extends AppCompatActivity {
                                 }
                             }
                         });
-            }
-
+                }
 
             } else {
                 startToast("회원정보를 입력해주세요.");
             }
     }
-
-
-
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
-
-
 }

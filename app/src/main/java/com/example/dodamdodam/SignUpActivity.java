@@ -1,8 +1,10 @@
 package com.example.dodamdodam;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.util.Log;
@@ -54,8 +56,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0) {
             if (password.equals(passwordCheck)) {
-
-
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -63,6 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) { //회원가입 성공시
                                     startToast("회원가입 성공!");
                                     myStartActivity(MainActivity.class);
+                                    finish();
                                 } else { //회원가입 실패시
                                     if (task.getException() != null) {
                                         startToast(task.getException().toString());
@@ -90,5 +91,22 @@ public class SignUpActivity extends AppCompatActivity {
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+        builder.setMessage("도담도담 앱을 종료하시겠습니까?");
+        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
+            }
+        });
+        builder.setNegativeButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        builder.show();
+    }
 }
