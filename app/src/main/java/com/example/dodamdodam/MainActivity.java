@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,8 +29,9 @@ public class MainActivity extends AppCompatActivity {
         else{
             for(UserInfo profile : user.getProviderData()){
                 String name =profile.getDisplayName();
-                if(name != null){
-                    if(name.length()==0){
+                Log.e("이름: ", "이름: "+name);
+                if(name == null){
+                    {
                         myStartActivity(MemberInitActivity.class);
                     }
                 }
