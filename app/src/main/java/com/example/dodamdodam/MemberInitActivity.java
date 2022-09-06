@@ -41,21 +41,23 @@ public class MemberInitActivity extends AppCompatActivity {
         if (name.length()>0) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                    .setDisplayName(name)
-                    .build();
-            if(user!=null){
-                user.updateProfile(profileUpdates)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
-                                    startToast("회원정보 등록에 성공하였습니다.");
-                                    finish();
-                                }
-                            }
-                        });
-                }
+//            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+//                    .setDisplayName(name)
+//                    .build();
+//            if(user!=null){
+//                user.updateProfile(profileUpdates)
+//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            @Override
+//                            public void onComplete(@NonNull Task<Void> task) {
+//                                if(task.isSuccessful()){
+//                                    startToast("회원정보 등록에 성공하였습니다.");
+//                                    finish();
+//                                }
+//                            }
+//                        });
+//                }
+
+
 
             } else {
                 startToast("회원정보를 입력해주세요.");
