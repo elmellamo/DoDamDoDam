@@ -1,6 +1,7 @@
 package com.example.dodamdodam;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -9,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,6 +19,8 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MemberInitActivity extends AppCompatActivity {
+    private static final String TAG = "MemberInitActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,29 @@ public class MemberInitActivity extends AppCompatActivity {
         if (name.length()>0 && birthDay.length()>5) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            MemberInfo memberInfo = new MemberInfo(name, birthDay, null);
+
+            if(user!=null){
+                db.collection("users").document(user.getUid()).set(memberInfo)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                startToast("회원정보 등록 성공!");
+                                finish();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                startToast("회원정보 등록 실패 ㅠ");
+                                Log.w(TAG, "Error writing document", e);
+                            }
+                        });
+            }else{
+                startToast("회원정보를 입력해주세요.");
+            }
+
 
 //            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
 //                    .setDisplayName(name)
