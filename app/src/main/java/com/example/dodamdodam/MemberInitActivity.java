@@ -13,6 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MemberInitActivity extends AppCompatActivity {
 
@@ -37,9 +38,11 @@ public class MemberInitActivity extends AppCompatActivity {
 
     private void profileUpdate() {
         String name = ((EditText) findViewById(R.id.nameEditText)).getText().toString();
+        final String birthDay = ((EditText) findViewById(R.id.birthDayEditText)).getText().toString();
 
-        if (name.length()>0) {
+        if (name.length()>0 && birthDay.length()>5) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
 
 //            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
 //                    .setDisplayName(name)
