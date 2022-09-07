@@ -19,13 +19,12 @@ import com.google.firebase.auth.UserInfo;
 
 public class FindLover extends AppCompatActivity {
     TextView myUid;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_lover);
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         myUid = (TextView)findViewById(R.id.myUID);
 
@@ -45,7 +44,7 @@ public class FindLover extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.sharebtn:
-                    //공유 창은 일단 구현 안 하는걸로
+                    shareMyUid();
                     break;
                 case R.id.loverbtn:
                     myStartActivity(PasswordResetActivity.class);
@@ -53,6 +52,21 @@ public class FindLover extends AppCompatActivity {
             }
         }
     };
+
+    private void shareMyUid(){
+       if(user!=null){
+           String uid = user.getUid();
+           Intent Sharing_intent = new Intent(Intent.ACTION_SEND);
+           Sharing_intent.setType("text/plain");
+
+           String Test_Message = uid;
+
+           Sharing_intent.putExtra(Intent.EXTRA_TEXT, Test_Message);
+
+           Intent Sharing = Intent.createChooser(Sharing_intent, "공유하기");
+           startActivity(Sharing);
+        }
+    }
 
     private void myStartActivity(Class c){
         Intent intent = new Intent(this, c);
