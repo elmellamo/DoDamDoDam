@@ -57,9 +57,9 @@ public class MemberInitActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                myStartActivity(FindLover.class);
+                                //myStartActivity(FindLover.class);
                                 startToast("회원정보 등록 성공!");
-
+                                myStartActivity(MainActivity.class);
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {

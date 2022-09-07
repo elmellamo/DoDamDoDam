@@ -18,6 +18,7 @@ import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -41,6 +42,29 @@ public class MainActivity extends AppCompatActivity {
                     myStartActivity(MemberInitActivity.class);
                 }
             }
+
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference document = db.collection("users")
+                    .document(user.getUid());
+            document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if(documentSnapshot.exists()){
+                        String loveruid = (String)documentSnapshot.get("lover");
+                        if(loveruid == null)
+                            myStartActivity(FindLover.class);
+                    }
+                    else
+                        startToast("user data 찾기 실패");
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    startToast("Failed to fetch");
+                }
+            });
+
         }
 
 

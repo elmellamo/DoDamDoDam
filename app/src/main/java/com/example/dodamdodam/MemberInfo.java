@@ -21,15 +21,9 @@ public class MemberInfo {
     public String getBirthday(){
         return this.birthday;
     }
-    public void setBirthday(String birthday){
-        this.birthday = birthday;
-    }
+    public void setBirthday(String birthday){ this.birthday = birthday; }
 
-    public String getLover(){
-        return this.lover;
-    }
-    public void setLover(String lover){
-        this.lover = lover;
-    }
+    public String getLover(){ return this.lover; }
+    public void setLover(String lover){ this.lover = lover; }
 
 }
