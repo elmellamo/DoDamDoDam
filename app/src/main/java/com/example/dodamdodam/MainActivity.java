@@ -1,5 +1,6 @@
 package com.example.dodamdodam;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,10 +10,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,12 +38,11 @@ public class MainActivity extends AppCompatActivity {
                 String name =profile.getDisplayName();
                 Log.e("이름: ", "이름: "+name);
                 if(name == null){
-                    {
-                        myStartActivity(MemberInitActivity.class);
-                    }
+                    myStartActivity(MemberInitActivity.class);
                 }
             }
         }
+
 
         findViewById(R.id.logoutbtn).setOnClickListener(onClickListener);
 
@@ -80,5 +86,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+    private void startToast(String msg){
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 }

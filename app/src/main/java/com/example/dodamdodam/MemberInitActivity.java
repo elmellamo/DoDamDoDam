@@ -1,5 +1,6 @@
 package com.example.dodamdodam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -56,8 +57,9 @@ public class MemberInitActivity extends AppCompatActivity {
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
+                                myStartActivity(FindLover.class);
                                 startToast("회원정보 등록 성공!");
-                                finish();
+
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -94,6 +96,13 @@ public class MemberInitActivity extends AppCompatActivity {
                 startToast("회원정보를 입력해주세요.");
             }
     }
+
+    private void myStartActivity(Class c){
+        Intent intent = new Intent(this, c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
