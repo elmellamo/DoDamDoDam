@@ -1,8 +1,11 @@
 package com.example.dodamdodam;
 
+import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -27,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
 
         findViewById(R.id.checkBtn).setOnClickListener(onClickListener);
         findViewById(R.id.gotoPasswordResetBtn).setOnClickListener(onClickListener);
+        findViewById(R.id.gotosignupBtn).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -38,6 +42,9 @@ public class LoginActivity extends AppCompatActivity {
                     break;
                 case R.id.gotoPasswordResetBtn:
                     myStartActivity(PasswordResetActivity.class);
+                    break;
+                case R.id.gotosignupBtn:
+                    myStartActivity(SignUpActivity.class);
                     break;
             }
         }
@@ -80,5 +87,23 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, c);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setMessage("도담도담 앱을 종료하시겠습니까?");
+        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.setNegativeButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+            }
+        });
+        builder.show();
     }
 }
