@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
                         if(loveruid == null)
                             myStartActivity(FindLover.class);
                     }
-                    else
-                        startToast("user data 찾기 실패");
                 }
             })
                     .addOnFailureListener(new OnFailureListener() {

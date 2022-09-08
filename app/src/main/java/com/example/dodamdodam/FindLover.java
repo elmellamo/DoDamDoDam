@@ -43,8 +43,6 @@ public class FindLover extends AppCompatActivity {
                 myUid.setText(uid);
         }
 
-
-
         findViewById(R.id.sharebtn).setOnClickListener(onClickListener);
         findViewById(R.id.loverbtn).setOnClickListener(onClickListener);
     }
@@ -57,7 +55,7 @@ public class FindLover extends AppCompatActivity {
                     shareMyUid();
                     break;
                 case R.id.loverbtn:
-                    putLoverCode();
+                    myStartActivity(PutCode.class);
                     break;
             }
         }
@@ -76,60 +74,6 @@ public class FindLover extends AppCompatActivity {
            Intent Sharing = Intent.createChooser(Sharing_intent, "공유하기");
            startActivity(Sharing);
         }
-    }
-
-    private void putLoverCode(){
-        Dialog dialog = new Dialog(FindLover.this, android.R.style.Theme_Material_Light_Dialog);
-        dialog.setContentView(R.layout.dialog_put_code);
-        //커스텀 다이얼로그
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setCanceledOnTouchOutside(false);
-        //다이얼로그 크기 조절하기
-        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-        params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        dialog.getWindow().setAttributes((WindowManager.LayoutParams) params);
-
-        String lovercode = ((EditText)findViewById(R.id.lovercode)).getText().toString();
-
-        Button btn_ok = dialog.findViewById(R.id.btn_ok);
-
-        btn_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(lovercode.length()>0){
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                DocumentReference document = db.collection("users").document(lovercode);
-                document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if(documentSnapshot.exists()){
-                            String otherlover = (String)documentSnapshot.get("lover");
-                            if(otherlover == null){
-                                if(user!=null){
-                                db.collection("users").document(user.getUid()).update("lover", lovercode);
-                                db.collection("users").document(lovercode).update("lover", user.getUid());
-                                startToast("짝꿍과 연결되었습니다!");
-                                myStartActivity(MainActivity.class);}
-                            }
-                            else{
-                                startToast("해당 짝꿍은 연결되어 있는 사람이 있어요.");
-                            }
-                        }
-                        else
-                            startToast("짝꿍이 존재하지 않아요.");
-                    }
-                })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                startToast("Failed to fetch");
-                            }
-                        });
-                dialog.dismiss();//dialog 종료
-            }}
-            });
-        dialog.show();
     }
 
     private void startToast(String msg){
