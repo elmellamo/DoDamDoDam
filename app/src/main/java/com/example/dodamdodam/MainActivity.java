@@ -35,34 +35,31 @@ public class MainActivity extends AppCompatActivity {
             myStartActivity(SignUpActivity.class);
         }
         else{
-            for(UserInfo profile : user.getProviderData()){
-                String name =profile.getDisplayName();
-                Log.e("이름: ", "이름: "+name);
-                if(name == null){
+            for(UserInfo profile : user.getProviderData()) {
+                String name = profile.getDisplayName();
+                if (name == null) {
                     myStartActivity(MemberInitActivity.class);
+                } else {
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    DocumentReference document = db.collection("users").document(user.getUid());
+                    document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if (documentSnapshot.exists()) {
+                                String loveruid = (String) documentSnapshot.get("lover");
+                                if (loveruid == null)
+                                    myStartActivity(FindLover.class);
+                            }
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    startToast("Failed to fetch");
+                                }
+                            });
                 }
             }
-
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference document = db.collection("users")
-                    .document(user.getUid());
-            document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    if(documentSnapshot.exists()){
-                        String loveruid = (String)documentSnapshot.get("lover");
-                        if(loveruid == null)
-                            myStartActivity(FindLover.class);
-                    }
-                }
-            })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            startToast("Failed to fetch");
-                        }
-                    });
-
         }
 
 

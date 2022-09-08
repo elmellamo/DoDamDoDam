@@ -30,11 +30,3 @@ public class Title extends Activity {
         }, 3000);
         }
     }
-
-public class StartMain extends Activity{
-    @Override
-    public void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
-}
