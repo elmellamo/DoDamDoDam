@@ -50,22 +50,22 @@ public class PutCode extends AppCompatActivity {
     };
 
     private void putLoverCode() {
-        String lovercode = ((EditText)findViewById(R.id.lovercode)).getText().toString();
-        if (lovercode.length() > 0) {
+        String loveruid = ((EditText)findViewById(R.id.putlovercode)).getText().toString();
+        if (loveruid.length() > 0) {
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            DocumentReference document = db.collection("users").document(lovercode);
+            DocumentReference document = db.collection("users")
+                    .document(loveruid);
             document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     if (documentSnapshot.exists()) {
                         String otherlover = (String) documentSnapshot.get("lover");
                         if (otherlover == null) {
-                            if (user != null) {
-                                db.collection("users").document(user.getUid()).update("lover", lovercode);
-                                db.collection("users").document(lovercode).update("lover", user.getUid());
+                                db.collection("users").document(user.getUid()).update("lover", loveruid);
+                                db.collection("users").document(loveruid).update("lover", user.getUid());
                                 startToast("짝꿍과 연결되었습니다!");
                                 myStartActivity(MainActivity.class);
-                            }
+
                         } else {
                             startToast("해당 짝꿍은 연결되어 있는 사람이 있어요.");
                         }
@@ -80,7 +80,7 @@ public class PutCode extends AppCompatActivity {
                         }
                     });
         }
-}
+    }
 
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();

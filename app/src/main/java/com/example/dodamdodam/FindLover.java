@@ -39,12 +39,14 @@ public class FindLover extends AppCompatActivity {
         myUid = (TextView)findViewById(R.id.myUID);
 
         if(user!=null){
-                String uid = user.getUid();
-                myUid.setText(uid);
+            String uid = user.getUid();
+            myUid.setText(uid);
         }
 
         findViewById(R.id.sharebtn).setOnClickListener(onClickListener);
         findViewById(R.id.loverbtn).setOnClickListener(onClickListener);
+
+
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -62,17 +64,17 @@ public class FindLover extends AppCompatActivity {
     };
 
     private void shareMyUid(){
-       if(user!=null){
-           String uid = user.getUid();
-           Intent Sharing_intent = new Intent(Intent.ACTION_SEND);
-           Sharing_intent.setType("text/plain");
+        if(user!=null){
+            String uid = user.getUid();
+            Intent Sharing_intent = new Intent(Intent.ACTION_SEND);
+            Sharing_intent.setType("text/plain");
 
-           String Test_Message = uid;
+            String Test_Message = uid;
 
-           Sharing_intent.putExtra(Intent.EXTRA_TEXT, Test_Message);
+            Sharing_intent.putExtra(Intent.EXTRA_TEXT, Test_Message);
 
-           Intent Sharing = Intent.createChooser(Sharing_intent, "공유하기");
-           startActivity(Sharing);
+            Intent Sharing = Intent.createChooser(Sharing_intent, "공유하기");
+            startActivity(Sharing);
         }
     }
 
