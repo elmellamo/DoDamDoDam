@@ -58,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
                         startToast("user data 찾기 실패");
                 }
             })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    startToast("Failed to fetch");
-                }
-            });
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            startToast("Failed to fetch");
+                        }
+                    });
 
         }
 
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    
+
     //메인 화면에서 back 버튼을 누르면 앱이 종료되도록 설정
     @Override
     public void onBackPressed() {
