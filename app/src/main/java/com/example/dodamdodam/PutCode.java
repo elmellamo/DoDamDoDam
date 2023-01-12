@@ -65,7 +65,6 @@ public class PutCode extends AppCompatActivity {
                                 db.collection("users").document(loveruid).update("lover", user.getUid());
                                 startToast("짝꿍과 연결되었습니다!");
                                 myStartActivity(MainActivity.class);
-
                         } else {
                             startToast("해당 짝꿍은 연결되어 있는 사람이 있어요.");
                         }
