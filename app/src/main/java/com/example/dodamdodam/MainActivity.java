@@ -35,12 +35,29 @@ public class MainActivity extends AppCompatActivity {
             myStartActivity(SignUpActivity.class);
         }
         else{
-            for(UserInfo profile : user.getProviderData()) {
-                String name = profile.getDisplayName();
-                if (name == null) {
-                    myStartActivity(MemberInitActivity.class);
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            DocumentReference document = db.collection("users")
+                    .document(user.getUid());
+            document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if(documentSnapshot.exists()){
+                        String loveruid = (String)documentSnapshot.get("lover");
+                        String myname = (String)documentSnapshot.get("name");
+                        if(myname == null)
+                            myStartActivity(MemberInitActivity.class);
+                        if(loveruid == null)
+                            myStartActivity(FindLover.class);
+                    }
                 }
-            }
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            startToast("Failed to fetch");
+                        }
+                    });
+
         }
 
 
