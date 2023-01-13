@@ -62,7 +62,7 @@ public class SignUpActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) { //회원가입 성공시
                                     startToast("회원가입 성공!");
-                                    myStartActivity(MainActivity.class);
+                                    myStartActivity(MemberInitActivity.class);
                                     finish();
                                 } else { //회원가입 실패시
                                     if (task.getException() != null) {
