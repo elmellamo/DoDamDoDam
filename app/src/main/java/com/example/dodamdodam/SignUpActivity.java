@@ -31,6 +31,11 @@ public class SignUpActivity extends AppCompatActivity {
 
         findViewById(R.id.signUpBtn).setOnClickListener(onClickListener);
         findViewById(R.id.goto_login).setOnClickListener(onClickListener);
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("도담도담");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {

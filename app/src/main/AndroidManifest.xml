@@ -37,6 +37,9 @@
         <activity android:name=".PutCode"
             android:exported="true">
         </activity>
+        <activity android:name=".AlbumMain"
+            android:exported="true">
+        </activity>
 
     </application>
 

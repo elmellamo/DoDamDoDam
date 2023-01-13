@@ -29,6 +29,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("도담도담");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        findViewById(R.id.albumbtn).setOnClickListener(onClickListener);
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if(user == null){
@@ -72,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.logoutbtn:
                     FirebaseAuth.getInstance().signOut();
                     myStartActivity(SignUpActivity.class);
+                    break;
+                case R.id.albumbtn:
+                    myStartActivity(AlbumMain.class);
                     break;
             }
         }

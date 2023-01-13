@@ -29,6 +29,10 @@ public class MemberInitActivity extends AppCompatActivity {
         setContentView(R.layout.activity_member_init);
 
         findViewById(R.id.checkBtn).setOnClickListener(onClickListener);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("도담도담");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
