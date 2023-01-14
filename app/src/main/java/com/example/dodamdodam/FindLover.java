@@ -41,6 +41,7 @@ public class FindLover extends AppCompatActivity {
         getSupportActionBar().setTitle("도담도담");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         myUid = (TextView)findViewById(R.id.myUID);
 
         if(user!=null){

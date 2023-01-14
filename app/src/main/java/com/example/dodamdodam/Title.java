@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
 
-public class Title extends Activity {
+public class Title extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 // TODO Auto-generated method stub

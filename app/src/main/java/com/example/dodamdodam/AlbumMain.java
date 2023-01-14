@@ -39,7 +39,7 @@ public class AlbumMain extends AppCompatActivity {
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("도담도담 앨범");
+        getSupportActionBar().setTitle("도담도담");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
