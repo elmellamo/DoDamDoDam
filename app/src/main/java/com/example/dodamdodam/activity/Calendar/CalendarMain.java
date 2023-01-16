@@ -1,28 +1,23 @@
-package com.example.dodamdodam.activity.Login;
+package com.example.dodamdodam.activity.Calendar;
 
 import android.os.Bundle;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Login.BasicActivity;
+
 import android.annotation.SuppressLint;
-import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-public class CalendarMain extends AppCompatActivity {
+public class CalendarMain extends BasicActivity {
     public String readDay = null;
     public String str = null;
     public CalendarView calendarView;
