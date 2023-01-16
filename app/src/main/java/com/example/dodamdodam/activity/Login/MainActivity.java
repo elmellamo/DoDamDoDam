@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.albumbtn).setOnClickListener(onClickListener);
-
+        findViewById(R.id.calendarbtn).setOnClickListener(onClickListener);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if(user == null){
@@ -80,6 +80,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.albumbtn:
                     myStartActivity(AlbumMain.class);
+                    break;
+                case R.id.calendarbtn:
+                    myStartActivity(CalendarMain.class);
                     break;
             }
         }
