@@ -1,4 +1,4 @@
-package com.example.dodamdodam.activity;
+package com.example.dodamdodam.activity.Login;
 
 import android.content.Intent;
 import android.os.Bundle;

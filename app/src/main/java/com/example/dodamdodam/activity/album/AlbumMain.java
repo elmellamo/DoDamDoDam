@@ -1,4 +1,4 @@
-package com.example.dodamdodam.activity;
+package com.example.dodamdodam.activity.album;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Login.PutCode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -33,7 +34,7 @@ public class AlbumMain extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()){
                 case R.id.album_add:
-                    myStartActivity(PutCode.class); ////여기에는 앨범 추가 사진이랑 간단 설명 넣을 시 갈 액티비티 넣기
+                    myStartActivity(AlbumAdd.class); ////여기에는 앨범 추가 사진이랑 간단 설명 넣을 시 갈 액티비티 넣기
                     break;
             }
         }

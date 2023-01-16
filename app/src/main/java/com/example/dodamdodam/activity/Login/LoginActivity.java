@@ -1,6 +1,7 @@
-package com.example.dodamdodam.activity;
+package com.example.dodamdodam.activity.Login;
 
 import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -16,20 +17,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-public class SignUpActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private static final String TAG = "SignUpActivity"; //앱에 뜨게 하려고
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_login);
 
-        mAuth = FirebaseAuth.getInstance(); //유저를 받아오기 위해서
+        mAuth = FirebaseAuth.getInstance();
 
-        findViewById(R.id.signUpBtn).setOnClickListener(onClickListener);
-        findViewById(R.id.goto_login).setOnClickListener(onClickListener);
+        findViewById(R.id.checkBtn).setOnClickListener(onClickListener);
+        findViewById(R.id.gotoPasswordResetBtn).setOnClickListener(onClickListener);
+        findViewById(R.id.gotosignupBtn).setOnClickListener(onClickListener);
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,34 +43,33 @@ public class SignUpActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.signUpBtn:
-                    signUp();
+                case R.id.checkBtn:
+                    login();
                     break;
-                case R.id.goto_login:
-                    myStartActivity(LoginActivity.class);
+                case R.id.gotoPasswordResetBtn:
+                    myStartActivity(PasswordResetActivity.class);
+                    break;
+                case R.id.gotosignupBtn:
+                    myStartActivity(SignUpActivity.class);
                     break;
             }
         }
     };
 
-    private void signUp() { //회원 가입 로직을 처리하는 함수
+    private void login() {
         String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
-        //editText 붙인 이유 : getText를 사용하려면 일반 View는 getText를 사용 못함
-        //editText나 textView에서만 사용 가능 > 그래서 형변환 해줌
         String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
-        String passwordCheck = ((EditText) findViewById(R.id.passwordCheckEditText)).getText().toString();
 
-        if (email.length() > 0 && password.length() > 0 && passwordCheck.length() > 0) {
-            if (password.equals(passwordCheck)) {
-                mAuth.createUserWithEmailAndPassword(email, password)
+        if (email.length() > 0 && password.length() > 0) {
+            mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) { //회원가입 성공시
-                                    startToast("회원가입 성공!");
-                                    myStartActivity(MemberInitActivity.class);
-                                    finish();
-                                } else { //회원가입 실패시
+                                if (task.isSuccessful()) {
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    startToast("로그인 성공!");
+                                    myStartActivity(MainActivity.class);
+                                } else {
                                     if (task.getException() != null) {
                                         startToast(task.getException().toString());
                                     }
@@ -76,28 +77,26 @@ public class SignUpActivity extends AppCompatActivity {
                             }
                         });
             } else {
-                startToast("비밀번호가 일치하지 않습니다.");
+                startToast("이메일 또는 비밀번호 입력해주세요!");
             }
-        }
-        else {
-            startToast("이메일 또는 비밀번호를 입력해 주세요.");
-        }
     }
 
-    //리스너에서는 인텐트 못 걸어줘서 따로 함수 만드는 것
 
+
+    private void startToast(String msg){
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    //한번 로그인을 하였다면, signup login 등 이전 히스토리가 안 남게 하고 이제 backpressed를 한 번 해도 이전 로그인, 회원가입 화면이 뜨지 않고
+    //바로 앱이 종료되도록 하는 것이 addFlags에 FLAG_ACTIVITY_CLEAR_TOP의 역할
     private void myStartActivity(Class c){
         Intent intent = new Intent(this, c);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
-    private void startToast(String msg){
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
-    }
     @Override
     public void onBackPressed() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
         builder.setMessage("도담도담 앱을 종료하시겠습니까?");
         builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
             @Override
@@ -108,9 +107,7 @@ public class SignUpActivity extends AppCompatActivity {
         builder.setNegativeButton("네", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                moveTaskToBack(true); // 태스크를 백그라운드로 이동
-                finishAndRemoveTask(); // 액티비티 종료 + 태스크 리스트에서 지우기
-                android.os.Process.killProcess(android.os.Process.myPid()); // 앱 프로세스 종료
+                finish();
             }
         });
         builder.show();

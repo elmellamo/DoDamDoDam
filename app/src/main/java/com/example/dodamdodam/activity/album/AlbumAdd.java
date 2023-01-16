@@ -1,4 +1,4 @@
-package com.example.dodamdodam.activity;
+package com.example.dodamdodam.activity.album;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,62 +12,29 @@ import com.example.dodamdodam.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class FindLover extends AppCompatActivity {
-    TextView myUid;
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+public class AlbumAdd extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_find_lover);
+        setContentView(R.layout.activity_album_add);
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("도담도담");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        myUid = (TextView)findViewById(R.id.myUID);
-
-        if(user!=null){
-            String uid = user.getUid();
-            myUid.setText(uid);
-        }
-
-        findViewById(R.id.sharebtn).setOnClickListener(onClickListener);
-        findViewById(R.id.loverbtn).setOnClickListener(onClickListener);
-
-
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.sharebtn:
-                    shareMyUid();
-                    break;
-                case R.id.loverbtn:
-                    myStartActivity(PutCode.class);
+                case R.id.album_add:
+                    myStartActivity(AlbumAdd.class); ////여기에는 앨범 추가 사진이랑 간단 설명 넣을 시 갈 액티비티 넣기
                     break;
             }
         }
     };
-
-    private void shareMyUid(){
-        if(user!=null){
-            String uid = user.getUid();
-            Intent Sharing_intent = new Intent(Intent.ACTION_SEND);
-            Sharing_intent.setType("text/plain");
-
-            String Test_Message = uid;
-
-            Sharing_intent.putExtra(Intent.EXTRA_TEXT, Test_Message);
-
-            Intent Sharing = Intent.createChooser(Sharing_intent, "공유하기");
-            startActivity(Sharing);
-        }
-    }
 
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();

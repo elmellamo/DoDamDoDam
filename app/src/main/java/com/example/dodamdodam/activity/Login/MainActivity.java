@@ -1,4 +1,4 @@
-package com.example.dodamdodam.activity;
+package com.example.dodamdodam.activity.Login;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.album.AlbumMain;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
