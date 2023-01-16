@@ -1,4 +1,4 @@
-package com.example.dodamdodam;
+package com.example.dodamdodam.view;
 
 public class MemberInfo {
     private String name;
