@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.dodamdodam.R;
-import com.example.dodamdodam.activity.Calendar.CalendarMain;
 import com.example.dodamdodam.activity.album.AlbumMain;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,7 +20,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class MainActivity extends BasicActivity {
+import java.util.Objects;
+
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class MainActivity extends BasicActivity {
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("도담도담");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.albumbtn).setOnClickListener(onClickListener);

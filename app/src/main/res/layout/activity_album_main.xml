@@ -11,7 +11,7 @@
     <include layout="@layout/toolbar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/album_title"
+        android:id="@+id/album_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
@@ -43,9 +43,9 @@
             android:padding="7dp"
             android:scaleType="centerInside"
             android:src="@drawable/album_add"
-            app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintStart_toEndOf="@+id/album_dodam"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,7 +56,7 @@
         android:id="@+id/listcontainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/album_title"
+        android:layout_below="@+id/album_layout"
         android:layout_alignParentBottom="true">
 
     </FrameLayout>

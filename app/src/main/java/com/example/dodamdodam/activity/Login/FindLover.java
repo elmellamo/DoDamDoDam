@@ -12,7 +12,9 @@ import com.example.dodamdodam.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class FindLover extends BasicActivity {
+import java.util.Objects;
+
+public class FindLover extends AppCompatActivity {
     TextView myUid;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -23,7 +25,7 @@ public class FindLover extends BasicActivity {
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("도담도담");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

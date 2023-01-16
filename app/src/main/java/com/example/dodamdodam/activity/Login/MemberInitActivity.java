@@ -18,7 +18,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class MemberInitActivity extends BasicActivity {
+import java.util.Objects;
+
+public class MemberInitActivity extends AppCompatActivity {
     private static final String TAG = "MemberInitActivity";
 
 
@@ -30,7 +32,7 @@ public class MemberInitActivity extends BasicActivity {
         findViewById(R.id.checkBtn).setOnClickListener(onClickListener);
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("도담도담");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
@@ -76,29 +78,10 @@ public class MemberInitActivity extends BasicActivity {
             }else{
                 startToast("회원정보를 입력해주세요.");
             }
-
-
-//            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-//                    .setDisplayName(name)
-//                    .build();
-//            if(user!=null){
-//                user.updateProfile(profileUpdates)
-//                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                            @Override
-//                            public void onComplete(@NonNull Task<Void> task) {
-//                                if(task.isSuccessful()){
-//                                    startToast("회원정보 등록에 성공하였습니다.");
-//                                    finish();
-//                                }
-//                            }
-//                        });
-//                }
-
-
-
-            } else {
-                startToast("회원정보를 입력해주세요.");
             }
+        else {
+                startToast("회원정보를 입력해주세요.");
+        }
     }
 
     private void myStartActivity(Class c){
