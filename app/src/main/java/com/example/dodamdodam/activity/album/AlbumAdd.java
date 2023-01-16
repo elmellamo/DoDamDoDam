@@ -9,10 +9,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Login.BasicActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AlbumAdd extends AppCompatActivity {
+public class AlbumAdd extends BasicActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

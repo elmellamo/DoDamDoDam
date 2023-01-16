@@ -12,7 +12,7 @@ import com.example.dodamdodam.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class FindLover extends AppCompatActivity {
+public class FindLover extends BasicActivity {
     TextView myUid;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 

@@ -19,7 +19,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class PutCode extends AppCompatActivity {
+public class PutCode extends BasicActivity {
     TextView myUid;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 

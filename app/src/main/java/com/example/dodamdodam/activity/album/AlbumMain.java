@@ -9,11 +9,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Login.BasicActivity;
 import com.example.dodamdodam.activity.Login.PutCode;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class AlbumMain extends AppCompatActivity {
+public class AlbumMain extends BasicActivity {
     TextView myUid;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
