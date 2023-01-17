@@ -45,7 +45,7 @@ public class AlbumAdd extends AppCompatActivity {
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("게시글 작성");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         findViewById(R.id.post_saves).setOnClickListener(onClickListener);
@@ -76,7 +76,7 @@ public class AlbumAdd extends AppCompatActivity {
         switch (requestCode) {
             case 0: {
                 if (resultCode == Activity.RESULT_OK) {
-                    String profilePath = data.getStringExtra(INTENT_PATH);
+                    String profilePath = data.getStringExtra("profilePath");
                     LinearLayout parent = findViewById(R.id.contents_layout); //콘텐츠 넣을 레이아웃
 
                     ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT); //사진이든, 동영상이든 그 크기에 맞게 조절될 수 있도록

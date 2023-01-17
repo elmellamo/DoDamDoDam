@@ -39,14 +39,16 @@ public class GalleryActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(GalleryActivity.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) { ///권한이 없을 때
-            ActivityCompat.requestPermissions(GalleryActivity.this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    1);
             if (ActivityCompat.shouldShowRequestPermissionRationale(GalleryActivity.this,
                     Manifest.permission.READ_EXTERNAL_STORAGE)) {
-
+                ActivityCompat.requestPermissions(GalleryActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        1);
             } else {
-                showToast(GalleryActivity.this, getResources().getString(R.string.please_grant_permission)); ///권한을 다시 묻는 아이
+                ActivityCompat.requestPermissions(GalleryActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        1);
+                showToast(GalleryActivity.this, getResources().getString(R.string.please_grant_permission));
             }
         } else { ///권한이 있을 때
             recyclerInit();
@@ -76,7 +78,7 @@ public class GalleryActivity extends AppCompatActivity {
     }
 
     private void recyclerInit(){
-        final int numberOfColumns = 3;
+        final int numberOfColumns = 4;
 
         RecyclerView galleryrecyclerView = findViewById(R.id.galleryrecyclerview);
         galleryrecyclerView.setHasFixedSize(true);
