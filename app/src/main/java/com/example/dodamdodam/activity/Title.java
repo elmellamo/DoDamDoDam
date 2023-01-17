@@ -12,6 +12,8 @@ import android.os.Handler;
 import android.view.View;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Login.LoginActivity;
+import com.example.dodamdodam.activity.Login.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserInfo;
@@ -26,8 +28,10 @@ public class Title extends AppCompatActivity {
         hd.postDelayed(new Runnable() {
             @Override
             public void run() {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
                 finish();
             }
-        }, 3000);
-        }
+        }, 1000);
     }
+}
