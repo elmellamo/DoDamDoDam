@@ -70,7 +70,7 @@ public class MemberInitActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 //myStartActivity(FindLover.class);
-                                startToast("회원정보 등록 성공!");
+                                startToast("회원정보 등록을 성공하였습니다.");
                                 myStartActivity(FindLover.class);
                                 finish();
                             }
@@ -78,7 +78,7 @@ public class MemberInitActivity extends AppCompatActivity {
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                startToast("회원정보 등록 실패 ㅠ");
+                                startToast("회원 정보를 보내는데 실패하였습니다.");
                                 Log.w(TAG, "Error writing document", e);
                             }
                         });

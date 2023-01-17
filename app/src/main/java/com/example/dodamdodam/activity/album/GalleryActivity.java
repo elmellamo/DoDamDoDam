@@ -38,7 +38,7 @@ public class GalleryActivity extends AppCompatActivity {
 
         if (ContextCompat.checkSelfPermission(GalleryActivity.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
+                != PackageManager.PERMISSION_GRANTED) { ///권한이 없을 때
             ActivityCompat.requestPermissions(GalleryActivity.this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     1);
@@ -46,27 +46,28 @@ public class GalleryActivity extends AppCompatActivity {
                     Manifest.permission.READ_EXTERNAL_STORAGE)) {
 
             } else {
-                showToast(GalleryActivity.this, getResources().getString(R.string.please_grant_permission));
+                showToast(GalleryActivity.this, getResources().getString(R.string.please_grant_permission)); ///권한을 다시 묻는 아이
             }
-        } else {
+        } else { ///권한이 있을 때
             recyclerInit();
         }
     }
 
-//    // 이건 나중에 그 버튼? 만들어야 할듯
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-//        switch (requestCode) {
-//            case 1: {
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    recyclerInit();
-//                } else {
-//                    finish();
-//                    showToast(GalleryActivity.this, getResources().getString(R.string.please_grant_permission));
-//                }
-//            }
-//        }
-//    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case 1: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    recyclerInit();
+                } else {
+                    finish();
+                    showToast(GalleryActivity.this, getResources().getString(R.string.please_grant_permission));
+                }
+            }
+        }
+    }
 
     @Override
     public void onBackPressed() {
