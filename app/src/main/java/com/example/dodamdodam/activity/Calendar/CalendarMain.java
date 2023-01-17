@@ -1,4 +1,4 @@
-package com.example.dodamdodam.activity.Login;
+package com.example.dodamdodam.activity.Calendar;
 
 import android.os.Bundle;
 import android.widget.TextView;

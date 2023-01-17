@@ -47,6 +47,13 @@ public class MemberInitActivity extends AppCompatActivity {
         }
     };
 
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     private void profileUpdate() {
         String name = ((EditText) findViewById(R.id.nameEditText)).getText().toString();
         final String birthDay = ((EditText) findViewById(R.id.birthDayEditText)).getText().toString();

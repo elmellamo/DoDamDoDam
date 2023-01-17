@@ -97,6 +97,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
+
     @Override
     public void onBackPressed() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
@@ -117,4 +118,6 @@ public class SignUpActivity extends AppCompatActivity {
         });
         builder.show();
     }
+
+
 }

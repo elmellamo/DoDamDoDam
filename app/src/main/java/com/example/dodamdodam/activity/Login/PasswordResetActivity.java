@@ -60,6 +60,11 @@ public class PasswordResetActivity extends BasicActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();

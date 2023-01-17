@@ -43,8 +43,10 @@
         <activity android:name=".activity.album.AlbumAdd"
             android:exported="true">
         </activity>
-
-        <activity android:name=".activity.Login.CalendarMain"
+        <activity android:name=".activity.album.GalleryActivity"
+            android:exported="true">
+        </activity>
+        <activity android:name=".activity.Calendar.CalendarMain"
             android:exported="true">
         </activity>
     </application>

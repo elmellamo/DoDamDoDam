@@ -20,6 +20,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     myStartActivity(AlbumMain.class);
                     break;
                 case R.id.calendarbtn:
-                    myStartActivity(CalendarMain.class);
+                    myStartActivity(Calendar.class);
                     break;
             }
         }
