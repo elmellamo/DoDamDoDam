@@ -48,6 +48,8 @@
                     android:id="@+id/contets_edit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textMultiLine"
+                    android:ems="10"
                     android:gravity="top|left"
                     android:hint="내용" />
             </LinearLayout>

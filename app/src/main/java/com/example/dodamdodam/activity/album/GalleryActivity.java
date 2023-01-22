@@ -1,5 +1,8 @@
 package com.example.dodamdodam.activity.album;
 
+import static com.example.dodamdodam.Util.GALLERY_IMAGE;
+import static com.example.dodamdodam.Util.GALLERY_VIDEO;
+import static com.example.dodamdodam.Util.INTENT_MEDIA;
 import static com.example.dodamdodam.Util.showToast;
 
 import android.Manifest;
@@ -37,18 +40,11 @@ public class GalleryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        if (ContextCompat.checkSelfPermission(GalleryActivity.this,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) { ///권한이 없을 때
-            if (ActivityCompat.shouldShowRequestPermissionRationale(GalleryActivity.this,
-                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                ActivityCompat.requestPermissions(GalleryActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        1);
+        if (ContextCompat.checkSelfPermission(GalleryActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) { ///권한이 없을 때
+            if (ActivityCompat.shouldShowRequestPermissionRationale(GalleryActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                ActivityCompat.requestPermissions(GalleryActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
             } else {
-                ActivityCompat.requestPermissions(GalleryActivity.this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        1);
+                ActivityCompat.requestPermissions(GalleryActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
                 showToast(GalleryActivity.this, getResources().getString(R.string.please_grant_permission));
             }
         } else { ///권한이 있을 때
@@ -98,7 +94,8 @@ public class GalleryActivity extends AppCompatActivity {
         String[] projection;
 
         Intent intent = getIntent();
-        if(intent.getStringExtra("media").equals("video")){
+        final int media = intent.getIntExtra(INTENT_MEDIA, GALLERY_IMAGE);
+        if(media == GALLERY_VIDEO){
             uri = android.provider.MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
             projection = new String[] { MediaStore.MediaColumns.DATA, MediaStore.Video.Media.BUCKET_DISPLAY_NAME };
         }else{
