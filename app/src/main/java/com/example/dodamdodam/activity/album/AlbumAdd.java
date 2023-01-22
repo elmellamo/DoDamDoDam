@@ -2,21 +2,25 @@ package com.example.dodamdodam.activity.album;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import com.bumptech.glide.Glide;
-
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.net.Uri;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.gms.tasks.Task;
+
+import com.bumptech.glide.Glide;
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.view.AlbumInfo;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,17 +30,39 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import static com.example.dodamdodam.Util.INTENT_PATH;
-import static com.example.dodamdodam.Util.showToast;
 import java.util.Objects;
 
 public class AlbumAdd extends AppCompatActivity {
     private static final String TAG = "AlbumAdd";
     private FirebaseUser user;
+
+    ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>()
+            {
+                @Override
+                public void onActivityResult(ActivityResult result)
+                {
+                    if (result.getResultCode() == Activity.RESULT_OK)
+                    {
+                        Intent data = result.getData();
+                        Uri uri = data.getData();
+//                        String profilePath = data.getStringExtra("profilePath");
+
+                        LinearLayout parent = findViewById(R.id.contents_layout); //콘텐츠 넣을 레이아웃
+                        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT); //사진이든, 동영상이든 그 크기에 맞게 조절될 수 있도록
+
+                        ImageView imageView = new ImageView(AlbumAdd.this);
+                        imageView.setLayoutParams(layoutParams);
+                        Glide.with(AlbumAdd.this).load(uri).override(1000).into(imageView);
+                        parent.addView(imageView); //레이아웃에 이미지뷰 넣어주기
+
+                        EditText editText = new EditText(AlbumAdd.this);
+                        editText.setLayoutParams(layoutParams);
+                        editText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE | InputType.TYPE_CLASS_TEXT);
+                        parent.addView(editText);
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,31 +96,14 @@ public class AlbumAdd extends AppCompatActivity {
         }
     };
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case 0: {
-                if (resultCode == Activity.RESULT_OK) {
-                    String profilePath = data.getStringExtra("profilePath");
-                    LinearLayout parent = findViewById(R.id.contents_layout); //콘텐츠 넣을 레이아웃
-
-                    ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT); //사진이든, 동영상이든 그 크기에 맞게 조절될 수 있도록
-
-                    ImageView imageView = new ImageView(AlbumAdd.this);
-                    imageView.setLayoutParams(layoutParams);
-                    parent.addView(imageView); //레이아웃에 이미지뷰 넣어주기
-                    Glide.with(this).load(profilePath).override(1000).into(imageView);
-
-                    EditText editText = new EditText(AlbumAdd.this);
-                    editText.setLayoutParams(layoutParams);
-                    editText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE | InputType.TYPE_CLASS_TEXT);
-                    parent.addView(editText);
-                }
-                break;
-            }
-        }
+    private void startGallery(Class c, String media){
+        Intent intent = new Intent(this, c);
+        intent.putExtra("media", media);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        resultLauncher.launch(intent);
     }
+
+
 
     private  void profileUpdate(){
         final String title = ((EditText)findViewById(R.id.title_edit)).getText().toString();
@@ -137,13 +146,6 @@ public class AlbumAdd extends AppCompatActivity {
 
     private void myStartActivity(Class c){
         Intent intent = new Intent(this, c);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
-
-    private void startGallery(Class c, String media){
-        Intent intent = new Intent(this, c);
-        intent.putExtra("media", media);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
