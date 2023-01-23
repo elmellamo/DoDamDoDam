@@ -1,7 +1,5 @@
 package com.example.dodamdodam.activity.Calendar;
 
-import static androidx.fragment.app.FragmentManager.TAG;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
@@ -20,6 +18,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -44,7 +43,7 @@ public class CalendarMain extends BasicActivity {
     private DatabaseReference loveruidReference;
     private DatabaseReference loveruidcodeReference;
     private String LOVERUID;
-
+    private String TAG;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -64,11 +63,12 @@ public class CalendarMain extends BasicActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         //LOVERUID = db.collection("users").document(user.getUid()).collection("lover").get().toString();
 
-
         DocumentReference docRef = db.collection("users").document(user.getUid());
+
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {

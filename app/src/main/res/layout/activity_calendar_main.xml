@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/calendarBtn"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <CalendarView
@@ -10,13 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/diaryTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside" />
 
     <TextView
         android:id="@+id/diaryTextView"
@@ -24,36 +24,81 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/loverEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
+
     <EditText
-        android:id="@+id/contextEditText"
+        android:id="@+id/loverEditText"
         android:layout_width="0dp"
-        android:layout_height="116dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:hint="일정이 비어있습니다."
         android:inputType="textMultiLine"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/contextEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/diaryTextView" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="@+id/contextEditText"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/loverEditText"
+        app:layout_constraintEnd_toEndOf="@+id/loverEditText"
+        app:layout_constraintStart_toStartOf="@+id/loverEditText"
+        app:layout_constraintTop_toTopOf="@+id/loverEditText">
+
+        <TextView
+            android:id="@+id/loverText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:maxLines="5"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/loverEditText"
+            app:layout_constraintEnd_toEndOf="@+id/loverEditText"
+            app:layout_constraintStart_toStartOf="@+id/loverEditText"
+            app:layout_constraintTop_toTopOf="@+id/loverEditText" />
+
+    </ScrollView>
+
+
+    <EditText
+        android:id="@+id/contextEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="일정이 비어있습니다."
+        android:inputType="textMultiLine"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/save_Btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loverEditText" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/contextEditText"
+        app:layout_constraintEnd_toEndOf="@+id/contextEditText"
         app:layout_constraintStart_toStartOf="@+id/contextEditText"
         app:layout_constraintTop_toTopOf="@+id/contextEditText">
+
         <TextView
             android:id="@+id/todaytext"
             android:layout_width="match_parent"
@@ -62,15 +107,14 @@
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:scrollbars="vertical"
             android:maxLines="5"
+            android:scrollbars="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/contextEditText"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/contextEditText"
             app:layout_constraintStart_toStartOf="@+id/contextEditText"
             app:layout_constraintTop_toTopOf="@+id/contextEditText" />
 
     </ScrollView>
-
 
 
     <Button
@@ -79,12 +123,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="2dp"
         android:text="저장"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/imageBtnLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contextEditText" />
@@ -107,11 +152,74 @@
         android:layout_width="176dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:text="삭제"
         android:visibility="invisible"
         app:layout_constraintBaseline_toBaselineOf="@+id/cha_Btn"
-        app:layout_constraintEnd_toEndOf="@+id/save_Btn"/>
+        app:layout_constraintEnd_toEndOf="@+id/save_Btn" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/imageBtnLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/save_Btn">
+
+        <ImageButton
+            android:id="@+id/settingBtn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="설정"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintLeft_toRightOf="@id/calendarBtn2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/settingicon" />
+
+        <ImageButton
+            android:id="@+id/calendarBtn2"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="달력"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/albumBtn"
+            app:layout_constraintRight_toLeftOf="@id/settingBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/calendaricon" />
+
+        <ImageButton
+            android:id="@+id/albumBtn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="사진"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/questionBtn"
+            app:layout_constraintRight_toLeftOf="@id/calendarBtn2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/albumicon" />
+
+        <ImageButton
+            android:id="@+id/questionBtn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="질문"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/albumBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/questionicon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
