@@ -1,10 +1,14 @@
 package com.example.dodamdodam.activity.Calendar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Login.BasicActivity;
+import com.example.dodamdodam.activity.Login.SignUpActivity;
+import com.example.dodamdodam.activity.album.AlbumMain;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +38,8 @@ public class CalendarMain extends BasicActivity {
     public String str = null;
     public CalendarView calendarView;
     public Button cha_Btn, del_Btn, save_Btn;
-    public TextView diaryTextView, todayText;
+    public ImageButton question_Btn,album_Btn,setting_Btn;
+    public TextView diaryTextView, todayText, loverText;
     public EditText contextEditText;
     private String stringDateSelected;
     private DatabaseReference databaseReference;
@@ -43,6 +48,7 @@ public class CalendarMain extends BasicActivity {
     private DatabaseReference loveruidReference;
     private DatabaseReference loveruidcodeReference;
     private String LOVERUID;
+    private String thisdayText;
     private String TAG;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,7 +61,12 @@ public class CalendarMain extends BasicActivity {
         del_Btn = findViewById(R.id.del_Btn);
         cha_Btn = findViewById(R.id.cha_Btn);
         todayText = findViewById(R.id.todaytext);
+        loverText = findViewById(R.id.loverText);
         contextEditText = findViewById(R.id.contextEditText);
+        question_Btn = findViewById(R.id.questionBtn);
+        album_Btn = findViewById(R.id.albumBtn);
+        setting_Btn = findViewById(R.id.settingBtn);
+
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Calendar");
         userdatabaseReference = FirebaseDatabase.getInstance().getReference("users");
@@ -94,8 +105,9 @@ public class CalendarMain extends BasicActivity {
                 databaseReference.child(stringDateSelected).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.child(LOVERUID).getValue()!=null){
-                            todayText.setText(snapshot.child(LOVERUID).getValue().toString());
+                        if(snapshot.child(user.getUid()).getValue()!=null){
+                            thisdayText = snapshot.child(user.getUid()).getValue().toString();
+                            todayText.setText(snapshot.child(user.getUid()).getValue().toString());
                             diaryTextView.setVisibility(View.VISIBLE);
                             save_Btn.setVisibility(View.INVISIBLE);
                             contextEditText.setVisibility(View.INVISIBLE);
@@ -103,7 +115,6 @@ public class CalendarMain extends BasicActivity {
                             cha_Btn.setVisibility(View.VISIBLE);
                             del_Btn.setVisibility(View.VISIBLE);
                             diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
-
                         }
                         else{
                             contextEditText.setText(null);
@@ -115,6 +126,13 @@ public class CalendarMain extends BasicActivity {
                             del_Btn.setVisibility(View.INVISIBLE);
                             diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
                         }
+
+                        if(snapshot.child(LOVERUID).getValue()!=null){
+                            loverText.setText(snapshot.child(LOVERUID).getValue().toString());
+                        }
+                        else{
+                            loverText.setText("상대방의 일정이 비어있습니다.");
+                             }
                     }
 
                     @Override
@@ -139,7 +157,7 @@ public class CalendarMain extends BasicActivity {
                 contextEditText.setVisibility(View.INVISIBLE);
                 todayText.setVisibility(View.VISIBLE);
                 todayText.setMovementMethod(new ScrollingMovementMethod());
-                databaseReference.child(stringDateSelected).child(LOVERUID).setValue(contextEditText.getText().toString());
+                databaseReference.child(stringDateSelected).child(user.getUid()).setValue(contextEditText.getText().toString());
             }
         });
 
@@ -150,8 +168,7 @@ public class CalendarMain extends BasicActivity {
             {
                 contextEditText.setVisibility(View.VISIBLE);
                 todayText.setVisibility(View.INVISIBLE);
-                contextEditText.setText(str);
-
+                contextEditText.setText(thisdayText);
                 save_Btn.setVisibility(View.VISIBLE);
                 cha_Btn.setVisibility(View.INVISIBLE);
                 del_Btn.setVisibility(View.INVISIBLE);
@@ -170,10 +187,27 @@ public class CalendarMain extends BasicActivity {
                 save_Btn.setVisibility(View.VISIBLE);
                 cha_Btn.setVisibility(View.INVISIBLE);
                 del_Btn.setVisibility(View.INVISIBLE);
-                databaseReference.child(stringDateSelected).child(LOVERUID).setValue(null);
+                databaseReference.child(stringDateSelected).child(user.getUid()).setValue(null);
             }
         });
 
+
+        album_Btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                myStartActivity(AlbumMain.class);
+            }
+        });
+    }
+
+
+
+    private void myStartActivity(Class c){
+        Intent intent = new Intent(this, c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
 }
