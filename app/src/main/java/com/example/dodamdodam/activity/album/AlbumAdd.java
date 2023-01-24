@@ -1,30 +1,33 @@
 package com.example.dodamdodam.activity.album;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.content.ActivityNotFoundException;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.MimeTypeFilter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.adapter.CustomAdapter;
 import com.example.dodamdodam.view.AlbumInfo;
+import com.example.dodamdodam.view.MediaType;
+import com.example.dodamdodam.view.RecyclerViewItem;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -41,13 +44,47 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Optional;
 
 public class AlbumAdd extends AppCompatActivity {
     private static final String TAG = "AlbumAdd";
-    private FirebaseUser user;
+    private RecyclerView recyclerview;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();;
     private ArrayList<String> pathList = new ArrayList<>();
+    private ArrayList<RecyclerViewItem> mRItems = new ArrayList<>();
+    private CustomAdapter mAdapter;
     private LinearLayout parent;
     private int pathCount,successCount;
+
+//    private final ActivityResultLauncher<Intent> startForMultipleModeResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+//            result -> {
+//                final int resultCode = result.getResultCode();
+//                final Intent data = result.getData();
+//                Log.e("로그", " resultCode: " + resultCode + " data: " + data);
+//
+//                if (result.getResultCode() == Activity.RESULT_OK) {
+//                    if (data == null) return;
+//
+//                    for (int i = 0; i < data.getClipData().getItemCount(); i++) {
+//                        final Uri currentUri = data.getClipData().getItemAt(i).getUri();
+//                        Log.e("로그", "onActivityResult: currentUri" + currentUri.toString());
+//
+//                        // Do stuff with each photo/video URI.
+//                        handlePickerResponse(currentUri);
+//                    }
+//
+//                    RecyclerViewItem item = new RecyclerViewItem();
+//                    item.setGalleryuri(uriList);
+//                    item.setPublisher(user.getUid());
+//                    item.setMcreatedAt(new Date());
+//
+//                    mRItems.add(item);
+//                    mAdapter = new CustomAdapter(mRItems);
+//                    recyclerview.setAdapter(mAdapter);
+//                }
+//            });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,11 +95,11 @@ public class AlbumAdd extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("게시글 작성");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        parent = findViewById(R.id.contents_layout);
+        recyclerview = findViewById(R.id.addgallery_layout);
 
         findViewById(R.id.post_saves).setOnClickListener(onClickListener);
         findViewById(R.id.image_btn).setOnClickListener(onClickListener);
-        findViewById(R.id.video_btn).setOnClickListener(onClickListener);
+
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -73,55 +110,92 @@ public class AlbumAdd extends AppCompatActivity {
                     storageUpload();
                     break;
                 case R.id.image_btn:
-                    startGallery(GalleryActivity.class, "image");
-                    break;
-                case R.id.video_btn:
-                    startGallery(GalleryActivity.class, "video");
+                    mRItems.clear();
+                    loadImage();
                     break;
             }
         }
     };
 
-    private void startGallery(Class c, String media){
-        Intent intent = new Intent(this, c);
-        intent.putExtra("media", media);
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        resultLauncher.launch(intent);
-    }
+    private final ActivityResultLauncher<PickVisualMediaRequest> startForMultipleModeResult =
+            registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(10), uris -> {
+                if (!uris.isEmpty()) {
+                    Log.e("로그", "Number of items selected: " + uris.size());
 
-    ActivityResultLauncher<Intent> resultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>()
-            {
-                @Override
-                public void onActivityResult(ActivityResult result)
-                {
-                    if (result.getResultCode() == Activity.RESULT_OK)
-                    {
-                        Intent data = result.getData();
-                        assert data != null;
-                        String profilePath = data.getStringExtra("profilePath");
-                        pathList.add(profilePath);
+                    for (int i = 0; i < uris.size(); i++) {
+                        final Uri currentUri = uris.get(i);
+                        Log.e("로그", "onActivityResult: currentUri" + currentUri.toString());
 
-                        //콘텐츠 넣을 레이아웃
-                        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT); //사진이든, 동영상이든 그 크기에 맞게 조절될 수 있도록
-
-                        ImageView imageView = new ImageView(AlbumAdd.this);
-                        imageView.setLayoutParams(layoutParams);
-                        Glide.with(AlbumAdd.this).load(profilePath).override(1000).into(imageView);
-                        parent.addView(imageView); //레이아웃에 이미지뷰 넣어주기
-
-                        EditText editText = new EditText(AlbumAdd.this);
-                        editText.setLayoutParams(layoutParams);
-                        editText.setInputType(InputType.TYPE_TEXT_FLAG_MULTI_LINE | InputType.TYPE_CLASS_TEXT);
-                        parent.addView(editText);
+                        handlePickerResponse(currentUri);
                     }
+
+                    mAdapter = new CustomAdapter(mRItems, getApplicationContext());
+                    recyclerview.setAdapter(mAdapter);
+                    mLayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
+                    recyclerview.setLayoutManager(mLayoutManager);
+                    recyclerview.setHasFixedSize(true);
+
+                } else {
+                    Log.e("로그", "No media selected");
                 }
             });
 
 
 
+    private void loadImage(){
+        try {
+            Log.e("로그", "startForMultipleModeResult 런치 시작!");
+            startForMultipleModeResult.launch(new PickVisualMediaRequest());
+        } catch (ActivityNotFoundException ex) {
+            showDialog(ex.getLocalizedMessage());
+        }
+    }
+
+    @NonNull
+    private Optional<MediaType> getMediaType(Uri currentUri) {
+        final String type = getContentResolver().getType(currentUri);
+        final String mimeType = MimeTypeMap.getSingleton().getExtensionFromMimeType(type);
+        Log.e("로그", "type: " + type + " mimeType: " + mimeType); // type: video/mp4 mimeType: mp4
+        Optional<MediaType> result = Optional.empty();
+        try {
+            final String[] MIME_TYPES = new String[]{"image/*", "video/*"};
+            Log.e("로그", "MimeTypeFilter.matches " + MimeTypeFilter.matches(type, MIME_TYPES));
+            result = MediaType.mediaFind(type);
+        } catch (IllegalArgumentException ex) {
+            showDialog(ex.getLocalizedMessage());
+        }
+        result.ifPresent(ret -> Log.e("로그", "getMimeType: " + ret.getMediaType())); // video/mp4
+        return result;
+    }
+
+    private void handlePickerResponse(Uri currentUri) {
+        Log.d(TAG, "handlePickerResponse: currentUri: " + currentUri);
+        final Optional<MediaType> clipMimeType = getMediaType(currentUri); // get MIME_TYPE
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            clipMimeType.ifPresentOrElse(type -> {
+                switch (type) {
+                    case IMAGE_GIF:
+                    case IMAGE_PNG:
+                    case IMAGE_JPG:
+                    case VIDEO_MP4:
+                    case VIDEO_WEBM:
+                        RecyclerViewItem rItem = new RecyclerViewItem();
+                        rItem.setPublisher(user.getUid());
+                        rItem.setMcreatedAt(new Date());
+                        rItem.setGalleryuri(currentUri);
+
+                        mRItems.add(rItem);
+                        break;
+                }
+            }, () -> Log.e("로그", "handlePickerResponse: error!"));
+        }
+    }
+
+
+
     private  void storageUpload(){
         final String title = ((EditText)findViewById(R.id.title_edit)).getText().toString();
+        final String contents = ((EditText)findViewById(R.id.contets_edit)).getText().toString();
 
         if(title.length()>0){
             ArrayList<String> contentsList = new ArrayList<>();
@@ -157,7 +231,7 @@ public class AlbumAdd extends AppCompatActivity {
                                         //Log.e("로그 : ","uri "+uri);
                                         contentsList.set(index, uri.toString());
                                         successCount++;
-                                        if (successCount == pathList.size()) {
+                                        if (pathList.size() == successCount) {
                                             AlbumInfo albumInfo = new AlbumInfo(title, contentsList, user.getUid(), new Date());
                                             storeUpload(albumInfo);
                                             /*for(int a=0; a<contentsList.size(); a++){
@@ -200,6 +274,7 @@ public class AlbumAdd extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        mRItems.clear();
         finish();
     }
 
@@ -207,8 +282,11 @@ public class AlbumAdd extends AppCompatActivity {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
-    private void myStartActivity(Class c){
-        Intent intent = new Intent(this, c);
-        startActivity(intent);
+    private void showDialog(String message) {
+        new MaterialAlertDialogBuilder(this)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, (dialogInterface, i) -> dialogInterface.dismiss())
+                .create().show();
+        Log.d(TAG, message);
     }
 }

@@ -9,7 +9,7 @@ public class AlbumInfo {
     private String publisher;
     private Date createdAt;
 
-    public AlbumInfo(String title, ArrayList<String> contents, String publisher, Date createdAt){
+    public AlbumInfo(String title,ArrayList<String> contents, String publisher, Date createdAt){
         this.title = title;
         this.contents = contents;
         this.publisher = publisher;
