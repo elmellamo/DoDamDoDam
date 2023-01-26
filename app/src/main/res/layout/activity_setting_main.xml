@@ -98,6 +98,26 @@
             app:layout_constraintStart_toEndOf="@+id/loverNickName"
             app:layout_constraintTop_toBottomOf="@+id/myNickNameEditText" />
 
+        <TextView
+            android:id="@+id/ourAnniversaryTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/ourAnniversaryEditText"
+            app:layout_constraintBottom_toBottomOf="@+id/ourAnniversary"/>
+
+        <TextView
+            android:id="@+id/myNickNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/myNickNameEditText"
+            app:layout_constraintBottom_toBottomOf="@+id/myNickName"/>
+
+        <TextView
+            android:id="@+id/loverNickNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/loverNickNameEditText"
+            app:layout_constraintBottom_toBottomOf="@+id/loverNickName"/>
 
 
 
@@ -106,7 +126,7 @@
             android:id="@+id/chaBtn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저장"
+            android:text="수정"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ourAnniversaryEditText"
@@ -116,7 +136,7 @@
             android:id="@+id/chaBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저장"
+            android:text="수정"
 
             app:layout_constraintTop_toBottomOf="@id/chaBtn1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -127,14 +147,36 @@
             android:id="@+id/chaBtn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저장"
+            android:text="수정"
             app:layout_constraintTop_toBottomOf="@+id/chaBtn2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/loverNickNameEditText"
             app:layout_constraintBottom_toBottomOf="parent" />
 
+        <Button
+            android:id="@+id/saveBtn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="저장"
+            app:layout_constraintStart_toStartOf="@+id/chaBtn1"
+            app:layout_constraintBottom_toBottomOf="@+id/chaBtn1" />
 
+        <Button
+            android:id="@+id/saveBtn2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="저장"
 
+            app:layout_constraintStart_toStartOf="@+id/chaBtn2"
+            app:layout_constraintBottom_toBottomOf="@+id/chaBtn2" />
+
+        <Button
+            android:id="@+id/saveBtn3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="저장"
+            app:layout_constraintStart_toStartOf="@+id/chaBtn3"
+            app:layout_constraintBottom_toBottomOf="@+id/chaBtn3" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -144,7 +186,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/setting_layout"
-        android:layout_alignParentBottom="true">>
+        android:layout_alignParentBottom="true">
         <ImageButton
             android:id="@+id/settingBtn"
             android:layout_width="0dp"

@@ -10,6 +10,7 @@ import com.example.dodamdodam.activity.Login.BasicActivity;
 import com.example.dodamdodam.activity.Login.SignUpActivity;
 import com.example.dodamdodam.activity.Setting.SettingMain;
 import com.example.dodamdodam.activity.album.AlbumMain;
+import com.example.dodamdodam.activity.Question.QuestionMain;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -210,6 +211,12 @@ public class CalendarMain extends BasicActivity {
             @Override
             public void onClick(View view) {
                 myStartActivity(SettingMain.class);
+            }
+        });
+        question_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(QuestionMain.class);
             }
         });
     }
