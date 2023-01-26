@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.dodamdodam.activity.Question.QuestionMain;
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Calendar.CalendarMain;
 import com.example.dodamdodam.activity.album.AlbumMain;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        findViewById(R.id.questionbtn).setOnClickListener(onClickListener);
         findViewById(R.id.albumbtn).setOnClickListener(onClickListener);
         findViewById(R.id.calendarbtn).setOnClickListener(onClickListener);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -80,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.logoutbtn:
                     FirebaseAuth.getInstance().signOut();
                     myStartActivity(SignUpActivity.class);
+                    break;
+                case R.id.questionbtn:
+                    myStartActivity(QuestionMain.class);
                     break;
                 case R.id.albumbtn:
                     myStartActivity(AlbumMain.class);
