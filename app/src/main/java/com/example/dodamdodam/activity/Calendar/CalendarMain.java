@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Login.BasicActivity;
 import com.example.dodamdodam.activity.Login.SignUpActivity;
+import com.example.dodamdodam.activity.Setting.SettingMain;
 import com.example.dodamdodam.activity.album.AlbumMain;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -203,6 +204,12 @@ public class CalendarMain extends BasicActivity {
             public void onClick(View view)
             {
                 myStartActivity(AlbumMain.class);
+            }
+        });
+        setting_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(SettingMain.class);
             }
         });
     }

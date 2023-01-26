@@ -1,6 +1,5 @@
 package com.example.dodamdodam.activity.Setting;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +26,6 @@ public class SettingMain extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseUser user;
 
-    public String num,clubkey;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -49,18 +49,18 @@ public class MainActivity extends AppCompatActivity {
             DocumentReference document = db.collection("users")
                     .document(user.getUid());
             document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    if(documentSnapshot.exists()){
-                        String loveruid = (String)documentSnapshot.get("lover");
-                        String myname = (String)documentSnapshot.get("name");
-                        if(myname == null)
-                            myStartActivity(MemberInitActivity.class);
-                        if(loveruid == null)
-                            myStartActivity(FindLover.class);
-                    }
-                }
-            })
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if(documentSnapshot.exists()){
+                                String loveruid = (String)documentSnapshot.get("lover");
+                                String myname = (String)documentSnapshot.get("name");
+                                if(myname == null)
+                                    myStartActivity(MemberInitActivity.class);
+                                if(loveruid == null)
+                                    myStartActivity(FindLover.class);
+                            }
+                        }
+                    })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
@@ -91,7 +91,6 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.settingbtn:
                     myStartActivity(SettingMain.class);
-
             }
         }
     };
