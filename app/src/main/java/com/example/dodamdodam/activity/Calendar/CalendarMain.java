@@ -34,6 +34,8 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 
+import java.util.Calendar;
+
 
 public class CalendarMain extends BasicActivity {
     public String readDay = null;
@@ -105,6 +107,9 @@ public class CalendarMain extends BasicActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth)
             {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, month,dayOfMonth);
+                int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
                 stringDateSelected=Integer.toString(year)+Integer.toString(month+1)+Integer.toString(dayOfMonth);
                 databaseReference.child(stringDateSelected).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -120,6 +125,7 @@ public class CalendarMain extends BasicActivity {
                             del_Btn.setVisibility(View.VISIBLE);
                             diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
                             //todayText.setText(snapshot.getKey().toString());
+                            todayText.setText(String.valueOf(dayOfWeek));
                         }
                         else{
                             contextEditText.setText(null);
