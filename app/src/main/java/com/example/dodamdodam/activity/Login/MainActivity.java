@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.dodamdodam.activity.Question.QuestionMain;
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Calendar.CalendarMain;
+import com.example.dodamdodam.activity.Setting.SettingMain;
 import com.example.dodamdodam.activity.album.AlbumMain;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.questionbtn).setOnClickListener(onClickListener);
         findViewById(R.id.albumbtn).setOnClickListener(onClickListener);
         findViewById(R.id.calendarbtn).setOnClickListener(onClickListener);
+        findViewById(R.id.settingbtn).setOnClickListener(onClickListener);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if(user == null){
@@ -49,18 +51,18 @@ public class MainActivity extends AppCompatActivity {
             DocumentReference document = db.collection("users")
                     .document(user.getUid());
             document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    if(documentSnapshot.exists()){
-                        String loveruid = (String)documentSnapshot.get("lover");
-                        String myname = (String)documentSnapshot.get("name");
-                        if(myname == null)
-                            myStartActivity(MemberInitActivity.class);
-                        if(loveruid == null)
-                            myStartActivity(FindLover.class);
-                    }
-                }
-            })
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            if(documentSnapshot.exists()){
+                                String loveruid = (String)documentSnapshot.get("lover");
+                                String myname = (String)documentSnapshot.get("name");
+                                if(myname == null)
+                                    myStartActivity(MemberInitActivity.class);
+                                if(loveruid == null)
+                                    myStartActivity(FindLover.class);
+                            }
+                        }
+                    })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
@@ -92,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.calendarbtn:
                     myStartActivity(CalendarMain.class);
                     break;
+                case R.id.settingbtn:
+                    myStartActivity(SettingMain.class);
             }
         }
     };
