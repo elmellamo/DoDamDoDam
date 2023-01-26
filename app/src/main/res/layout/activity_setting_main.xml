@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/ourAnniversary"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="만난 날"
+        android:textSize="15dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/myNickName"
+        app:layout_constraintEnd_toStartOf="@+id/ourAnniversaryEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <TextView
+        android:id="@+id/myNickName"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="나의 애칭"
+        android:textSize="15dp"
+
+        app:layout_constraintBottom_toTopOf="@+id/loverNickName"
+        app:layout_constraintEnd_toStartOf="@+id/myNickNameEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ourAnniversary" />
+
+    <TextView
+        android:id="@+id/loverNickName"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="상대방 애칭"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/loverNickNameEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myNickName" />
+
+
+    <EditText
+        android:id="@+id/ourAnniversaryEditText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="YYYYMMDD"
+        android:inputType="textMultiLine"
+        android:maxLines="1"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/myNickNameEditText"
+        app:layout_constraintEnd_toStartOf="@+id/chaBtn1"
+        app:layout_constraintStart_toEndOf="@+id/ourAnniversary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+
+    <EditText
+        android:id="@+id/myNickNameEditText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="나의 애칭"
+        android:inputType="textMultiLine"
+        android:maxLines="1"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/loverNickNameEditText"
+        app:layout_constraintEnd_toStartOf="@+id/chaBtn2"
+        app:layout_constraintStart_toEndOf="@+id/myNickName"
+        app:layout_constraintTop_toBottomOf="@+id/ourAnniversaryEditText" />
+
+    <EditText
+        android:id="@+id/loverNickNameEditText"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:hint="상대방 애칭"
+        android:inputType="textMultiLine"
+        android:maxLines="1"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/chaBtn3"
+        app:layout_constraintStart_toEndOf="@+id/loverNickName"
+        app:layout_constraintTop_toBottomOf="@+id/myNickNameEditText" />
+
+
+
+
+
+    <Button
+        android:id="@+id/chaBtn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="저장"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ourAnniversaryEditText"
+        app:layout_constraintBottom_toTopOf="@+id/chaBtn2" />
+
+    <Button
+        android:id="@+id/chaBtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="저장"
+
+        app:layout_constraintTop_toBottomOf="@id/chaBtn1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/myNickNameEditText"
+        app:layout_constraintBottom_toTopOf="@+id/chaBtn3"/>
+
+    <Button
+        android:id="@+id/chaBtn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="저장"
+        app:layout_constraintTop_toBottomOf="@+id/chaBtn2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/loverNickNameEditText"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

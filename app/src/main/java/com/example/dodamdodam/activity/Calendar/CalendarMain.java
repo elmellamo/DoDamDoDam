@@ -42,7 +42,7 @@ public class CalendarMain extends BasicActivity {
     public TextView diaryTextView, todayText, loverText;
     public EditText contextEditText;
     private String stringDateSelected;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,databaseReference2;
     private FirebaseUser user;
     private DatabaseReference userdatabaseReference;
     private DatabaseReference loveruidReference;
@@ -50,6 +50,7 @@ public class CalendarMain extends BasicActivity {
     private String LOVERUID;
     private String thisdayText;
     private String TAG;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -69,6 +70,7 @@ public class CalendarMain extends BasicActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Calendar");
+        databaseReference2 = FirebaseDatabase.getInstance().getReference("Question");
         userdatabaseReference = FirebaseDatabase.getInstance().getReference("users");
         loveruidReference = userdatabaseReference.child(user.getUid());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -115,6 +117,7 @@ public class CalendarMain extends BasicActivity {
                             cha_Btn.setVisibility(View.VISIBLE);
                             del_Btn.setVisibility(View.VISIBLE);
                             diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
+                            //todayText.setText(snapshot.getKey().toString());
                         }
                         else{
                             contextEditText.setText(null);
@@ -142,6 +145,7 @@ public class CalendarMain extends BasicActivity {
                 });
 
 
+
             }
         });
         save_Btn.setOnClickListener(new View.OnClickListener()
@@ -157,6 +161,7 @@ public class CalendarMain extends BasicActivity {
                 contextEditText.setVisibility(View.INVISIBLE);
                 todayText.setVisibility(View.VISIBLE);
                 todayText.setMovementMethod(new ScrollingMovementMethod());
+
                 databaseReference.child(stringDateSelected).child(user.getUid()).setValue(contextEditText.getText().toString());
             }
         });

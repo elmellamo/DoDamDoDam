@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Calendar.CalendarMain;
+import com.example.dodamdodam.activity.Setting.SettingMain;
 import com.example.dodamdodam.activity.album.AlbumMain;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.albumbtn).setOnClickListener(onClickListener);
         findViewById(R.id.calendarbtn).setOnClickListener(onClickListener);
+        findViewById(R.id.settingbtn).setOnClickListener(onClickListener);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         if(user == null){
@@ -87,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.calendarbtn:
                     myStartActivity(CalendarMain.class);
                     break;
+                case R.id.settingbtn:
+                    myStartActivity(SettingMain.class);
+
             }
         }
     };
