@@ -1,6 +1,7 @@
 package com.example.dodamdodam.activity.album;
 
 import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Calendar.CalendarMain;
+import com.example.dodamdodam.activity.Setting.SettingMain;
 import com.example.dodamdodam.adapter.CustomAdapter;
 import com.example.dodamdodam.view.AlbumInfo;
 import com.example.dodamdodam.view.MediaType;
@@ -57,33 +60,7 @@ public class AlbumAdd extends AppCompatActivity {
     private LinearLayout parent;
     private int pathCount,successCount;
 
-//    private final ActivityResultLauncher<Intent> startForMultipleModeResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-//            result -> {
-//                final int resultCode = result.getResultCode();
-//                final Intent data = result.getData();
-//                Log.e("로그", " resultCode: " + resultCode + " data: " + data);
-//
-//                if (result.getResultCode() == Activity.RESULT_OK) {
-//                    if (data == null) return;
-//
-//                    for (int i = 0; i < data.getClipData().getItemCount(); i++) {
-//                        final Uri currentUri = data.getClipData().getItemAt(i).getUri();
-//                        Log.e("로그", "onActivityResult: currentUri" + currentUri.toString());
-//
-//                        // Do stuff with each photo/video URI.
-//                        handlePickerResponse(currentUri);
-//                    }
-//
-//                    RecyclerViewItem item = new RecyclerViewItem();
-//                    item.setGalleryuri(uriList);
-//                    item.setPublisher(user.getUid());
-//                    item.setMcreatedAt(new Date());
-//
-//                    mRItems.add(item);
-//                    mAdapter = new CustomAdapter(mRItems);
-//                    recyclerview.setAdapter(mAdapter);
-//                }
-//            });
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +77,14 @@ public class AlbumAdd extends AppCompatActivity {
         findViewById(R.id.post_saves).setOnClickListener(onClickListener);
         findViewById(R.id.image_btn).setOnClickListener(onClickListener);
 
+        EditText editText = new EditText(AlbumAdd.this);
+        editText.setHint("내용을 입력하세요.");
+
+        findViewById(R.id.questionBtn).setOnClickListener(onClickListener);
+        findViewById(R.id.settingBtn).setOnClickListener(onClickListener);
+        findViewById(R.id.calendarBtn2).setOnClickListener(onClickListener);
+        findViewById(R.id.albumBtn).setOnClickListener(onClickListener);
+
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -113,6 +98,19 @@ public class AlbumAdd extends AppCompatActivity {
                     mRItems.clear();
                     loadImage();
                     break;
+                case R.id.questionBtn:
+                    //myStartActivity(AlbumMain.class);
+                    break;
+                case R.id.settingBtn:
+                    myStartActivity(SettingMain.class);
+                    break;
+                case R.id.calendarBtn2:
+                    myStartActivity(CalendarMain.class);
+                    break;
+                case R.id.albumBtn:
+                    myStartActivity(AlbumMain.class);
+                    break;
+
             }
         }
     };
@@ -275,11 +273,18 @@ public class AlbumAdd extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         mRItems.clear();
+        mAdapter.notifyDataSetChanged();
         finish();
     }
 
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    private void myStartActivity(Class c){
+        Intent intent = new Intent(this, c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     private void showDialog(String message) {
