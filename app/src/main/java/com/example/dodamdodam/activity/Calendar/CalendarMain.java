@@ -24,7 +24,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
@@ -54,6 +55,10 @@ public class CalendarMain extends BasicActivity {
     private String LOVERUID;
     private String thisdayText;
     private String TAG;
+    private int dday;
+    public String ouranniversary;
+    private TextView ddayTextView;
+    private String daynow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -71,14 +76,50 @@ public class CalendarMain extends BasicActivity {
         question_Btn = findViewById(R.id.questionBtn);
         album_Btn = findViewById(R.id.albumBtn);
         setting_Btn = findViewById(R.id.settingBtn);
+        ddayTextView=findViewById(R.id.dday_TextView);
+        ddayTextView.setVisibility(View.VISIBLE);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Calendar");
-        databaseReference2 = FirebaseDatabase.getInstance().getReference("Question");
+        databaseReference2 = FirebaseDatabase.getInstance().getReference("Setting");
         userdatabaseReference = FirebaseDatabase.getInstance().getReference("users");
         loveruidReference = userdatabaseReference.child(user.getUid());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         //LOVERUID = db.collection("users").document(user.getUid()).collection("lover").get().toString();
+
+
+        databaseReference2.child("anniversary").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.child(user.getUid()).getValue()!=null){
+                    ouranniversary = snapshot.child(user.getUid()).getValue().toString();
+                    long now = System.currentTimeMillis();
+                    Date date = new Date(now);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+                    daynow = dateFormat.format(date);
+
+                    dday=Integer.parseInt(daynow)-Integer.parseInt(ouranniversary);
+                    ddayTextView.setText("d+day "+Integer.toString(dday));
+
+                }
+                else{
+                    ddayTextView.setText("설정에 가서 기념일을 입력해주십시오");
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+
+
+
+
 
         DocumentReference docRef = db.collection("users").document(user.getUid());
 
@@ -110,7 +151,20 @@ public class CalendarMain extends BasicActivity {
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year, month,dayOfMonth);
                 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-                stringDateSelected=Integer.toString(year)+Integer.toString(month+1)+Integer.toString(dayOfMonth);
+                if(month<9&&dayOfMonth<10) {
+                    stringDateSelected = Integer.toString(year) +"0"+ Integer.toString(month + 1) +"0"+ Integer.toString(dayOfMonth);
+                }
+                else if (month>8 && dayOfMonth<10) {
+                    stringDateSelected = Integer.toString(year) + Integer.toString(month + 1) +"0"+ Integer.toString(dayOfMonth);
+                }
+                else if (month<9 && dayOfMonth>9) {
+                    stringDateSelected = Integer.toString(year) + "0"+Integer.toString(month + 1) + Integer.toString(dayOfMonth);
+                }
+                else {
+                    stringDateSelected = Integer.toString(year) +Integer.toString(month + 1) + Integer.toString(dayOfMonth);
+                }
+
+
                 databaseReference.child(stringDateSelected).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -126,6 +180,8 @@ public class CalendarMain extends BasicActivity {
                             diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
                             //todayText.setText(snapshot.getKey().toString());
                             todayText.setText(String.valueOf(dayOfWeek));
+                            ddayTextView.setVisibility(View.INVISIBLE);
+
                         }
                         else{
                             contextEditText.setText(null);
@@ -136,14 +192,20 @@ public class CalendarMain extends BasicActivity {
                             cha_Btn.setVisibility(View.INVISIBLE);
                             del_Btn.setVisibility(View.INVISIBLE);
                             diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
+                            ddayTextView.setVisibility(View.INVISIBLE);
+
                         }
 
                         if(snapshot.child(LOVERUID).getValue()!=null){
                             loverText.setText(snapshot.child(LOVERUID).getValue().toString());
+                            ddayTextView.setVisibility(View.INVISIBLE);
+
                         }
                         else{
                             loverText.setText("상대방의 일정이 비어있습니다.");
-                             }
+                            ddayTextView.setVisibility(View.INVISIBLE);
+
+                        }
                     }
 
                     @Override
@@ -169,6 +231,7 @@ public class CalendarMain extends BasicActivity {
                 contextEditText.setVisibility(View.INVISIBLE);
                 todayText.setVisibility(View.VISIBLE);
                 todayText.setMovementMethod(new ScrollingMovementMethod());
+                ddayTextView.setVisibility(View.INVISIBLE);
 
                 databaseReference.child(stringDateSelected).child(user.getUid()).setValue(contextEditText.getText().toString());
             }
@@ -186,6 +249,8 @@ public class CalendarMain extends BasicActivity {
                 cha_Btn.setVisibility(View.INVISIBLE);
                 del_Btn.setVisibility(View.INVISIBLE);
                 todayText.setText(contextEditText.getText());
+                ddayTextView.setVisibility(View.INVISIBLE);
+
             }
 
         });
@@ -201,6 +266,8 @@ public class CalendarMain extends BasicActivity {
                 cha_Btn.setVisibility(View.INVISIBLE);
                 del_Btn.setVisibility(View.INVISIBLE);
                 databaseReference.child(stringDateSelected).child(user.getUid()).setValue(null);
+                ddayTextView.setVisibility(View.INVISIBLE);
+
             }
         });
 
