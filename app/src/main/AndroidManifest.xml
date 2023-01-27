@@ -70,7 +70,6 @@
         <activity android:name=".activity.Question.QuestionMain"
             android:exported="true">
         </activity>
-
     </application>
 
 </manifest>
