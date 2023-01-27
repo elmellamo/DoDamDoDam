@@ -1,4 +1,4 @@
-package com.example.dodamdodam.view;
+package com.example.dodamdodam.models;
 
 import java.util.Arrays;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.example.dodamdodam.activity;
+package com.example.dodamdodam.Utils;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

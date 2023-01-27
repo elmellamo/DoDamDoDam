@@ -1,8 +1,8 @@
 package com.example.dodamdodam.activity.album;
 
-import static com.example.dodamdodam.Util.GALLERY_IMAGE;
-import static com.example.dodamdodam.Util.GALLERY_VIDEO;
-import static com.example.dodamdodam.Util.INTENT_MEDIA;
+import static com.example.dodamdodam.Utils.Util.GALLERY_IMAGE;
+import static com.example.dodamdodam.Utils.Util.GALLERY_VIDEO;
+import static com.example.dodamdodam.Utils.Util.INTENT_MEDIA;
 
 import android.Manifest;
 import android.app.Activity;

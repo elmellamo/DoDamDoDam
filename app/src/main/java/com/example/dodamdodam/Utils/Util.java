@@ -1,4 +1,4 @@
-package com.example.dodamdodam;
+package com.example.dodamdodam.Utils;
 
 import android.app.Activity;
 import android.util.Patterns;

@@ -22,28 +22,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.Utils.FirebaseMethods;
 import com.example.dodamdodam.activity.Calendar.CalendarMain;
 import com.example.dodamdodam.activity.Setting.SettingMain;
 import com.example.dodamdodam.adapter.CustomAdapter;
-import com.example.dodamdodam.view.AlbumInfo;
-import com.example.dodamdodam.view.MediaType;
-import com.example.dodamdodam.view.RecyclerViewItem;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.dodamdodam.models.MediaType;
+import com.example.dodamdodam.models.RecyclerViewItem;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageMetadata;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
@@ -59,6 +52,11 @@ public class AlbumAdd extends AppCompatActivity {
     private CustomAdapter mAdapter;
     private LinearLayout parent;
     private int pathCount,successCount;
+    private int postCount =0;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference myRef;
+    private FirebaseMethods mFirebaseMethods;
 
 
 
@@ -66,6 +64,8 @@ public class AlbumAdd extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_add);
+
+        mFirebaseMethods = new FirebaseMethods(AlbumAdd.this);
 
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -84,6 +84,8 @@ public class AlbumAdd extends AppCompatActivity {
         findViewById(R.id.settingBtn).setOnClickListener(onClickListener);
         findViewById(R.id.calendarBtn2).setOnClickListener(onClickListener);
         findViewById(R.id.albumBtn).setOnClickListener(onClickListener);
+
+        setupFirebaseAuth();
 
     }
 
@@ -189,85 +191,125 @@ public class AlbumAdd extends AppCompatActivity {
         }
     }
 
+    private void setupFirebaseAuth(){
+        Log.d(TAG, "setupFirebaseAuth: setting up firebase auth");
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase= FirebaseDatabase.getInstance();
+        myRef=mFirebaseDatabase.getReference();
+        Log.d(TAG, "onDataChange: image count : "+postCount);
 
 
-    private  void storageUpload(){
-        final String title = ((EditText)findViewById(R.id.title_edit)).getText().toString();
-        final String contents = ((EditText)findViewById(R.id.contets_edit)).getText().toString();
-
-        if(title.length()>0){
-            ArrayList<String> contentsList = new ArrayList<>();
-            user = FirebaseAuth.getInstance().getCurrentUser();
-            FirebaseStorage storage = FirebaseStorage.getInstance();
-            StorageReference storageRef = storage.getReference();
-
-            for(int i=0 ; i<parent.getChildCount(); i++){
-                View view = parent.getChildAt(i);
-                if(view instanceof EditText){
-                    String text = ((EditText)view).getText().toString();
-                    if(text.length()>0){
-                        contentsList.add(text);
-                    }
-                }else{
-                    contentsList.add(pathList.get(pathCount));
-                    final StorageReference mountainImagesRef = storageRef.child("users/" + user.getUid() + "/" + pathCount + ".jpg");
-                    try {
-                        InputStream stream = new FileInputStream(new File(pathList.get(pathCount)));
-                        StorageMetadata metadata = new StorageMetadata.Builder().setCustomMetadata("index", "" + (contentsList.size() - 1)).build(); //인덱스정보 넘겨주기
-                        UploadTask uploadTask = mountainImagesRef.putStream(stream, metadata);
-                        uploadTask.addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception exception) {
-                            }
-                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                final int index = Integer.parseInt(taskSnapshot.getMetadata().getCustomMetadata("index"));
-                                mountainImagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                    @Override
-                                    public void onSuccess(Uri uri) {
-                                        //Log.e("로그 : ","uri "+uri);
-                                        contentsList.set(index, uri.toString());
-                                        successCount++;
-                                        if (pathList.size() == successCount) {
-                                            AlbumInfo albumInfo = new AlbumInfo(title, contentsList, user.getUid(), new Date());
-                                            storeUpload(albumInfo);
-                                            /*for(int a=0; a<contentsList.size(); a++){
-                                                Log.e("로그 : ", "콘텐츠: "+contentsList);
-                                            }*/
-
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    } catch (FileNotFoundException e) {
-                        Log.e("로그", "에러: " + e.toString());
-                    }
-                    pathCount++;
-                }
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                postCount = mFirebaseMethods.getPostCount(dataSnapshot);
+                Log.d(TAG, "onDataChange: post count : "+postCount);
             }
-        }else{
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void storageUpload(){
+        final String title = ((EditText)findViewById(R.id.title_edit)).getText().toString();
+        if(title.length()>0 && !mRItems.isEmpty()){
+
+
+
+            //mFirebaseMethods.uploadNewPost(mRItems.,imageCount,imgUrl,null);
+
+        }else if(title.length()==0){
             startToast("제목을 작성해주세요.");
+        }else if(mRItems.isEmpty()){
+            startToast("앨범에 등록할 사진을 선택해주세요.");
         }
     }
 
-    private  void storeUpload(AlbumInfo albumInfo){
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("posts").add(albumInfo)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot written with ID: "+documentReference.getId());
-                        finish();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
-    }
+
+
+
+//    private  void storageUpload(){
+//        final String title = ((EditText)findViewById(R.id.title_edit)).getText().toString();
+//        final String contents = ((EditText)findViewById(R.id.contets_edit)).getText().toString();
+//
+//        if(title.length()>0){
+//            ArrayList<String> contentsList = new ArrayList<>();
+//            user = FirebaseAuth.getInstance().getCurrentUser();
+//            FirebaseStorage storage = FirebaseStorage.getInstance();
+//            StorageReference storageRef = storage.getReference();
+//
+//            for(int i=0 ; i<parent.getChildCount(); i++){
+//                View view = parent.getChildAt(i);
+//                if(view instanceof EditText){
+//                    String text = ((EditText)view).getText().toString();
+//                    if(text.length()>0){
+//                        contentsList.add(text);
+//                    }
+//                }else{
+//                    contentsList.add(pathList.get(pathCount));
+//                    final StorageReference mountainImagesRef = storageRef.child("users/" + user.getUid() + "/" + pathCount + ".jpg");
+//                    try {
+//                        InputStream stream = new FileInputStream(new File(pathList.get(pathCount)));
+//                        StorageMetadata metadata = new StorageMetadata.Builder().setCustomMetadata("index", "" + (contentsList.size() - 1)).build(); //인덱스정보 넘겨주기
+//                        UploadTask uploadTask = mountainImagesRef.putStream(stream, metadata);
+//                        uploadTask.addOnFailureListener(new OnFailureListener() {
+//                            @Override
+//                            public void onFailure(@NonNull Exception exception) {
+//                            }
+//                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+//                            @Override
+//                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+//                                final int index = Integer.parseInt(taskSnapshot.getMetadata().getCustomMetadata("index"));
+//                                mountainImagesRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                                    @Override
+//                                    public void onSuccess(Uri uri) {
+//                                        //Log.e("로그 : ","uri "+uri);
+//                                        contentsList.set(index, uri.toString());
+//                                        successCount++;
+//                                        if (pathList.size() == successCount) {
+//                                            AlbumInfo albumInfo = new AlbumInfo(title, contentsList, user.getUid(), new Date());
+//                                            storeUpload(albumInfo);
+//                                            for(int a=0; a<contentsList.size(); a++){
+//                                                Log.e("로그 : ", "콘텐츠: "+contentsList);
+//                                            }
+//
+//                                        }
+//                                    }
+//                                });
+//                            }
+//                        });
+//                    } catch (FileNotFoundException e) {
+//                        Log.e("로그", "에러: " + e.toString());
+//                    }
+//                    pathCount++;
+//                }
+//            }
+//        }else{
+//            startToast("제목을 작성해주세요.");
+//        }
+//    }
+//
+//    private  void storeUpload(AlbumInfo albumInfo){
+//        FirebaseFirestore db = FirebaseFirestore.getInstance();
+//        db.collection("posts").add(albumInfo)
+//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                    @Override
+//                    public void onSuccess(DocumentReference documentReference) {
+//                        Log.d(TAG, "DocumentSnapshot written with ID: "+documentReference.getId());
+//                        finish();
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.w(TAG, "Error adding document", e);
+//                    }
+//                });
+//    }
+
+
 
     @Override
     public void onBackPressed() {

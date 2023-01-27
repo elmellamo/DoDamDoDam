@@ -20,7 +20,7 @@
         android:theme="@style/Theme.DoDamDoDam">
 
         <activity
-            android:name=".activity.Title"
+            android:name=".Utils.Title"
             android:exported="true"
             android:theme="@style/Theme.DoDamDoDam">
             <intent-filter>

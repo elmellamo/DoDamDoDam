@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.dodamdodam.R;
-import com.example.dodamdodam.view.RecyclerViewItem;
+import com.example.dodamdodam.models.RecyclerViewItem;
 
 import java.util.ArrayList;
 

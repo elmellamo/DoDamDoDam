@@ -1,4 +1,4 @@
-package com.example.dodamdodam.view;
+package com.example.dodamdodam.models;
 
 public class CalendarInfo {
     private String contents;
