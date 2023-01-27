@@ -50,16 +50,17 @@ public class QuestionMain extends AppCompatActivity {
 
 
     private String TAG;
-    private Button question_list_btn,ques_submit_btn;
+    private Button question_list_btn,ques_submit_btn,check_btn;
     public String str_ans = null;
     private EditText et_ques;
 
-    private TextView show_question;
+    private TextView show_question,howmany1;
 
     public String num,questionkey;
 
 
 
+    private int many;
 
 
 
@@ -77,6 +78,7 @@ public class QuestionMain extends AppCompatActivity {
         loveruidReference = userdatabaseReference.child(user.getUid());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("users").document(user.getUid());
+
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -102,9 +104,7 @@ public class QuestionMain extends AppCompatActivity {
 
 
 
-
-
-        num="2";
+        num="1";
         show_question=findViewById(R.id.tv_show_question);
 
         databaseReference.child(num).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -146,16 +146,18 @@ public class QuestionMain extends AppCompatActivity {
         });
 
 
-/*
+
         question_list_btn=findViewById(R.id.question_list_btn);
         question_list_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(QuestionMain.this, QuestionList.class);
+                intent.putExtra("userUid",user.getUid());
+                intent.putExtra("loverUid",LOVERUID);
                 startActivity(intent);
             }
         });
-*/
+
 
 
     }

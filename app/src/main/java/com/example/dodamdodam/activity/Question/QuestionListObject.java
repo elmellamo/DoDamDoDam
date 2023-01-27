@@ -6,6 +6,13 @@ public class QuestionListObject {
     private String ans1;
     private String ans2;
 
+
+    public QuestionListObject(String ques, String ans1, String ans2) {
+        this.ques = ques;
+        this.ans1 = ans1;
+        this.ans2 = ans2;
+    }
+
     public String getQues() {
         return ques;
     }
