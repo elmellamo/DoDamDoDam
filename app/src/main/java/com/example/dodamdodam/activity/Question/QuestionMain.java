@@ -38,10 +38,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class QuestionMain extends AppCompatActivity {
 
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,database;
     private FirebaseUser user;
     private DatabaseReference userdatabaseReference;
     private DatabaseReference loveruidReference;
@@ -54,14 +57,13 @@ public class QuestionMain extends AppCompatActivity {
     public String str_ans = null;
     private EditText et_ques;
 
-    private TextView show_question,howmany1;
+    private TextView show_question,show_num,show_number,show_num1;
 
-    public String num,questionkey;
+    public String questionkey,getTime;
 
 
-
-    private int many;
-
+    private int num;
+    private long now;
 
 
 
@@ -79,7 +81,7 @@ public class QuestionMain extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("users").document(user.getUid());
 
-
+        database = FirebaseDatabase.getInstance().getReference("UpdateDay");
 
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -100,16 +102,168 @@ public class QuestionMain extends AppCompatActivity {
         });//LoverUID받아오기
 
 
-
-
-
-
-
-
-        num="1";
         show_question=findViewById(R.id.tv_show_question);
 
-        databaseReference.child(num).addListenerForSingleValueEvent(new ValueEventListener() {
+        now=System.currentTimeMillis();
+        Date date =new Date(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        getTime = sdf.format(date);
+
+
+
+
+        database.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.hasChild(user.getUid())&&snapshot.hasChild(LOVERUID)){//시작했을때
+                    if(snapshot.child("Info").child(user.getUid()).getValue().toString()!=getTime){//하루지났을때
+                        num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString())+1;
+                        database.child("Num").child(user.getUid()).setValue(Integer.toString(num));
+
+
+
+                        databaseReference.child(Integer.toString(num)).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot childSnapshot:snapshot.getChildren()){
+                                    questionkey=childSnapshot.getKey();
+                                    show_question.setText(questionkey);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+
+                        et_ques=(EditText)findViewById(R.id.et_question);
+                        str_ans=et_ques.getText().toString();
+                        ques_submit_btn=findViewById(R.id.ques_submit_btn);
+                        ques_submit_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                et_ques=(EditText)findViewById(R.id.et_question);
+                                str_ans=et_ques.getText().toString();
+
+                                databaseReference.child(Integer.toString(num)).child(questionkey).child(user.getUid()).setValue(str_ans);
+
+                            }
+                        });
+
+                        Intent intent1 = new Intent(QuestionMain.this, QuestionList.class);
+                        intent1.putExtra("Num",Integer.toString(num));
+
+                    }
+                    else{
+                        num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
+
+
+                        databaseReference.child(Integer.toString(num)).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot childSnapshot:snapshot.getChildren()){
+                                    questionkey=childSnapshot.getKey();
+                                    show_question.setText(questionkey);
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+
+
+                        et_ques=(EditText)findViewById(R.id.et_question);
+                        str_ans=et_ques.getText().toString();
+                        ques_submit_btn=findViewById(R.id.ques_submit_btn);
+                        ques_submit_btn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                et_ques=(EditText)findViewById(R.id.et_question);
+                                str_ans=et_ques.getText().toString();
+
+                                databaseReference.child(Integer.toString(num)).child(questionkey).child(user.getUid()).setValue(str_ans);
+
+                            }
+                        });
+                    }
+                    Intent intent1 = new Intent(QuestionMain.this, QuestionList.class);
+                    intent1.putExtra("Num",Integer.toString(num));
+
+                }
+                else{//둘중에 하나라도 시작 안했을때
+                    database.child("Info").child(user.getUid()).setValue(getTime);
+                    database.child("Num").child(user.getUid()).setValue("1");
+                    database.child("Info").child(LOVERUID).setValue(getTime);
+                    database.child("Num").child(LOVERUID).setValue("1");
+                    //number = snapshot.child("Num").child(user.getUid()).getValue(Number.class);
+                    num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
+                    databaseReference.child(Integer.toString(num)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot childSnapshot:snapshot.getChildren()){
+                                questionkey=childSnapshot.getKey();
+                                show_question.setText(questionkey);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
+
+                    et_ques=(EditText)findViewById(R.id.et_question);
+                    str_ans=et_ques.getText().toString();
+                    ques_submit_btn=findViewById(R.id.ques_submit_btn);
+                    ques_submit_btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            et_ques=(EditText)findViewById(R.id.et_question);
+                            str_ans=et_ques.getText().toString();
+
+                            databaseReference.child(Integer.toString(num)).child(questionkey).child(user.getUid()).setValue(str_ans);
+
+                        }
+                    });
+
+
+
+                    Intent intent1 = new Intent(QuestionMain.this, QuestionList.class);
+                    intent1.putExtra("Num",Integer.toString(num));
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        question_list_btn=findViewById(R.id.question_list_btn);
+        question_list_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(QuestionMain.this, QuestionList.class);
+                intent.putExtra("userUid",user.getUid());
+                intent.putExtra("loverUid",LOVERUID);
+                startActivity(intent);
+            }
+        });
+
+        /*
+
+
+        databaseReference.child(number).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot childSnapshot:snapshot.getChildren()){
@@ -142,10 +296,12 @@ public class QuestionMain extends AppCompatActivity {
                 et_ques=(EditText)findViewById(R.id.et_question);
                 str_ans=et_ques.getText().toString();
 
-                databaseReference.child(num).child(questionkey).child(user.getUid()).setValue(str_ans);
+                databaseReference.child(number).child(questionkey).child(user.getUid()).setValue(str_ans);
 
             }
         });
+
+
 
 
 
@@ -160,7 +316,8 @@ public class QuestionMain extends AppCompatActivity {
             }
         });
 
-
+*/
 
     }
+
 }

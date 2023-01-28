@@ -1,7 +1,6 @@
 package com.example.dodamdodam.activity.Question;
 
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
@@ -39,7 +38,7 @@ public class QuestionList extends AppCompatActivity {
     private QuestionAdapter questionAdapter;
     private String num,questionkey,question,answer1,answer2,userUid,loverUid,answer11,answer22;
     private int how_many_question;
-    private long how;
+    private String Num;
     private TextView uiduid;
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -63,9 +62,11 @@ public class QuestionList extends AppCompatActivity {
         Intent intent =getIntent();
         userUid = intent.getStringExtra("userUid");
         loverUid = intent.getStringExtra("loverUid");
-
+        Intent intent1 =getIntent();
+        Num=intent1.getStringExtra("Num");
+        how_many_question=Integer.valueOf(Num);
         answer2=loverUid;
-        for(int i=1;i<=3;i++) {
+        for(int i=1;i<=how_many_question;i++) {
             databaseReference.child(Integer.toString(i)).addListenerForSingleValueEvent(new ValueEventListener() {
 
                 @Override
@@ -89,22 +90,14 @@ public class QuestionList extends AppCompatActivity {
                         arrayList.add(questionlistObject);
 
                     }
-
                     questionAdapter.notifyDataSetChanged();
                 }
-
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
                 }
             });
 
         }
-
-
-
-
     }
 
 
