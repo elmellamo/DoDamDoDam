@@ -9,7 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -23,8 +23,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.Utils.FirebaseMethods;
-import com.example.dodamdodam.activity.Calendar.CalendarMain;
-import com.example.dodamdodam.activity.Setting.SettingMain;
 import com.example.dodamdodam.adapter.CustomAdapter;
 import com.example.dodamdodam.models.MediaType;
 import com.example.dodamdodam.models.RecyclerViewItem;
@@ -47,18 +45,16 @@ public class AlbumAdd extends AppCompatActivity {
     private RecyclerView recyclerview;
     private RecyclerView.LayoutManager mLayoutManager;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();;
-    private ArrayList<String> pathList = new ArrayList<>();
-    private ArrayList<RecyclerViewItem> mRItems = new ArrayList<>();
+    private ArrayList<Uri> pathList = new ArrayList<>();
+    private RecyclerViewItem rItem = new RecyclerViewItem();
     private CustomAdapter mAdapter;
-    private LinearLayout parent;
-    private int pathCount,successCount;
     private int postCount =0;
     private FirebaseAuth mAuth;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
     private FirebaseMethods mFirebaseMethods;
 
-
+    private ImageButton questionBtn,albumBtn,settingBtn, calendarBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +76,6 @@ public class AlbumAdd extends AppCompatActivity {
         EditText editText = new EditText(AlbumAdd.this);
         editText.setHint("내용을 입력하세요.");
 
-        findViewById(R.id.questionBtn).setOnClickListener(onClickListener);
-        findViewById(R.id.settingBtn).setOnClickListener(onClickListener);
-        findViewById(R.id.calendarBtn2).setOnClickListener(onClickListener);
-        findViewById(R.id.albumBtn).setOnClickListener(onClickListener);
-
         setupFirebaseAuth();
 
     }
@@ -97,22 +88,9 @@ public class AlbumAdd extends AppCompatActivity {
                     storageUpload();
                     break;
                 case R.id.image_btn:
-                    mRItems.clear();
+                    pathList.clear();
                     loadImage();
                     break;
-                case R.id.questionBtn:
-                    //myStartActivity(AlbumMain.class);
-                    break;
-                case R.id.settingBtn:
-                    myStartActivity(SettingMain.class);
-                    break;
-                case R.id.calendarBtn2:
-                    myStartActivity(CalendarMain.class);
-                    break;
-                case R.id.albumBtn:
-                    myStartActivity(AlbumMain.class);
-                    break;
-
             }
         }
     };
@@ -129,7 +107,11 @@ public class AlbumAdd extends AppCompatActivity {
                         handlePickerResponse(currentUri);
                     }
 
-                    mAdapter = new CustomAdapter(mRItems, getApplicationContext());
+                    rItem.setPublisher(user.getUid());
+                    rItem.setMcreatedAt(new Date());
+                    rItem.setGalleryuri(pathList);
+
+                    mAdapter = new CustomAdapter(rItem, getApplicationContext());
                     recyclerview.setAdapter(mAdapter);
                     mLayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
                     recyclerview.setLayoutManager(mLayoutManager);
@@ -179,12 +161,8 @@ public class AlbumAdd extends AppCompatActivity {
                     case IMAGE_JPG:
                     case VIDEO_MP4:
                     case VIDEO_WEBM:
-                        RecyclerViewItem rItem = new RecyclerViewItem();
-                        rItem.setPublisher(user.getUid());
-                        rItem.setMcreatedAt(new Date());
-                        rItem.setGalleryuri(currentUri);
+                        pathList.add(currentUri);
 
-                        mRItems.add(rItem);
                         break;
                 }
             }, () -> Log.e("로그", "handlePickerResponse: error!"));
@@ -192,19 +170,19 @@ public class AlbumAdd extends AppCompatActivity {
     }
 
     private void setupFirebaseAuth(){
-        Log.d(TAG, "setupFirebaseAuth: setting up firebase auth");
+        Log.e("로그", "setupFirebaseAuth: setting up firebase auth");
 
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase= FirebaseDatabase.getInstance();
         myRef=mFirebaseDatabase.getReference();
-        Log.d(TAG, "onDataChange: image count : "+postCount);
+        Log.e("로그", "onDataChange: image count : "+postCount);
 
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 postCount = mFirebaseMethods.getPostCount(dataSnapshot);
-                Log.d(TAG, "onDataChange: post count : "+postCount);
+                Log.e("로그", "onDataChange: post count : "+postCount);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -215,15 +193,14 @@ public class AlbumAdd extends AppCompatActivity {
 
     private void storageUpload(){
         final String title = ((EditText)findViewById(R.id.title_edit)).getText().toString();
-        if(title.length()>0 && !mRItems.isEmpty()){
+        final String contents = ((EditText)findViewById(R.id.contets_edit)).getText().toString();
+        if(title.length()>0 && !pathList.isEmpty()){
 
-
-
-            //mFirebaseMethods.uploadNewPost(mRItems.,imageCount,imgUrl,null);
+            mFirebaseMethods.uploadNewPost(contents,postCount,pathList);
 
         }else if(title.length()==0){
             startToast("제목을 작성해주세요.");
-        }else if(mRItems.isEmpty()){
+        }else if(pathList.isEmpty()){
             startToast("앨범에 등록할 사진을 선택해주세요.");
         }
     }
@@ -314,7 +291,7 @@ public class AlbumAdd extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        mRItems.clear();
+        pathList.clear();
         mAdapter.notifyDataSetChanged();
         finish();
     }

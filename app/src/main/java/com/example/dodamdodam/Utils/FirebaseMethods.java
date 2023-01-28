@@ -61,7 +61,7 @@ public class FirebaseMethods {
     }
 
     public void uploadNewPost(final String caption, int count, ArrayList<Uri> imgUrl) {
-        Log.d(TAG, "uploadNewPhoto: uploading NEW photo.");
+        Log.e("로그", "uploadNewPhoto: uploading NEW photo.");
 
         String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -81,6 +81,7 @@ public class FirebaseMethods {
                         @Override
                         public void onSuccess(Uri uri) {
                             Uri firebaseUrl = uri;
+                            Log.e("로그", "photo upload success");
                             Toast.makeText(mContext, "photo upload success", Toast.LENGTH_SHORT).show();
 
                             //새로운 앨범 게시물을 'posts'랑 'user_posts' 카테고리에 추가
@@ -95,7 +96,7 @@ public class FirebaseMethods {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Log.d(TAG, "onFailure: Photo upload failed.");
+                    Log.e("로그", "onFailure: Photo upload failed.");
                     Toast.makeText(mContext, "Photo upload failed ", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -104,7 +105,7 @@ public class FirebaseMethods {
 
 
     private void addAlbumToDatabase(String caption, String url){
-        Log.d(TAG, "addPhotoToDatabase: 데이터 베이스에 사진 추가");
+        Log.e("로그", "addPhotoToDatabase: 데이터 베이스에 사진 추가");
 
         String newPostKey = myRef.child(mContext.getString(R.string.dbname_posts)).push().getKey();
         Post post = new Post();

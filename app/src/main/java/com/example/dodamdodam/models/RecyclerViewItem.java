@@ -2,10 +2,11 @@ package com.example.dodamdodam.models;
 
 import android.net.Uri;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class RecyclerViewItem {
-    private Uri galleryuri;
+    private ArrayList<Uri> galleryuri;
     private String publisher;
     private Date mcreatedAt;
 
@@ -13,14 +14,14 @@ public class RecyclerViewItem {
 
     }
 
-    public RecyclerViewItem(Uri galleryuri, String publisher, Date mcreatedAt){
+    public RecyclerViewItem(ArrayList<Uri> galleryuri, String publisher, Date mcreatedAt){
         this.galleryuri = galleryuri;
         this.publisher = publisher;
         this.mcreatedAt = mcreatedAt;
     }
 
-    public  Uri getGalleryuri(){return  this.galleryuri;}
-    public void setGalleryuri(Uri galleryuri){this.galleryuri = galleryuri;}
+    public  ArrayList<Uri> getGalleryuri(){return  this.galleryuri;}
+    public void setGalleryuri(ArrayList<Uri> galleryuri){this.galleryuri = galleryuri;}
 
     public String getPublisher() {return this.publisher;}
     public void setPublisher(String publisher) {this.publisher = publisher;}
