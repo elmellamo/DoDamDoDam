@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -53,8 +54,9 @@ public class AlbumAdd extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference myRef;
     private FirebaseMethods mFirebaseMethods;
+    private Button post_saves;
+    private ImageButton image_btn;
 
-    private ImageButton questionBtn,albumBtn,settingBtn, calendarBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,30 +72,30 @@ public class AlbumAdd extends AppCompatActivity {
 
         recyclerview = findViewById(R.id.addgallery_layout);
 
-        findViewById(R.id.post_saves).setOnClickListener(onClickListener);
-        findViewById(R.id.image_btn).setOnClickListener(onClickListener);
+        post_saves = findViewById(R.id.post_saves);
+        image_btn = findViewById(R.id.image_btn);
 
         EditText editText = new EditText(AlbumAdd.this);
         editText.setHint("내용을 입력하세요.");
 
         setupFirebaseAuth();
 
+        post_saves.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                storageUpload();
+            }
+        });
+        image_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pathList.clear();
+                loadImage();
+            }
+        });
+
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.post_saves:
-                    storageUpload();
-                    break;
-                case R.id.image_btn:
-                    pathList.clear();
-                    loadImage();
-                    break;
-            }
-        }
-    };
 
     private final ActivityResultLauncher<PickVisualMediaRequest> startForMultipleModeResult =
             registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(10), uris -> {

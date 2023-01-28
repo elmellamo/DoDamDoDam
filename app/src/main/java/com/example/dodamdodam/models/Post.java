@@ -3,17 +3,19 @@ package com.example.dodamdodam.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.List;
+
 public class Post implements Parcelable {
     private String caption;
     private String date_created;
-    private String image_path;
+    private List<String> image_path;
     private String post_id;
     private String user_id;
 
     public Post() {
     }
 
-    public Post(String caption, String date_created, String image_path, String post_id,
+    public Post(String caption, String date_created, List<String> image_path, String post_id,
                  String user_id) {
         this.caption = caption;
         this.date_created = date_created;
@@ -25,7 +27,7 @@ public class Post implements Parcelable {
     protected Post(Parcel in) {
         caption = in.readString();
         date_created = in.readString();
-        image_path = in.readString();
+        in.readStringList(image_path);
         post_id = in.readString();
         user_id = in.readString();
     }
@@ -34,7 +36,7 @@ public class Post implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(caption);
         dest.writeString(date_created);
-        dest.writeString(image_path);
+        dest.writeStringList(image_path);
         dest.writeString(post_id);
         dest.writeString(user_id);
     }
@@ -76,11 +78,11 @@ public class Post implements Parcelable {
         this.date_created = date_created;
     }
 
-    public String getImage_path() {
+    public List<String> getImage_path() {
         return image_path;
     }
 
-    public void setImage_path(String image_path) {
+    public void setImage_path(List<String> image_path) {
         this.image_path = image_path;
     }
 
@@ -101,6 +103,7 @@ public class Post implements Parcelable {
 
     @Override
     public String toString() {
+
         return "Post{" +
                 "caption='" + caption + '\'' +
                 ", date_created='" + date_created + '\'' +
