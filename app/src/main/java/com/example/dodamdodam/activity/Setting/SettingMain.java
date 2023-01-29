@@ -29,7 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SettingMain extends AppCompatActivity {
     public Button chabtn_1,chabtn_2,chabtn_3;
-    public Button savebtn_1,savebtn_2,savebtn_3;
+    public Button savebtn_1,savebtn_2,savebtn_3,askbtn;
     public EditText editText_1,editText_2,editText_3;
     public TextView textView_1,textView_2,textView_3;
     private DatabaseReference databaseReference;
@@ -54,6 +54,7 @@ public class SettingMain extends AppCompatActivity {
         question_Btn=findViewById(R.id.questionBtn);
         calendar_Btn=findViewById(R.id.calendarBtn2);
         album_Btn=findViewById(R.id.albumBtn);
+        askbtn=findViewById(R.id.askBtn);
         user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference document = db.collection("users").document(user.getUid());
@@ -233,6 +234,29 @@ public class SettingMain extends AppCompatActivity {
                 myStartActivity(CalendarMain.class);
             }
         });
+
+        askbtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.setType("plain/text");
+                String[] address = {"dobbydavid1@naver.com"};
+                email.putExtra(Intent.EXTRA_EMAIL, address);
+                email.putExtra(Intent.EXTRA_SUBJECT, "test@test");
+                email.putExtra(Intent.EXTRA_TEXT, "아이디 : \n문의사항 : ");
+                startActivity(email);
+
+
+
+
+            }
+        });
+
+
+
+
     }
     private void myStartActivity(Class c){
         Intent intent = new Intent(this, c);

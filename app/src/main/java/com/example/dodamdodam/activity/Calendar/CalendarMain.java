@@ -271,23 +271,6 @@ public class CalendarMain extends BasicActivity {
         });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
         {
             @Override
