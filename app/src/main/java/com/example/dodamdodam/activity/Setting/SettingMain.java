@@ -1,5 +1,6 @@
 package com.example.dodamdodam.activity.Setting;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dodamdodam.R;
@@ -29,7 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SettingMain extends AppCompatActivity {
     public Button chabtn_1,chabtn_2,chabtn_3;
-    public Button savebtn_1,savebtn_2,savebtn_3,askbtn;
+    public Button savebtn_1,savebtn_2,savebtn_3,askbtn,withdrawbtn;
     public EditText editText_1,editText_2,editText_3;
     public TextView textView_1,textView_2,textView_3;
     private DatabaseReference databaseReference;
@@ -55,6 +57,7 @@ public class SettingMain extends AppCompatActivity {
         calendar_Btn=findViewById(R.id.calendarBtn2);
         album_Btn=findViewById(R.id.albumBtn);
         askbtn=findViewById(R.id.askBtn);
+        withdrawbtn=findViewById(R.id.withdrawBtn);
         user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference document = db.collection("users").document(user.getUid());
@@ -244,17 +247,21 @@ public class SettingMain extends AppCompatActivity {
                 email.setType("plain/text");
                 String[] address = {"dobbydavid1@naver.com"};
                 email.putExtra(Intent.EXTRA_EMAIL, address);
-                email.putExtra(Intent.EXTRA_SUBJECT, "test@test");
+                email.putExtra(Intent.EXTRA_SUBJECT, "도담도담 1대1 문의");
                 email.putExtra(Intent.EXTRA_TEXT, "아이디 : \n문의사항 : ");
                 startActivity(email);
-
-
-
 
             }
         });
 
-
+        withdrawbtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                showDialog();
+            }
+        });
 
 
     }
@@ -267,4 +274,29 @@ public class SettingMain extends AppCompatActivity {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
+    void showDialog() {
+        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(SettingMain.this)
+                .setTitle("탈퇴하기")
+                .setMessage("탈퇴 시 되돌릴 수 없습니다")
+                .setPositiveButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(SettingMain.this, "취소하였습니다", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("탈퇴", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getApplicationContext(), "길게 출력 Hello World!", Toast.LENGTH_LONG).show();
+                        WITHDRAW();
+                        //startToast("탈퇴를 진행하겠습니다\n1분 내외의 시간이 소요됩니다");
+                    }
+                });
+        AlertDialog msgDlg = msgBuilder.create();
+        msgDlg.show();
+    }
+    void WITHDRAW(){
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference("Calendar");
+    }
 }
