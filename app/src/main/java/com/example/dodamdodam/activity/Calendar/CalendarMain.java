@@ -59,7 +59,10 @@ public class CalendarMain extends BasicActivity {
     public String ouranniversary;
     private TextView ddayTextView;
     private String daynow;
-
+    private int dYear, dMonth, dDay;
+    private String MYBIRTH, LOVERBIRTH;
+    public int resultnum;
+    public String MYNICK,LOVERNICK;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -88,18 +91,173 @@ public class CalendarMain extends BasicActivity {
         //LOVERUID = db.collection("users").document(user.getUid()).collection("lover").get().toString();
 
 
-        databaseReference2.child("anniversary").addListenerForSingleValueEvent(new ValueEventListener() {
+
+        DocumentReference docRef = db.collection("users").document(user.getUid());
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        LOVERUID = document.getData().get("lover").toString();
+                        MYBIRTH = document.getData().get("birthday").toString();
+                    } else {
+                        Log.d(TAG, "없다없다없다없다");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
+
+
+//        databaseReference2.child("lovernickname").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if(snapshot.child(user.getUid()).getValue()!=null) {
+//                    LOVERNICK = snapshot.child(user.getUid()).getValue().toString();
+//                    }
+//                }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//
+//        databaseReference2.child("mynickname").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if(snapshot.child(user.getUid()).getValue()!=null) {
+//                    MYNICK = snapshot.child(user.getUid()).getValue().toString();
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
+
+//        databaseReference2.child("anniversary").addListenerForSingleValueEvent(new ValueEventListener() {//이건 리얼타임
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                if(snapshot.child(user.getUid()).getValue()!=null){
+//                    ouranniversary = snapshot.child(user.getUid()).getValue().toString();
+//                    long now = System.currentTimeMillis();
+//                    int ouranniversaryint = Integer.parseInt(ouranniversary);
+//                    dYear = ouranniversaryint/10000;
+//                    dMonth=(ouranniversaryint%10000)/100;
+//                    dDay = ouranniversaryint%100;
+//                    Calendar dCalendar = Calendar.getInstance();
+//                    dCalendar.set(dYear,dMonth-1,dDay);
+//                    long ddaytime = dCalendar.getTimeInMillis();
+//                    long dplusday=(now-ddaytime)/(24*60*60*1000);
+//                    resultnum = (int)dplusday+1;
+//
+//                    if(LOVERUID!=null) {//이건 파이어스토어3
+//                        if (db.collection("users").document(LOVERUID) != null) {
+//                            DocumentReference docRef2 = db.collection("users").document(LOVERUID);
+//                            docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<DocumentSnapshot> task2) {
+//
+//                                    if (task2.isSuccessful()) {
+//                                        DocumentSnapshot document2 = task2.getResult();
+//                                        if (document2.exists()) {
+//                                            LOVERBIRTH = document2.getData().get("birthday").toString();
+//                                            int dminusmy = dminusdayActivity(MYBIRTH);
+//                                            int dminuslover = dminusdayActivity(LOVERBIRTH);
+//                                            ddayTextView.setText("우리가 만난지 "+"d+day "+Integer.toString(resultnum)+
+//                                                    "\n"+MYNICK+"의 생일 d-day "+dminusmy+"\n"+LOVERNICK+"의 생일 d-day "
+//                                                    +dminuslover+"\n");
+//                                        } else {
+//                                            Log.d(TAG, "없다없다없다없다");
+//                                            //ddayTextView.setText("상대방 생일1");
+//
+//                                        }
+//                                    } else {
+//                                        Log.d(TAG, "get failed with ", task2.getException());
+//                                        //ddayTextView.setText("상대방 생일2");
+//
+//                                    }
+//                                }
+//                            });
+//                        }
+//                    }
+//                    else{
+//                        //ddayTextView.setText("dfdf"+LOVERUID+MYBIRTH);
+//                    }
+//
+//                }
+//                else{
+//                    ddayTextView.setText("설정에 가서 기념일을 입력해주십시오");
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+        databaseReference2.addListenerForSingleValueEvent(new ValueEventListener() {//이건 리얼타임
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child(user.getUid()).getValue()!=null){
-                    ouranniversary = snapshot.child(user.getUid()).getValue().toString();
+                if(snapshot.child("anniversary").child(user.getUid()).getValue()!=null){
+                    ouranniversary = snapshot.child("anniversary").child(user.getUid()).getValue().toString();
                     long now = System.currentTimeMillis();
-                    Date date = new Date(now);
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-                    daynow = dateFormat.format(date);
+                    int ouranniversaryint = Integer.parseInt(ouranniversary);
+                    dYear = ouranniversaryint/10000;
+                    dMonth=(ouranniversaryint%10000)/100;
+                    dDay = ouranniversaryint%100;
+                    Calendar dCalendar = Calendar.getInstance();
+                    dCalendar.set(dYear,dMonth-1,dDay);
+                    long ddaytime = dCalendar.getTimeInMillis();
+                    long dplusday=(now-ddaytime)/(24*60*60*1000);
+                    resultnum = (int)dplusday+1;
 
-                    dday=Integer.parseInt(daynow)-Integer.parseInt(ouranniversary);
-                    ddayTextView.setText("d+day "+Integer.toString(dday));
+                    if(LOVERUID!=null) {//이건 파이어스토어3
+                        if (db.collection("users").document(LOVERUID) != null) {
+                            DocumentReference docRef2 = db.collection("users").document(LOVERUID);
+                            docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task2) {
+
+                                    if (task2.isSuccessful()) {
+                                        DocumentSnapshot document2 = task2.getResult();
+                                        if (document2.exists()) {
+                                            LOVERBIRTH = document2.getData().get("birthday").toString();
+                                            int dminusmy = dminusdayActivity(MYBIRTH);
+                                            int dminuslover = dminusdayActivity(LOVERBIRTH);
+                                            if(snapshot.child("lovernickname").child(user.getUid()).getValue()!=null){
+                                                LOVERNICK = snapshot.child("lovernickname").child(user.getUid()).getValue().toString();
+                                            }
+                                            if(snapshot.child("mynickname").child(user.getUid()).getValue()!=null) {
+                                                MYNICK = snapshot.child("mynickname").child(user.getUid()).getValue().toString();
+
+                                            }
+                                            ddayTextView.setText("우리가 만난지 "+"d+"+Integer.toString(resultnum)+
+                                                    "일\n"+MYNICK+"의 생일 d-"+dminusmy+"일\n"+LOVERNICK+"의 생일 d-"
+                                                    +dminuslover+"일");
+                                        } else {
+                                            Log.d(TAG, "없다없다없다없다");
+                                            //ddayTextView.setText("상대방 생일1");
+
+                                        }
+                                    } else {
+                                        Log.d(TAG, "get failed with ", task2.getException());
+                                        //ddayTextView.setText("상대방 생일2");
+
+                                    }
+                                }
+                            });
+                        }
+                    }
+                    else{
+                        //ddayTextView.setText("dfdf"+LOVERUID+MYBIRTH);
+                    }
 
                 }
                 else{
@@ -121,24 +279,11 @@ public class CalendarMain extends BasicActivity {
 
 
 
-        DocumentReference docRef = db.collection("users").document(user.getUid());
 
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        LOVERUID = document.getData().get("lover").toString();
-                    } else {
-                        Log.d(TAG, "없다없다없다없다");
-                    }
-                } else {
-                    Log.d(TAG, "get failed with ", task.getException());
-                }
-            }
-        });
+
+
+
 
 
 
@@ -300,6 +445,31 @@ public class CalendarMain extends BasicActivity {
         Intent intent = new Intent(this, c);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    private int dminusdayActivity(String STR){
+        long now2 = System.currentTimeMillis();
+        //int todayint = (int)(now2/(24*60*60*1000));
+
+        Date date = new Date(now2);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        String todayString = dateFormat.format(date);
+        int todayint=Integer.parseInt(todayString);
+
+        int birthdayint = Integer.parseInt(STR);
+        while(birthdayint<todayint){
+            birthdayint=birthdayint+10000;
+        }
+        //todayText.setText(Integer.toString(birthdayint)+Integer.toString(todayint));
+        int dYear2 = birthdayint/10000;
+        int dMonth2=(birthdayint%10000)/100;
+        int dDay2 = birthdayint%100;
+        Calendar dCalendar2 = Calendar.getInstance();
+        dCalendar2.set(dYear2,dMonth2-1,dDay2);
+        long ddaytime2 = dCalendar2.getTimeInMillis();
+        long dplusday2 = (now2-ddaytime2)/(24*60*60*1000);
+        return (int)dplusday2;
+
     }
 
 }

@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SettingMain extends AppCompatActivity {
     public Button chabtn_1,chabtn_2,chabtn_3;
@@ -52,6 +55,8 @@ public class SettingMain extends AppCompatActivity {
         calendar_Btn=findViewById(R.id.calendarBtn2);
         album_Btn=findViewById(R.id.albumBtn);
         user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference document = db.collection("users").document(user.getUid());
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Setting");
         databaseReference.child("anniversary").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -234,6 +239,8 @@ public class SettingMain extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
+    private void startToast(String msg){
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
 
 }
