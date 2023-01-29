@@ -198,7 +198,7 @@ public class AlbumAdd extends AppCompatActivity {
         final String contents = ((EditText)findViewById(R.id.contets_edit)).getText().toString();
         if(title.length()>0 && !pathList.isEmpty()){
 
-            mFirebaseMethods.uploadNewPost(contents,postCount,pathList);
+            mFirebaseMethods.uploadNewPost(title, contents,postCount,pathList);
 
         }else if(title.length()==0){
             startToast("제목을 작성해주세요.");

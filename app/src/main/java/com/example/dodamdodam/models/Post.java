@@ -11,17 +11,19 @@ public class Post implements Parcelable {
     private List<String> image_path;
     private String post_id;
     private String user_id;
+    private String title;
 
     public Post() {
     }
 
-    public Post(String caption, String date_created, List<String> image_path, String post_id,
+    public Post(String title, String caption, String date_created, List<String> image_path, String post_id,
                  String user_id) {
         this.caption = caption;
         this.date_created = date_created;
         this.image_path = image_path;
         this.post_id = post_id;
         this.user_id = user_id;
+        this.title = title;
     }
 
     protected Post(Parcel in) {
@@ -30,6 +32,7 @@ public class Post implements Parcelable {
         in.readStringList(image_path);
         post_id = in.readString();
         user_id = in.readString();
+        title = in.readString();
     }
 
     @Override
@@ -39,6 +42,7 @@ public class Post implements Parcelable {
         dest.writeStringList(image_path);
         dest.writeString(post_id);
         dest.writeString(user_id);
+        dest.writeString(title);
     }
 
     @Override
@@ -68,6 +72,14 @@ public class Post implements Parcelable {
 
     public void setCaption(String caption) {
         this.caption = caption;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public void setTitle(String title){
+        this.title = title;
     }
 
     public String getDate_created() {
@@ -105,7 +117,8 @@ public class Post implements Parcelable {
     public String toString() {
 
         return "Post{" +
-                "caption='" + caption + '\'' +
+                "title='" + title + '\''+
+                ", caption='" + caption + '\'' +
                 ", date_created='" + date_created + '\'' +
                 ", image_path='" + image_path + '\'' +
                 ", post_id='" + post_id + '\'' +

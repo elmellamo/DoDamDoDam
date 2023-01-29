@@ -25,6 +25,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class FirebaseMethods {
         return count;
     }
 
-    public void uploadNewPost(final String caption, int count, ArrayList<Uri> imgUrl) {
+    public void uploadNewPost(final String title, final String caption, int count, ArrayList<Uri> imgUrl) {
         Log.e("로그", "uploadNewPhoto: uploading NEW photo.");
 
         String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -89,7 +90,9 @@ public class FirebaseMethods {
                 } else {
                     bm = MediaStore.Images.Media.getBitmap(mContext.getContentResolver(), imgUrl.get(i - 1));
                 }
-                byte[] bytes = ImageManager.getBytesFromBitmap(bm, 100);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                byte[] bytes = baos.toByteArray(); //ImageManager.getBytesFromBitmap(bm, 100);
                 UploadTask uploadTask = null;
                 uploadTask = storageReference.putBytes(bytes);
                 uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -121,10 +124,10 @@ public class FirebaseMethods {
 
         if(uploadkey==1){
             if(caption==null){
-                addAlbumToDatabase(null, pleaseUpload);
+                addAlbumToDatabase(title, null, pleaseUpload);
                 Log.e("로그", "내용 없슈!!!");
             }else{
-                addAlbumToDatabase(caption, pleaseUpload);
+                addAlbumToDatabase(title, caption, pleaseUpload);
                 Log.e("로그", "진짜진짜 성공!!!");
             }
 
@@ -134,11 +137,12 @@ public class FirebaseMethods {
         }
     }
 
-    private void addAlbumToDatabase(String caption, List<String> imgurl){
+    private void addAlbumToDatabase(String title, String caption, List<String> imgurl){
         Log.e("로그", "addPhotoToDatabase: 데이터 베이스에 사진 추가");
 
         String newPostKey = myRef.child(mContext.getString(R.string.dbname_posts)).push().getKey();
         Post post = new Post();
+        post.setTitle(title);
         post.setCaption(caption);
         post.setDate_created(getTimeStamp());
         post.setImage_path(imgurl);
