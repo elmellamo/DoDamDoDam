@@ -56,16 +56,58 @@ public class QuestionList extends AppCompatActivity {
         database1 = FirebaseDatabase.getInstance();
         recyclerView.setAdapter((questionAdapter));
         databaseReference = database.getReference("Question");
-
+        databaseReference1=database1.getReference("UpdateDay");
 
 
         Intent intent =getIntent();
         userUid = intent.getStringExtra("userUid");
         loverUid = intent.getStringExtra("loverUid");
-        Intent intent1 =getIntent();
-        Num=intent1.getStringExtra("Num");
-        how_many_question=Integer.valueOf(Num);
-        answer2=loverUid;
+
+
+        databaseReference1.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String num=snapshot.child("Num").child(userUid).getValue().toString();
+                for(int i=1;i<=Integer.valueOf(num);i++) {
+                    databaseReference.child(Integer.toString(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
+
+                            for (DataSnapshot snapshot1 : dataSnapshot1.getChildren()) {
+                                questionkey = snapshot1.getKey();
+                                if (snapshot1.hasChild(userUid)) {
+                                    question = questionkey;
+                                } else question = null;
+
+                                if (snapshot1.hasChild(userUid)) {
+                                    answer1 = snapshot1.child(userUid).getValue().toString();
+                                }
+                                else answer1=null;
+                                if (snapshot1.hasChild(loverUid)) {
+                                    answer2 = snapshot1.child(loverUid).getValue().toString();
+                                }
+                                else answer2=null;
+                                QuestionListObject questionlistObject = new QuestionListObject(question, answer1, answer2);
+                                arrayList.add(questionlistObject);
+
+                            }
+                            questionAdapter.notifyDataSetChanged();
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        /*
         for(int i=1;i<=how_many_question;i++) {
             databaseReference.child(Integer.toString(i)).addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -98,6 +140,8 @@ public class QuestionList extends AppCompatActivity {
             });
 
         }
+        */
+
     }
 
 

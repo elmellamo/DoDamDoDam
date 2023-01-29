@@ -1,45 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <TextView
-        android:id="@+id/tv_num"
+        android:id="@+id/tv_today_question"
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="질문이 도착했어요!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_show_question"
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_today_question" />
 
-    <EditText
-        android:id="@+id/et_question"
-        android:layout_width="200dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_show_question">
+
+        <EditText
+            android:id="@+id/et_question"
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="12dp"
+            android:hint="답변을 입력하세요"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ques_submit_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/ques_submit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="제출"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/et_question"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/BottomButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         >
 
-    </EditText>
+        <ImageButton
+            android:id="@+id/settingBtn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="설정"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintLeft_toRightOf="@id/calendarBtn2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/settingicon" />
 
-    <Button
-        android:id="@+id/ques_submit_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="입력"/>
+        <ImageButton
+            android:id="@+id/calendarBtn2"
+            android:layout_width="109dp"
+            android:layout_height="48dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="달력"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/albumBtn"
+            app:layout_constraintRight_toLeftOf="@id/settingBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/calendaricon" />
 
-    <Button
-        android:id="@+id/question_list_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="목록"
-        />
+        <ImageButton
+            android:id="@+id/albumBtn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="사진"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/question_list_btn"
+            app:layout_constraintRight_toLeftOf="@id/calendarBtn2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/albumicon" />
 
-    <Button
-        android:id="@+id/qwert_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="체크"
-        />
-</LinearLayout>
+        <ImageButton
+            android:id="@+id/question_list_btn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="질문 목록"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/albumBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/questionicon" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
