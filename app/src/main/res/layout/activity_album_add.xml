@@ -54,6 +54,7 @@
                     android:hint="내용" />
             </LinearLayout>
 
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/addgallery_layout"
                 android:layout_width="match_parent"

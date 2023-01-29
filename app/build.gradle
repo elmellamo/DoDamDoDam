@@ -30,6 +30,7 @@ android {
 
 dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.2.0')
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 
     implementation platform('com.google.firebase:firebase-bom:30.3.2')
     implementation 'com.google.firebase:firebase-analytics'
@@ -49,7 +50,7 @@ dependencies {
     implementation 'androidx.fragment:fragment:1.5.5'
 
     implementation 'androidx.appcompat:appcompat:1.6.0'
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     implementation 'com.google.firebase:firebase-messaging:23.1.1'
