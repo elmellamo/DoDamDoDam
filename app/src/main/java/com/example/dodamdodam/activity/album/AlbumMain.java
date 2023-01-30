@@ -5,12 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dodamdodam.R;
@@ -48,7 +48,7 @@ public class AlbumMain extends BasicActivity {
     private ArrayList<String> mFollowing = new ArrayList<>();
     private ArrayList<Post> mPosts = new ArrayList<>();
     private ImageButton album_add;
-    private RecyclerView gridView;
+    private GridView gridView;
     private RecyclerView.LayoutManager LayoutManager;
 
     public interface OnGridImageSelectedListener{
@@ -66,10 +66,7 @@ public class AlbumMain extends BasicActivity {
         getSupportActionBar().setTitle("도담도담");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        gridView = (RecyclerView)findViewById(R.id.gridView);
-        gridView.setHasFixedSize(true);
-        LayoutManager = new GridLayoutManager(AlbumMain.this, 3);
-        gridView.setLayoutManager(LayoutManager);
+        gridView = (GridView) findViewById(R.id.gridView);
 
         getFollowing();
 
@@ -94,6 +91,7 @@ public class AlbumMain extends BasicActivity {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        if(user!=null){
         DocumentReference docRef = db.collection("users").document(user.getUid());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -103,6 +101,7 @@ public class AlbumMain extends BasicActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         LOVERUID = document.getData().get("lover").toString();
+                        mFollowing.add(LOVERUID);
                     } else {
                         Log.e("로그", "지금 사용자의 lover가 없어요");
                     }
@@ -112,13 +111,17 @@ public class AlbumMain extends BasicActivity {
             }
         });
 
-        mFollowing.add(LOVERUID);
+
         mFollowing.add(user.getUid());
+
+        for(int j=0; j<mFollowing.size(); j++){
+            Log.e("로그", "팔로잉 목록>>"+mFollowing.get(j));
+        }
 
 
         getPosts();
         //getPosts 지금 여기서 가져와야함
-    }
+    }}
 
     private void getPosts(){
         Log.e("로그", "getPhotos: getting photos");
@@ -130,9 +133,8 @@ public class AlbumMain extends BasicActivity {
 
             Query query = reference
                     .child("user_posts")
-                    .child(mFollowing.get(i))
-                    .orderByChild("user_id")
-                    .equalTo(mFollowing.get(i));
+                    .orderByChild(mFollowing.get(i))
+                    .equalTo(true);
 
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -173,6 +175,9 @@ public class AlbumMain extends BasicActivity {
     }
 
     private void setupGridView(){
+        int gridWidth = getResources().getDisplayMetrics().widthPixels;
+        int imageWidth = gridWidth/3;
+        gridView.setColumnWidth(imageWidth);
 
         ArrayList<String> imgUrls = new ArrayList<>();
         for(int i=0 ; i<mPosts.size();i++){
@@ -180,7 +185,7 @@ public class AlbumMain extends BasicActivity {
         }
 
         AlbumMainListAdapter adapter = new AlbumMainListAdapter(AlbumMain.this,R.layout.layout_grid_imageview,"",imgUrls);
-        //gridView.setAdapter(adapter);
+        gridView.setAdapter(adapter);
         //그냥...다시 어댑터 만들자..
         // 여기는 해당 아이템 눌렸을 때 다시 상세페이지 뜨도록 해야 함!mOnGridImageSelectedListener.onGridImageSelected(mPosts.get(position),4);
     }
