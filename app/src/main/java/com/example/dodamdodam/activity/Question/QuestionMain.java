@@ -10,8 +10,10 @@ import android.widget.TextView;
 import android.view.View;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Calendar.CalendarMain;
 import com.example.dodamdodam.activity.Login.BasicActivity;
 import com.example.dodamdodam.activity.Setting.SettingMain;
+import com.example.dodamdodam.activity.album.AlbumMain;
 import com.google.android.gms.tasks.OnCompleteListener;
 
 
@@ -66,12 +68,15 @@ public class QuestionMain extends AppCompatActivity {
 
     private int num,number;
     private long now;
-
+    public ImageButton ALBUMBTN,CALENDARBTN,SETTINGBTN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_main);
+        ALBUMBTN = findViewById(R.id.albumBtn);
+        SETTINGBTN = findViewById(R.id.settingBtn);
+        CALENDARBTN = findViewById(R.id.calendarBtn2);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Question");
@@ -244,6 +249,28 @@ public class QuestionMain extends AppCompatActivity {
                 intent.putExtra("userUid",user.getUid());
                 intent.putExtra("loverUid",LOVERUID);
                 startActivity(intent);
+            }
+        });
+
+
+        ALBUMBTN.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                myStartActivity(AlbumMain.class);
+            }
+        });
+        SETTINGBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(SettingMain.class);
+            }
+        });
+        CALENDARBTN.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(CalendarMain.class);
             }
         });
 
