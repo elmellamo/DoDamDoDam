@@ -172,7 +172,6 @@ public class SettingMain extends AppCompatActivity {
                 textView_1.setVisibility(View.VISIBLE);
             }
         });
-
         savebtn_2.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -200,9 +199,6 @@ public class SettingMain extends AppCompatActivity {
                 textView_3.setVisibility(View.VISIBLE);
             }
         });
-
-
-
         chabtn_1.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -214,7 +210,6 @@ public class SettingMain extends AppCompatActivity {
                 chabtn_1.setVisibility(View.INVISIBLE);
             }
         });
-
         chabtn_2.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -234,7 +229,6 @@ public class SettingMain extends AppCompatActivity {
                 savebtn_3.setVisibility(View.VISIBLE);
                 chabtn_3.setVisibility(View.INVISIBLE);            }
         });
-
         album_Btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -317,7 +311,6 @@ public class SettingMain extends AppCompatActivity {
         //user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("users").document(user.getUid());
-
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -325,20 +318,56 @@ public class SettingMain extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         LOVERUID2 = document.getData().get("lover").toString();
-                        db.collection("users").document(LOVERUID2)
-                                .delete()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Log.w(TAG, "Error deleting document", e);
-                                    }
-                                });
+                        DocumentReference docRdf2 = db.collection("users").document(LOVERUID2);
+
+
+
+
+
+                        docRdf2.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                if (documentSnapshot.exists()) {
+                                        db.collection("users").document(LOVERUID2).update("lover", "nolover");
+
+                                }
+                                else
+                                    startToast("짝꿍이 존재하지 않아요.");
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                startToast("Failed to fetch");
+                            }
+                        });
+
+
+
+
+
+
+
+
+// 이건 상대방 꺼도 파이어스토어에서 삭제하는거임
+//                        db.collection("users").document(LOVERUID2)
+//                                .delete()
+//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+//                                    @Override
+//                                    public void onSuccess(Void aVoid) {
+//                                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+//                                    }
+//                                })
+//                                .addOnFailureListener(new OnFailureListener() {
+//                                    @Override
+//                                    public void onFailure(@NonNull Exception e) {
+//                                        Log.w(TAG, "Error deleting document", e);
+//                                    }
+//                                });
+
+
+
+
+
 
                         db.collection("users").document(user.getUid())
                                 .delete()
@@ -370,8 +399,7 @@ public class SettingMain extends AppCompatActivity {
         });
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        user.delete()
+        user.delete()//계정 삭제 시키기
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
