@@ -84,8 +84,7 @@ public class SettingMain extends AppCompatActivity {
                     if (document.exists()) {
                         LOVERUID2 = document.getData().get("lover").toString();
                         if(LOVERUID2.equals("nolover")){
-                            textView_3.setText("이거 연결 끊김");
-                            editText_3.setText("이거 연결 끊김");
+                            showDialog2();
                         }
                     } else {
                         Log.d(TAG, "없다없다없다없다");
@@ -323,6 +322,33 @@ public class SettingMain extends AppCompatActivity {
         AlertDialog msgDlg = msgBuilder.create();
         msgDlg.show();
     }
+
+
+    void showDialog2() {
+        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(SettingMain.this)
+                .setTitle("탈퇴하기")
+                .setMessage("상대방이 탈퇴하였습니다.\n추가적인 사용을 원하시면\n탈퇴 후 다시 가입하여주십시오.")
+                .setPositiveButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(SettingMain.this, "취소하였습니다", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("탈퇴", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(getApplicationContext(), "길게 출력 Hello World!", Toast.LENGTH_LONG).show();
+                        WITHDRAW();
+                        //startToast("탈퇴를 진행하겠습니다\n1분 내외의 시간이 소요됩니다");
+                    }
+                });
+        AlertDialog msgDlg = msgBuilder.create();
+        msgDlg.show();
+    }
+
+
+
+
     void WITHDRAW(){
         //user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
