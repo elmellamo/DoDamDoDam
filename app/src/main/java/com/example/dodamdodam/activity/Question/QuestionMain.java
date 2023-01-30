@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Login.BasicActivity;
+import com.example.dodamdodam.activity.Setting.SettingMain;
 import com.google.android.gms.tasks.OnCompleteListener;
 
 
@@ -67,9 +68,6 @@ public class QuestionMain extends AppCompatActivity {
     private long now;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -93,6 +91,9 @@ public class QuestionMain extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         LOVERUID = document.getData().get("lover").toString();
+//                        if(LOVERUID=="nolover"){
+//                            myStartActivity(SettingMain.class);
+//                        }
                     } else {
                         Log.d(TAG, "없다없다없다없다");
                     }
@@ -247,6 +248,11 @@ public class QuestionMain extends AppCompatActivity {
         });
 
 
+    }
+    private void myStartActivity(Class c){
+        Intent intent = new Intent(this, c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
 }
