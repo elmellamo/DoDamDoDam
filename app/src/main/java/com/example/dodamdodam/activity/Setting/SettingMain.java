@@ -3,6 +3,7 @@ package com.example.dodamdodam.activity.Setting;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,15 +11,24 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.dodamdodam.activity.Login.LoginActivity;
+import com.google.firebase.firestore.DocumentReference;
+
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Calendar.CalendarMain;
+import com.example.dodamdodam.activity.Login.MainActivity;
 import com.example.dodamdodam.activity.Login.SignUpActivity;
 import com.example.dodamdodam.activity.Question.QuestionMain;
 import com.example.dodamdodam.activity.album.AlbumMain;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +37,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SettingMain extends AppCompatActivity {
     public Button chabtn_1,chabtn_2,chabtn_3;
@@ -37,6 +59,7 @@ public class SettingMain extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseUser user;
     public ImageButton question_Btn,album_Btn,calendar_Btn;
+    public String TAG,LOVERUID2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -212,11 +235,6 @@ public class SettingMain extends AppCompatActivity {
                 chabtn_3.setVisibility(View.INVISIBLE);            }
         });
 
-
-
-
-
-
         album_Btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -296,7 +314,75 @@ public class SettingMain extends AppCompatActivity {
         msgDlg.show();
     }
     void WITHDRAW(){
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference("Calendar");
+        //user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("users").document(user.getUid());
+
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        LOVERUID2 = document.getData().get("lover").toString();
+                        db.collection("users").document(LOVERUID2)
+                                .delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error deleting document", e);
+                                    }
+                                });
+
+                        db.collection("users").document(user.getUid())
+                                .delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error deleting document", e);
+                                    }
+                                });
+
+
+
+
+                    }
+                    else {
+                        Log.d(TAG, "없다없다없다없다");
+                    }
+                }
+                else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        user.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User account deleted.");
+                        }
+                    }
+                });
+
+
+        FirebaseAuth.getInstance().signOut();
+        myStartActivity(LoginActivity.class);
     }
 }

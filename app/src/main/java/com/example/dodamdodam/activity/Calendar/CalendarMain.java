@@ -217,7 +217,7 @@ public class CalendarMain extends BasicActivity {
                             del_Btn.setVisibility(View.VISIBLE);
                             diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
                             //todayText.setText(snapshot.getKey().toString());
-                            todayText.setText(String.valueOf(dayOfWeek));
+                            //todayText.setText(String.valueOf(dayOfWeek));
                             ddayTextView.setVisibility(View.INVISIBLE);
 
                         }
