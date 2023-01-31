@@ -34,7 +34,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +44,7 @@ public class AlbumMain extends BasicActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private Context mContext = AlbumMain.this;
     private String LOVERUID;
-    private ArrayList<String> mFollowing = new ArrayList<>();
+    private ArrayList<String> mFollowing;
     private ArrayList<Post> mPosts = new ArrayList<>();
     private ImageButton album_add;
     private GridView gridView;
@@ -67,7 +66,7 @@ public class AlbumMain extends BasicActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         gridView = (GridView) findViewById(R.id.gridView);
-
+        initImageLoader();
         getFollowing();
 
         album_add.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +89,8 @@ public class AlbumMain extends BasicActivity {
         Log.e("로그", "나랑 짝꿍이랑 연결되는 중");
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        mFollowing = new ArrayList<>();
+        mFollowing.add(user.getUid());
 
         if(user!=null){
         DocumentReference docRef = db.collection("users").document(user.getUid());
@@ -101,7 +102,9 @@ public class AlbumMain extends BasicActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         LOVERUID = document.getData().get("lover").toString();
+                        Log.e("로그", "러버 유아이디>> "+LOVERUID);
                         mFollowing.add(LOVERUID);
+                        getPosts();
                     } else {
                         Log.e("로그", "지금 사용자의 lover가 없어요");
                     }
@@ -111,15 +114,6 @@ public class AlbumMain extends BasicActivity {
             }
         });
 
-
-        mFollowing.add(user.getUid());
-
-        for(int j=0; j<mFollowing.size(); j++){
-            Log.e("로그", "팔로잉 목록>>"+mFollowing.get(j));
-        }
-
-
-        getPosts();
         //getPosts 지금 여기서 가져와야함
     }}
 
@@ -127,14 +121,15 @@ public class AlbumMain extends BasicActivity {
         Log.e("로그", "getPhotos: getting photos");
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-
+        //Log.e("로그", "팔로잉 개수>>>> "+mFollowing.size());
         for(int i = 0; i < mFollowing.size(); i++){
             final int count = i;
 
             Query query = reference
                     .child("user_posts")
-                    .orderByChild(mFollowing.get(i))
-                    .equalTo(true);
+                    .child(mFollowing.get(i))
+                    .orderByChild("user_id")
+                    .equalTo(mFollowing.get(i));
 
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -144,12 +139,12 @@ public class AlbumMain extends BasicActivity {
                         Post post = new Post();
                         Map<String, Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
 
+                        Log.e("로그", "어디까지 되는거지?");
+                        Log.e("로그", "캡션 내용 >>"+objectMap.get("caption").toString());
                         post.setCaption(objectMap.get("caption").toString());
                         post.setPost_id(objectMap.get("post_id").toString());
                         post.setUser_id(objectMap.get("user_id").toString());
                         post.setDate_created(objectMap.get("date_created").toString());
-
-
                         post.setImage_path((List<String>) objectMap.get("image_path"));
 
                         mPosts.add(post);
@@ -157,13 +152,15 @@ public class AlbumMain extends BasicActivity {
 
                     if(count >= mFollowing.size() -1){
                         //display our photos
-                        Collections.sort(mPosts, new Comparator<Post>() {
-                            @Override
-                            public int compare(Post o1, Post o2) {
-                                return o2.getDate_created().compareTo(o1.getDate_created());
-                            }
-                        });
-                        setupGridView();
+                        if(mPosts != null){
+                            mPosts.sort(new Comparator<Post>() {
+                                @Override
+                                public int compare(Post o1, Post o2) {
+                                    return o2.getDate_created().compareTo(o1.getDate_created());
+                                }
+                            });
+                            setupGridView();
+                        }
                     }
                 }
 
