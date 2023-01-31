@@ -101,12 +101,15 @@ public class AlbumAdd extends AppCompatActivity {
             registerForActivityResult(new ActivityResultContracts.PickMultipleVisualMedia(10), uris -> {
                 if (!uris.isEmpty()) {
                     Log.e("로그", "Number of items selected: " + uris.size());
+                    final int flag = Intent.FLAG_GRANT_READ_URI_PERMISSION;
 
                     for (int i = 0; i < uris.size(); i++) {
                         final Uri currentUri = uris.get(i);
                         Log.e("로그", "onActivityResult: currentUri" + currentUri.toString());
 
                         handlePickerResponse(currentUri);
+                        getContentResolver().takePersistableUriPermission(currentUri, flag);
+
                     }
 
                     rItem.setPublisher(user.getUid());

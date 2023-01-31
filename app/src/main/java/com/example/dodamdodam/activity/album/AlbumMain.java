@@ -2,6 +2,7 @@ package com.example.dodamdodam.activity.album;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +15,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dodamdodam.R;
-import com.example.dodamdodam.Utils.UniversalImageLoader;
 import com.example.dodamdodam.activity.Login.BasicActivity;
 import com.example.dodamdodam.adapter.AlbumMainListAdapter;
 import com.example.dodamdodam.models.Post;
@@ -31,7 +31,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -49,6 +48,7 @@ public class AlbumMain extends BasicActivity {
     private ImageButton album_add;
     private GridView gridView;
     private RecyclerView.LayoutManager LayoutManager;
+    private AlbumMainListAdapter adapter;
 
     public interface OnGridImageSelectedListener{
         void onGridImageSelected(Post post , int activityNumber);
@@ -66,7 +66,6 @@ public class AlbumMain extends BasicActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         gridView = (GridView) findViewById(R.id.gridView);
-        initImageLoader();
         getFollowing();
 
         album_add.setOnClickListener(new View.OnClickListener() {
@@ -78,13 +77,6 @@ public class AlbumMain extends BasicActivity {
 
     }
 
-    public void onAttach(Context context) {
-        try{
-            mOnGridImageSelectedListener = (OnGridImageSelectedListener)getApplicationContext();
-        }catch (ClassCastException e){
-            Log.e("로그", "onAttach: ClassCastException: "+e.getMessage());
-        }
-    }
     private void getFollowing() {
         Log.e("로그", "나랑 짝꿍이랑 연결되는 중");
 
@@ -137,22 +129,27 @@ public class AlbumMain extends BasicActivity {
 
                     for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
                         Post post = new Post();
+                        ArrayList<String> tmpPath = new ArrayList<>();
                         Map<String, Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
 
-                        Log.e("로그", "어디까지 되는거지?");
-                        Log.e("로그", "캡션 내용 >>"+objectMap.get("caption").toString());
                         post.setCaption(objectMap.get("caption").toString());
                         post.setPost_id(objectMap.get("post_id").toString());
                         post.setUser_id(objectMap.get("user_id").toString());
                         post.setDate_created(objectMap.get("date_created").toString());
                         post.setImage_path((List<String>) objectMap.get("image_path"));
 
+                        final int flag = Intent.FLAG_GRANT_READ_URI_PERMISSION;
+
+                        for(int tmp=0; tmp<post.getImage_path().size(); tmp++){
+                            getContentResolver().takePersistableUriPermission(Uri.parse(post.getImage_path().get(tmp)), flag);
+                        }
                         mPosts.add(post);
                     }
 
                     if(count >= mFollowing.size() -1){
                         //display our photos
                         if(mPosts != null){
+                            Log.e("로그", "여기까지는???");
                             mPosts.sort(new Comparator<Post>() {
                                 @Override
                                 public int compare(Post o1, Post o2) {
@@ -179,10 +176,16 @@ public class AlbumMain extends BasicActivity {
         ArrayList<String> imgUrls = new ArrayList<>();
         for(int i=0 ; i<mPosts.size();i++){
             imgUrls.add(mPosts.get(i).getImage_path().get(0));
+            Log.e("로그", "포스트 링크 >> "+ imgUrls.get(i));
         }
 
-        AlbumMainListAdapter adapter = new AlbumMainListAdapter(AlbumMain.this,R.layout.layout_grid_imageview,"",imgUrls);
+        adapter = new AlbumMainListAdapter(AlbumMain.this,R.layout.layout_grid_imageview,"",imgUrls);
+
+
+
         gridView.setAdapter(adapter);
+
+
         //그냥...다시 어댑터 만들자..
         // 여기는 해당 아이템 눌렸을 때 다시 상세페이지 뜨도록 해야 함!mOnGridImageSelectedListener.onGridImageSelected(mPosts.get(position),4);
     }
@@ -190,10 +193,7 @@ public class AlbumMain extends BasicActivity {
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
-    private void initImageLoader(){
-        UniversalImageLoader universalImageLoader = new UniversalImageLoader(mContext);
-        ImageLoader.getInstance().init(universalImageLoader.getConfig());
-    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
