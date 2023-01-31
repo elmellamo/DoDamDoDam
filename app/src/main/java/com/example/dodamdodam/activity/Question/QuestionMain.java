@@ -56,7 +56,7 @@ public class QuestionMain extends AppCompatActivity {
 
 
     private String TAG;
-    private Button ques_submit_btn;
+    private Button ques_submit_btn,ques_show_btn;
     private ImageButton question_list_btn;
     public String str_ans = null;
     private EditText et_ques;
@@ -96,9 +96,7 @@ public class QuestionMain extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         LOVERUID = document.getData().get("lover").toString();
-//                        if(LOVERUID=="nolover"){
-//                            myStartActivity(SettingMain.class);
-//                        }
+
                     } else {
                         Log.d(TAG, "없다없다없다없다");
                     }
@@ -122,7 +120,7 @@ public class QuestionMain extends AppCompatActivity {
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child("Info").hasChild(user.getUid())&&snapshot.child("Info").hasChild(LOVERUID)){//시작했을때
+
                     if((snapshot.child("Info").child(user.getUid()).getValue().toString()).equals(getTime)==false){//하루지났을때
 
                         num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
@@ -141,13 +139,9 @@ public class QuestionMain extends AppCompatActivity {
                         });
                         database.child("Info").child(user.getUid()).setValue(getTime);
 
-
-
                     }
                     else{
                         num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
-
-
                         databaseReference.child(Integer.toString(num)).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -156,63 +150,55 @@ public class QuestionMain extends AppCompatActivity {
                                     show_question.setText(questionkey);
                                 }
                             }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
 
                             }
                         });
                     }
-                }
-
-
-
-
-                else{//둘중에 하나라도 시작 안했을때
-                    database.child("Info").child(user.getUid()).setValue(getTime);
-                    database.child("Num").child(user.getUid()).setValue("1");
-                    database.child("Info").child(LOVERUID).setValue(getTime);
-                    database.child("Num").child(LOVERUID).setValue("1");
-                    num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
-
-                }
-
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
 
-
-        database.addListenerForSingleValueEvent(new ValueEventListener() {
+        ques_show_btn=findViewById(R.id.ques_show_btn);
+        ques_show_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                number=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
+            public void onClick(View view) {
 
-                databaseReference.child(Integer.toString(number)).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                database.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot childSnapshot:snapshot.getChildren()){
-                            questionkey=childSnapshot.getKey();
-                            show_question.setText(questionkey);
-                            database.child("Info").child(user.getUid()).setValue(getTime);
-                        }
+                        number=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
+
+                        databaseReference.child(Integer.toString(number)).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot childSnapshot:snapshot.getChildren()){
+                                    questionkey=childSnapshot.getKey();
+                                    show_question.setText(questionkey);
+                                    database.child("Info").child(user.getUid()).setValue(getTime);
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
                 });
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
         });
+
 
         et_ques=(EditText)findViewById(R.id.et_question);
         str_ans=et_ques.getText().toString();
