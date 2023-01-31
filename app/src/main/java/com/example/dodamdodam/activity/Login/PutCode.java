@@ -72,8 +72,11 @@ public class PutCode extends BasicActivity {
                                 DatabaseReference database = FirebaseDatabase.getInstance().getReference("UpdateDay");
                                 database.child("Num").child(user.getUid()).setValue("1");
                                 database.child("Info").child(user.getUid()).setValue(getTime);
+                                database.child("Num").child(loveruid).setValue("1");
+                                database.child("Info").child(loveruid).setValue(getTime);
 
-                            myStartActivity(MainActivity.class);
+
+                                myStartActivity(MainActivity.class);
                         } else {
                             startToast("해당 짝꿍은 연결되어 있는 사람이 있어요.");
                         }

@@ -83,10 +83,10 @@ public class QuestionMain extends AppCompatActivity {
         userdatabaseReference = FirebaseDatabase.getInstance().getReference("users");
         loveruidReference = userdatabaseReference.child(user.getUid());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("users").document(user.getUid());
 
         database = FirebaseDatabase.getInstance().getReference("UpdateDay");
 
+        DocumentReference docRef = db.collection("users").document(user.getUid());
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
