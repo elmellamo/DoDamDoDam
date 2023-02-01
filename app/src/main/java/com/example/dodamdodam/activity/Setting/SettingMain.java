@@ -2,6 +2,8 @@ package com.example.dodamdodam.activity.Setting;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,6 +64,7 @@ public class SettingMain extends AppCompatActivity {
     public ImageButton question_Btn,album_Btn,calendar_Btn;
     public String TAG,LOVERUID2;
     public ImageView imageView2;
+    public Boolean chkVariable = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +114,7 @@ public class SettingMain extends AppCompatActivity {
 
 
 
-            Glide.with(this).asGif().load(R.raw.rabbithopping).listener(new RequestListener<GifDrawable>() {
+            Glide.with(this).asGif().load(R.raw.dodamloading).listener(new RequestListener<GifDrawable>() {
                 @Override
                 public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
                     return false;
@@ -118,11 +122,24 @@ public class SettingMain extends AppCompatActivity {
 
                 @Override
                 public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
-                    resource.setLoopCount(1);
+                    while(chkVariable==false) {
+                        resource.setLoopCount(1);
+                    }
+                    //imageView2.setBackgroundColor(Color.parseColor("#800000"));
+                    Paint paint = new Paint();
+
+                    paint.setColor(Color.BLACK);
+
+                    paint.setAlpha(70);
+
+                    ((RelativeLayout)findViewById(R.id.activity_setting_main)).setBackgroundColor(paint.getColor());
+
+
                     resource.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
                         @Override
                         public void onAnimationEnd(Drawable drawable) {
                             //do whatever after specified number of loops complete
+                            imageView2.setVisibility(View.INVISIBLE);
 
                         }
                     });
@@ -170,7 +187,9 @@ public class SettingMain extends AppCompatActivity {
         databaseReference.child("anniversary").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 if(snapshot.child(user.getUid()).getValue()!=null){
+                    chkVariable=true;
                     textView_1.setText(snapshot.child(user.getUid()).getValue().toString());
                     editText_1.setVisibility(View.INVISIBLE);
                     textView_1.setVisibility(View.VISIBLE);
@@ -178,6 +197,7 @@ public class SettingMain extends AppCompatActivity {
                     chabtn_1.setVisibility(View.VISIBLE);
                 }
                 else{
+                    chkVariable=true;
                     editText_1.setText(null);
                     editText_1.setVisibility(View.VISIBLE);
                     textView_1.setVisibility(View.INVISIBLE);
