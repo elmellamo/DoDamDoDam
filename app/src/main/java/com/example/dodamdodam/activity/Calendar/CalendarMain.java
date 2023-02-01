@@ -45,7 +45,7 @@ public class CalendarMain extends BasicActivity {
     public String str = null;
     public CalendarView calendarView;
     public Button cha_Btn, del_Btn, save_Btn;
-    public ImageButton question_Btn,album_Btn,setting_Btn;
+    public ImageButton question_Btn,album_Btn,setting_Btn,calendar_Btn;
     public TextView diaryTextView, todayText, loverText;
     public EditText contextEditText;
     private String stringDateSelected;
@@ -79,6 +79,7 @@ public class CalendarMain extends BasicActivity {
         loverText = findViewById(R.id.loverText);
         contextEditText = findViewById(R.id.contextEditText);
         question_Btn = findViewById(R.id.questionBtn);
+        calendar_Btn=findViewById(R.id.calendarBtn2);
         album_Btn = findViewById(R.id.albumBtn);
         setting_Btn = findViewById(R.id.settingBtn);
         ddayTextView=findViewById(R.id.dday_TextView);
@@ -330,6 +331,12 @@ public class CalendarMain extends BasicActivity {
             @Override
             public void onClick(View view) {
                 myStartActivity(QuestionMain.class);
+            }
+        });
+        calendar_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(CalendarMain.class);
             }
         });
     }

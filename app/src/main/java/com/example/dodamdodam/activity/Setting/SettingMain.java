@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -100,16 +101,16 @@ public class SettingMain extends AppCompatActivity {
 
                 @Override
                 public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
-                    resource.setLoopCount(1);
+                    resource.setLoopCount(2);
                     //imageView2.setBackgroundColor(Color.parseColor("#800000"));
-                    Paint paint = new Paint();
-
-                    paint.setColor(Color.BLACK);
-
-                    paint.setAlpha(70);
-
-                    ((RelativeLayout)findViewById(R.id.activity_setting_main)).setBackgroundColor(paint.getColor());
-
+//                    Paint paint = new Paint();
+//
+//                    paint.setColor(Color.BLACK);
+//
+//                    paint.setAlpha(70);
+//
+//                    ((RelativeLayout)findViewById(R.id.activity_setting_main)).setBackgroundColor(paint.getColor());
+                    imageView2.setColorFilter(Color.parseColor("#E2E2E2"), PorterDuff.Mode.DARKEN);
 
                     resource.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
                         @Override
@@ -440,32 +441,6 @@ public class SettingMain extends AppCompatActivity {
                                 startToast("Failed to fetch");
                             }
                         });
-
-
-
-
-
-
-
-
-// 이건 상대방 꺼도 파이어스토어에서 삭제하는거임
-//                        db.collection("users").document(LOVERUID2)
-//                                .delete()
-//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                    @Override
-//                                    public void onSuccess(Void aVoid) {
-//                                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
-//                                    }
-//                                })
-//                                .addOnFailureListener(new OnFailureListener() {
-//                                    @Override
-//                                    public void onFailure(@NonNull Exception e) {
-//                                        Log.w(TAG, "Error deleting document", e);
-//                                    }
-//                                });
-
-
-
 
 
 
