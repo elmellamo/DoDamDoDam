@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +16,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Calendar.CalendarMain;
 import com.example.dodamdodam.activity.Login.BasicActivity;
+import com.example.dodamdodam.activity.Question.QuestionMain;
+import com.example.dodamdodam.activity.Setting.SettingMain;
 import com.example.dodamdodam.adapter.AlbumMainListAdapter;
 import com.example.dodamdodam.models.Post;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -45,7 +49,8 @@ public class AlbumMain extends BasicActivity {
     private String LOVERUID;
     private ArrayList<String> mFollowing;
     private ArrayList<Post> mPosts = new ArrayList<>();
-    private ImageButton album_add;
+    private ImageButton album_add, questionBtn,albumBtn,settingBtn, calendarBtn;
+    private LinearLayout emptytxt;
     private GridView gridView;
     private RecyclerView.LayoutManager LayoutManager;
     private AlbumMainListAdapter adapter;
@@ -60,18 +65,43 @@ public class AlbumMain extends BasicActivity {
         setContentView(R.layout.activity_album_main);
         album_add = findViewById(R.id.album_add);
 
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("도담도담");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         gridView = (GridView) findViewById(R.id.gridView);
+        questionBtn = (ImageButton) findViewById(R.id.questionBtn);
+        albumBtn = (ImageButton) findViewById(R.id.albumBtn);
+        settingBtn = (ImageButton) findViewById(R.id.settingBtn);
+        calendarBtn = (ImageButton) findViewById(R.id.calendarBtn2);
+        emptytxt = findViewById(R.id.emptytxt);
+
         getFollowing();
 
         album_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 myStartActivity(AlbumAdd.class);
+            }
+        });
+        albumBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(AlbumMain.class);
+            }
+        });
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(SettingMain.class);
+            }
+        });
+        calendarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(CalendarMain.class);
+            }
+        });
+        questionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(QuestionMain.class);
             }
         });
 
@@ -181,13 +211,11 @@ public class AlbumMain extends BasicActivity {
 
         adapter = new AlbumMainListAdapter(AlbumMain.this,R.layout.layout_grid_imageview,"",imgUrls);
 
-
-
+        if(adapter.isEmpty()){
+            emptytxt.setVisibility(adapter.getCount()==0?  View.VISIBLE : View.GONE);
+        }
         gridView.setAdapter(adapter);
 
-
-        //그냥...다시 어댑터 만들자..
-        // 여기는 해당 아이템 눌렸을 때 다시 상세페이지 뜨도록 해야 함!mOnGridImageSelectedListener.onGridImageSelected(mPosts.get(position),4);
     }
 
     private void startToast(String msg){
