@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Question.QuestionMain;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -29,7 +30,7 @@ public class LoginActivity extends BasicActivity {
 
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser()!=null){
-            myStartActivity(MainActivity.class);
+        myStartActivity(QuestionMain.class);
         }
         findViewById(R.id.checkBtn).setOnClickListener(onClickListener);
         findViewById(R.id.gotoPasswordResetBtn).setOnClickListener(onClickListener);
@@ -70,7 +71,7 @@ public class LoginActivity extends BasicActivity {
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     startToast("로그인 성공!");
-                                    myStartActivity(MainActivity.class);
+                                    myStartActivity(QuestionMain.class);
                                 } else {
                                     if (task.getException() != null) {
                                         startToast(task.getException().toString());
