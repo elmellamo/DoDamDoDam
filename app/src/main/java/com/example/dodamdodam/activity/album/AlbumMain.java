@@ -115,29 +115,29 @@ public class AlbumMain extends BasicActivity {
         mFollowing.add(user.getUid());
 
         if(user!=null){
-        DocumentReference docRef = db.collection("users").document(user.getUid());
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+            DocumentReference docRef = db.collection("users").document(user.getUid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
 
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        LOVERUID = document.getData().get("lover").toString();
-                        Log.e("로그", "러버 유아이디>> "+LOVERUID);
-                        mFollowing.add(LOVERUID);
-                        getPosts();
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            LOVERUID = document.getData().get("lover").toString();
+                            Log.e("로그", "러버 유아이디>> "+LOVERUID);
+                            mFollowing.add(LOVERUID);
+                            getPosts();
+                        } else {
+                            Log.e("로그", "지금 사용자의 lover가 없어요");
+                        }
                     } else {
-                        Log.e("로그", "지금 사용자의 lover가 없어요");
+                        Log.e("로그", "데베에서 유저 정보 가져 오는 거 실패 get failed with ", task.getException());
                     }
-                } else {
-                    Log.e("로그", "데베에서 유저 정보 가져 오는 거 실패 get failed with ", task.getException());
                 }
-            }
-        });
+            });
 
-        //getPosts 지금 여기서 가져와야함
-    }}
+            //getPosts 지금 여기서 가져와야함
+        }}
 
     private void getPosts(){
         Log.e("로그", "getPhotos: getting photos");

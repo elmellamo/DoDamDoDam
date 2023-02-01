@@ -2,22 +2,32 @@ package com.example.dodamdodam.activity.Setting;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.example.dodamdodam.activity.Login.LoginActivity;
 import com.google.firebase.firestore.DocumentReference;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.vectordrawable.graphics.drawable.Animatable2Compat;
 
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Calendar.CalendarMain;
@@ -50,6 +60,7 @@ public class SettingMain extends AppCompatActivity {
     private FirebaseUser user;
     public ImageButton question_Btn,album_Btn,calendar_Btn;
     public String TAG,LOVERUID2;
+    public ImageView imageView2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,9 +82,64 @@ public class SettingMain extends AppCompatActivity {
         album_Btn=findViewById(R.id.albumBtn);
         askbtn=findViewById(R.id.askBtn);
         withdrawbtn=findViewById(R.id.withdrawBtn);
+        imageView2=findViewById(R.id.imageView2);
         user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference document = db.collection("users").document(user.getUid());
+
+
+
+//        Glide.with(this)
+//                .asGif()
+//                .load(R.raw.dodamrabbit)
+//                .listener(new RequestListener<GifDrawable>() {
+//                    @Override
+//                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
+//                        return false;
+//                    }
+//
+//                    @Override
+//                    public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
+//                        if (resource != null) {
+//                            resource.setLoopCount(1);
+//                        }
+//                        return false;
+//                    }
+//                })
+//                .into(imageView);
+
+
+
+            Glide.with(this).asGif().load(R.raw.rabbithopping).listener(new RequestListener<GifDrawable>() {
+                @Override
+                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
+                    resource.setLoopCount(1);
+                    resource.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
+                        @Override
+                        public void onAnimationEnd(Drawable drawable) {
+                            //do whatever after specified number of loops complete
+
+                        }
+                    });
+                    return false;
+                }
+            }).into(imageView2);
+
+
+
+
+
+
+
+
+
+
+
 
         document.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
