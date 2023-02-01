@@ -136,8 +136,7 @@ public class AlbumMain extends BasicActivity {
                 }
             });
 
-            //getPosts 지금 여기서 가져와야함
-        }}
+    }}
 
     private void getPosts(){
         Log.e("로그", "getPhotos: getting photos");
@@ -168,11 +167,26 @@ public class AlbumMain extends BasicActivity {
                         post.setDate_created(objectMap.get("date_created").toString());
                         post.setImage_path((List<String>) objectMap.get("image_path"));
 
-                        final int flag = Intent.FLAG_GRANT_READ_URI_PERMISSION;
 
-                        for(int tmp=0; tmp<post.getImage_path().size(); tmp++){
-                            getContentResolver().takePersistableUriPermission(Uri.parse(post.getImage_path().get(tmp)), flag);
+                        try {
+                            final int flag =  Intent.FLAG_GRANT_READ_URI_PERMISSION;
+                            for(int tmp=0; tmp<post.getImage_path().size(); tmp++){
+                                final Uri tmpuri = Uri.parse(post.getImage_path().get(tmp));
+
+                                Log.e("로그", (post.getImage_path().get(tmp)));
+
+                                AlbumMain.this.grantUriPermission(getPackageName(), tmpuri, flag);
+                                Log.e("로그", "안되고 있겠죠?2");
+                                AlbumMain.this.getContentResolver().takePersistableUriPermission(tmpuri, flag);
+                                Log.e("로그", "안되고 있겠죠?3");
+                            }
+                            Log.e("로그", "안되고 있겠죠?1");
                         }
+                        catch (SecurityException e) {
+                            // OK, we were not offered any persistable permissions
+                        }
+
+
                         mPosts.add(post);
                     }
 

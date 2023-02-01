@@ -72,16 +72,16 @@ public class AlbumMainListAdapter extends ArrayAdapter {
                             return false;
                         }
 
-                        @Override
-                        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                            viewHolder.mProgressBar.setVisibility(View.GONE);
-                            return false;
-                        }
-                    })
-                    .into(viewHolder.profileImage);
+                            @Override
+                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                viewHolder.mProgressBar.setVisibility(View.GONE);
+                                return false;
+                            }
+                        })
+                        .into(viewHolder.profileImage);
+            }
+            return convertView;
         }
-        return convertView;
-    }
 
     public int getCount(){
         return super.getCount();
