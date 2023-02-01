@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,7 +57,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SettingMain extends AppCompatActivity {
     public Button chabtn_1,chabtn_2,chabtn_3;
-    public Button savebtn_1,savebtn_2,savebtn_3,askbtn,withdrawbtn;
+    public Button savebtn_1,savebtn_2,savebtn_3,askbtn,withdrawbtn,logoutbtn;
     public EditText editText_1,editText_2,editText_3;
     public TextView textView_1,textView_2,textView_3;
     private DatabaseReference databaseReference;
@@ -87,32 +88,10 @@ public class SettingMain extends AppCompatActivity {
         askbtn=findViewById(R.id.askBtn);
         withdrawbtn=findViewById(R.id.withdrawBtn);
         imageView2=findViewById(R.id.imageView2);
+        logoutbtn=findViewById(R.id.logoutBtn);
         user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference document = db.collection("users").document(user.getUid());
-
-
-
-//        Glide.with(this)
-//                .asGif()
-//                .load(R.raw.dodamrabbit)
-//                .listener(new RequestListener<GifDrawable>() {
-//                    @Override
-//                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
-//                        return false;
-//                    }
-//
-//                    @Override
-//                    public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
-//                        if (resource != null) {
-//                            resource.setLoopCount(1);
-//                        }
-//                        return false;
-//                    }
-//                })
-//                .into(imageView);
-
-
 
             Glide.with(this).asGif().load(R.raw.dodamloading).listener(new RequestListener<GifDrawable>() {
                 @Override
@@ -122,40 +101,27 @@ public class SettingMain extends AppCompatActivity {
 
                 @Override
                 public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
-                    while(chkVariable==false) {
-                        resource.setLoopCount(1);
-                    }
+                    resource.setLoopCount(2);
                     //imageView2.setBackgroundColor(Color.parseColor("#800000"));
-                    Paint paint = new Paint();
-
-                    paint.setColor(Color.BLACK);
-
-                    paint.setAlpha(70);
-
-                    ((RelativeLayout)findViewById(R.id.activity_setting_main)).setBackgroundColor(paint.getColor());
-
+//                    Paint paint = new Paint();
+//
+//                    paint.setColor(Color.BLACK);
+//
+//                    paint.setAlpha(70);
+//
+//                    ((RelativeLayout)findViewById(R.id.activity_setting_main)).setBackgroundColor(paint.getColor());
+                    imageView2.setColorFilter(Color.parseColor("#E2E2E2"), PorterDuff.Mode.DARKEN);
 
                     resource.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
                         @Override
                         public void onAnimationEnd(Drawable drawable) {
                             //do whatever after specified number of loops complete
                             imageView2.setVisibility(View.INVISIBLE);
-
                         }
                     });
                     return false;
                 }
             }).into(imageView2);
-
-
-
-
-
-
-
-
-
-
 
 
         document.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -189,7 +155,7 @@ public class SettingMain extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 if(snapshot.child(user.getUid()).getValue()!=null){
-                    chkVariable=true;
+                    //chkVariable=true;
                     textView_1.setText(snapshot.child(user.getUid()).getValue().toString());
                     editText_1.setVisibility(View.INVISIBLE);
                     textView_1.setVisibility(View.VISIBLE);
@@ -197,7 +163,7 @@ public class SettingMain extends AppCompatActivity {
                     chabtn_1.setVisibility(View.VISIBLE);
                 }
                 else{
-                    chkVariable=true;
+                    //chkVariable=true;
                     editText_1.setText(null);
                     editText_1.setVisibility(View.VISIBLE);
                     textView_1.setVisibility(View.INVISIBLE);
@@ -375,6 +341,13 @@ public class SettingMain extends AppCompatActivity {
                 showDialog();
             }
         });
+        logoutbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                myStartActivity(SignUpActivity.class);
+            }
+        });
 
 
     }
@@ -471,32 +444,6 @@ public class SettingMain extends AppCompatActivity {
 
 
 
-
-
-
-
-
-// 이건 상대방 꺼도 파이어스토어에서 삭제하는거임
-//                        db.collection("users").document(LOVERUID2)
-//                                .delete()
-//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                    @Override
-//                                    public void onSuccess(Void aVoid) {
-//                                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
-//                                    }
-//                                })
-//                                .addOnFailureListener(new OnFailureListener() {
-//                                    @Override
-//                                    public void onFailure(@NonNull Exception e) {
-//                                        Log.w(TAG, "Error deleting document", e);
-//                                    }
-//                                });
-
-
-
-
-
-
                         db.collection("users").document(user.getUid())
                                 .delete()
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -540,5 +487,25 @@ public class SettingMain extends AppCompatActivity {
 
         FirebaseAuth.getInstance().signOut();
         myStartActivity(LoginActivity.class);
+    }
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("도담도담 앱을 종료하시겠습니까?");
+        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.setNegativeButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                moveTaskToBack(true);
+                finishAndRemoveTask();
+                finish();
+            }
+        });
+        builder.show();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.dodamdodam.activity.Calendar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,6 +35,7 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import java.util.Calendar;
 
@@ -43,7 +45,7 @@ public class CalendarMain extends BasicActivity {
     public String str = null;
     public CalendarView calendarView;
     public Button cha_Btn, del_Btn, save_Btn;
-    public ImageButton question_Btn,album_Btn,setting_Btn;
+    public ImageButton question_Btn,album_Btn,setting_Btn,calendar_Btn;
     public TextView diaryTextView, todayText, loverText;
     public EditText contextEditText;
     private String stringDateSelected;
@@ -77,6 +79,7 @@ public class CalendarMain extends BasicActivity {
         loverText = findViewById(R.id.loverText);
         contextEditText = findViewById(R.id.contextEditText);
         question_Btn = findViewById(R.id.questionBtn);
+        calendar_Btn=findViewById(R.id.calendarBtn2);
         album_Btn = findViewById(R.id.albumBtn);
         setting_Btn = findViewById(R.id.settingBtn);
         ddayTextView=findViewById(R.id.dday_TextView);
@@ -330,6 +333,12 @@ public class CalendarMain extends BasicActivity {
                 myStartActivity(QuestionMain.class);
             }
         });
+        calendar_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(CalendarMain.class);
+            }
+        });
     }
 
 
@@ -364,5 +373,24 @@ public class CalendarMain extends BasicActivity {
         return (int)dplusday2;
 
     }
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("도담도담 앱을 종료하시겠습니까?");
+        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
 
+            }
+        });
+        builder.setNegativeButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                moveTaskToBack(true);
+                finishAndRemoveTask();
+                finish();
+            }
+        });
+        builder.show();
+    }
 }
