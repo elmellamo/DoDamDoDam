@@ -21,7 +21,7 @@
         >
 
         <activity
-            android:name=".Utils.Title"
+            android:name=".activity.Login.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.DoDamDoDam">
             <intent-filter>
@@ -71,6 +71,7 @@
         <activity android:name=".activity.Setting.SettingMain"
             android:exported="true">
         </activity>
+
     </application>
 
 </manifest>
