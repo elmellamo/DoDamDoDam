@@ -12,10 +12,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Question.QuestionMain;
+import com.example.dodamdodam.models.MemberInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Objects;
 
@@ -37,6 +45,7 @@ public class SignUpActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -68,6 +77,20 @@ public class SignUpActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) { //회원가입 성공시
                                     startToast("회원가입 성공!");
+
+
+
+
+
+                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                    DocumentReference document = db.collection("users")
+                                            .document(user.getUid());
+                                    MemberInfo memberInfo = new MemberInfo(null, null, null);
+
+                                    db.collection("users").document(user.getUid()).set(memberInfo);
+
+
                                     myStartActivity(MemberInitActivity.class);
                                     finish();
                                 } else { //회원가입 실패시
