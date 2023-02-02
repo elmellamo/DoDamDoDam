@@ -53,7 +53,7 @@ public class MemberInitActivity extends AppCompatActivity {
         String name = ((EditText) findViewById(R.id.nameEditText)).getText().toString();
         final String birthDay = ((EditText) findViewById(R.id.birthDayEditText)).getText().toString();
 
-        if (name.length()>0 && birthDay.length()>5) {
+        if (name.length()>0 && birthDay.length()==8) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -78,7 +78,7 @@ public class MemberInitActivity extends AppCompatActivity {
                             }
                         });
             }else{
-                startToast("회원정보를 입력해주세요.");
+                startToast("회원정보를 양식에 맞게 입력해주세요.");
             }
             }
         else {
