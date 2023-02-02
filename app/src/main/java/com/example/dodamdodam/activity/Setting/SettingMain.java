@@ -87,41 +87,34 @@ public class SettingMain extends AppCompatActivity {
         album_Btn=findViewById(R.id.albumBtn);
         askbtn=findViewById(R.id.askBtn);
         withdrawbtn=findViewById(R.id.withdrawBtn);
-        imageView2=findViewById(R.id.imageView2);
+        //imageView2=findViewById(R.id.imageView2);
         logoutbtn=findViewById(R.id.logoutBtn);
         user = FirebaseAuth.getInstance().getCurrentUser();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference document = db.collection("users").document(user.getUid());
 
-            Glide.with(this).asGif().load(R.raw.dodamloading).listener(new RequestListener<GifDrawable>() {
-                @Override
-                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
-                    return false;
-                }
-
-                @Override
-                public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
-                    resource.setLoopCount(2);
-                    //imageView2.setBackgroundColor(Color.parseColor("#800000"));
-//                    Paint paint = new Paint();
+//            Glide.with(this).asGif().load(R.raw.dodamloading).listener(new RequestListener<GifDrawable>() {
+//                @Override
+//                public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<GifDrawable> target, boolean isFirstResource) {
+//                    return false;
+//                }
 //
-//                    paint.setColor(Color.BLACK);
+//                @Override
+//                public boolean onResourceReady(GifDrawable resource, Object model, Target<GifDrawable> target, DataSource dataSource, boolean isFirstResource) {
+//                    resource.setLoopCount(0);
 //
-//                    paint.setAlpha(70);
+//                    imageView2.setColorFilter(Color.parseColor("#E2E2E2"), PorterDuff.Mode.DARKEN);
 //
-//                    ((RelativeLayout)findViewById(R.id.activity_setting_main)).setBackgroundColor(paint.getColor());
-                    imageView2.setColorFilter(Color.parseColor("#E2E2E2"), PorterDuff.Mode.DARKEN);
-
-                    resource.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
-                        @Override
-                        public void onAnimationEnd(Drawable drawable) {
-                            //do whatever after specified number of loops complete
-                            imageView2.setVisibility(View.INVISIBLE);
-                        }
-                    });
-                    return false;
-                }
-            }).into(imageView2);
+//                    resource.registerAnimationCallback(new Animatable2Compat.AnimationCallback() {
+//                        @Override
+//                        public void onAnimationEnd(Drawable drawable) {
+//                            //do whatever after specified number of loops complete
+//                            imageView2.setVisibility(View.INVISIBLE);
+//                        }
+//                    });
+//                    return false;
+//                }
+//            }).into(imageView2);
 
 
         document.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
