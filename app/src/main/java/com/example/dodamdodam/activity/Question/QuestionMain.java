@@ -137,7 +137,7 @@ public class QuestionMain extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot datasnapshot1) {
                                 for(DataSnapshot snapshot1 : datasnapshot1.getChildren()){
-                                if(snapshot1.hasChild(user.getUid())&&snapshot1.hasChild(LOVERUID)) {
+                                if(snapshot1.hasChild(user.getUid())&&snapshot1.hasChild(LOVERUID)) {//둘다 답변이 있다면?
                                     database.child("Num").child(user.getUid()).setValue(Integer.toString(num + 1));
                                     tv_today_question.setVisibility(View.VISIBLE);
                                     tv_happy.setVisibility(View.INVISIBLE);
@@ -164,18 +164,19 @@ public class QuestionMain extends AppCompatActivity {
                                 for(DataSnapshot childSnapshot:snapshot.getChildren()){
                                     questionkey=childSnapshot.getKey();
                                     show_question.setText(questionkey);
+
                                     if(childSnapshot.hasChild(user.getUid())){//내 답변이 등록되있을떄
                                         et_ques.setVisibility(View.INVISIBLE);
                                         ques_submit_btn.setVisibility(View.INVISIBLE);
                                         tv_show_answer1.setText("나 : "+childSnapshot.child(user.getUid()).getValue().toString());
-                                        if(childSnapshot.hasChild(LOVERUID)) {
+                                        if(childSnapshot.hasChild(LOVERUID)) {//상대도 답변했음
                                             tv_show_answer2.setText("너 : " + childSnapshot.child(LOVERUID).getValue().toString());
                                             tv_happy.setVisibility(View.VISIBLE);
                                             tv_today_question.setVisibility(View.INVISIBLE);
                                             tv_no_answer.setVisibility(View.INVISIBLE);
                                             tv_show_answer2.setVisibility(View.VISIBLE);
                                         }
-                                        else{
+                                        else{//상대 답변없을때
                                             tv_happy.setVisibility(View.INVISIBLE);
                                             tv_today_question.setVisibility(View.INVISIBLE);
                                             tv_no_answer.setVisibility(View.VISIBLE);
@@ -253,6 +254,33 @@ public class QuestionMain extends AppCompatActivity {
                 et_ques.setVisibility(View.INVISIBLE);
                 ques_submit_btn.setVisibility(View.INVISIBLE);
                 tv_show_answer1.setVisibility(View.VISIBLE);
+                database.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        number=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
+
+                        databaseReference.child(Integer.toString(number)).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot childSnapshot:snapshot.getChildren()){
+                                    if(childSnapshot.hasChild(LOVERUID)){
+                                        tv_show_answer2.setText("너 : "+childSnapshot.child(LOVERUID).getValue().toString());
+                                        tv_show_answer2.setVisibility(View.VISIBLE);
+                                    }
+                                }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
             }
         });
