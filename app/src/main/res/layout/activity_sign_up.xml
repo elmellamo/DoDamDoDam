@@ -3,19 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF7D2"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/rabbitlogo2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/emailEditText"
         android:text="회원가입"
         android:textColor="#000000"
-        android:textStyle="bold"
+
         android:id="@+id/memberinfo"
         android:gravity="center"
         android:textSize="24sp"
@@ -28,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:ems="10"
-        android:hint="이메일"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         android:id="@+id/emailEditText"/>
 
@@ -39,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:ems="10"
-        android:hint="비밀번호"
+        android:hint="Password"
         android:inputType="textPassword"
         android:id="@+id/passwordEditText"/>
 
@@ -50,28 +61,43 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:ems="10"
-        android:hint="비밀번호"
+        android:hint="Password"
         android:inputType="textPassword"
         android:id="@+id/passwordCheckEditText"/>
 
-    <Button
-        app:layout_constraintTop_toBottomOf="@+id/passwordCheckEditText"
-        app:layout_constraintBottom_toTopOf="@+id/goto_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/signUpBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="회원가입"/>
+<!--    <Button-->
+<!--        android:id="@+id/signUpBtn"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="회원가입"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/goto_login"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/passwordCheckEditText" />-->
 
-    <Button
-        app:layout_constraintTop_toBottomOf="@+id/signUpBtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:id="@+id/goto_login"
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signUpBtn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="로그인하기"/>
+        android:background="@drawable/white_rounded_button"
+        android:text="회 원 가 입"
+        android:padding="12dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="25dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordCheckEditText"/>
+
+<!--    <Button-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/signUpBtn"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        android:id="@+id/goto_login"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="로그인하기"/>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
