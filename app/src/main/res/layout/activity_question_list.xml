@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.Question.QuestionList">
+    tools:context=".activity.Question.QuestionList"
+    android:background="#FFF7D2">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RecyclerView"
