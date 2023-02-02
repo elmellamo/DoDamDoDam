@@ -39,7 +39,7 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance(); //유저를 받아오기 위해서
 
         findViewById(R.id.signUpBtn).setOnClickListener(onClickListener);
-        findViewById(R.id.goto_login).setOnClickListener(onClickListener);
+       // findViewById(R.id.goto_login).setOnClickListener(onClickListener);
 
 //        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
