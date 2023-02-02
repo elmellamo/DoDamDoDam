@@ -14,74 +14,74 @@
         android:layout_height="75dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="40dp"
-        android:src="@drawable/rabbitlogo2"
+        android:src="@drawable/rabbitreallogo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
 
         />
 
-        <TextView
-            android:id="@+id/memberinfo"
+    <TextView
+        android:id="@+id/memberinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:paddingTop="70dp"
+        android:text="회원정보"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/nameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="이름"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="20dp"
+            android:inputType="textPersonName" />
 
-            android:gravity="center"
-            android:paddingTop="70dp"
-            android:text="회원정보"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+
+        <EditText
+            android:id="@+id/birthDayEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:paddingBottom="20dp"
+            android:hint="생년월일(YYYYMMDD)"
+            android:inputType="date" />
+
+        <!--            <Button-->
+        <!--                android:id="@+id/checkBtn"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:text="확인" />-->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/checkBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_rounded_button"
+            android:text="확 인"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="25dp"
             />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <EditText
-                android:id="@+id/nameEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="이름"
-                android:layout_marginBottom="20dp"
-                android:paddingBottom="20dp"
-                android:inputType="textPersonName" />
-
-
-            <EditText
-                android:id="@+id/birthDayEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:paddingBottom="20dp"
-                android:hint="생년월일(YYYYMMDD)"
-                android:inputType="date" />
-
-<!--            <Button-->
-<!--                android:id="@+id/checkBtn"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="확인" />-->
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/checkBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/white_rounded_button"
-                android:text="확 인"
-                android:layout_marginTop="70dp"
-                android:layout_marginBottom="25dp"
-                />
-
-        </LinearLayout>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

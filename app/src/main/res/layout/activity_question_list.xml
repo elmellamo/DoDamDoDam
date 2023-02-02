@@ -41,8 +41,8 @@
 
         <ImageButton
             android:id="@+id/calendarBtn_l"
-            android:layout_width="109dp"
-            android:layout_height="48dp"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
             android:adjustViewBounds="true"
             android:contentDescription="달력"
             android:scaleType="fitCenter"

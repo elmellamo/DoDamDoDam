@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".activity.Login.LoginActivity"
     android:background="#FFF7D2"
+    android:paddingTop="50dp"
     android:paddingLeft="25dp"
     android:paddingRight="25dp">
     <ImageView
@@ -15,7 +16,7 @@
         android:layout_height="75dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="40dp"
-        android:src="@drawable/rabbitlogo2"
+        android:src="@drawable/rabbitreallogo"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -25,40 +26,94 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="로그인"
+        android:layout_marginTop="48dp"
+        android:paddingTop="70dp"
         android:textColor="#000000"
         android:textSize="24sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/emailEditText"
 
         />
 
 
-    <EditText
-        android:id="@+id/emailEditText"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="이메일"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@id/passwordEditText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/memberinfo" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/passwordEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="비밀번호"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@id/checkBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+        <EditText
+            android:id="@+id/emailEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="이메일"
+            android:inputType="textEmailAddress"
+
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="20dp"
+            app:layout_constraintBottom_toTopOf="@id/passwordEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/passwordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="비밀번호"
+            android:paddingBottom="20dp"
+            android:inputType="textPassword"
+            app:layout_constraintBottom_toTopOf="@id/checkBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/emailEditText"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/checkBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_rounded_button"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="15dp"
+            android:padding="12dp"
+            android:text="로 그 인"
+
+            app:layout_constraintBottom_toTopOf="@id/signupBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/passwordEditText"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signupBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_rounded_button"
+            android:padding="12dp"
+            android:text="회 원 가 입"
+            android:layout_marginBottom="15dp"
+
+            app:layout_constraintBottom_toTopOf="@id/gotoPasswordResetBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkBtn" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/gotoPasswordResetBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_rounded_button"
+            android:padding="12dp"
+            android:text="비 밀 번 호 재 설 정"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/signupBtn"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--            <Button-->
     <!--                android:id="@+id/checkBtn"-->
@@ -77,44 +132,6 @@
     <!--                android:layout_width="wrap_content"-->
     <!--                android:layout_height="wrap_content"-->
     <!--                android:text="회원가입" />-->
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/checkBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/white_rounded_button"
-        android:padding="12dp"
-        android:text="로 그 인"
-
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/gotoPasswordResetBtn" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/gotoPasswordResetBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/white_rounded_button"
-        android:padding="12dp"
-        android:text="비 밀 번 호 재 설 정"
-        app:layout_constraintTop_toBottomOf="@id/checkBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/signupBtn" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signupBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/white_rounded_button"
-        android:padding="12dp"
-        android:text="회 원 가 입"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
