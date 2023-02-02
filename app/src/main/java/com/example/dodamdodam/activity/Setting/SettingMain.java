@@ -345,7 +345,7 @@ public class SettingMain extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                myStartActivity(SignUpActivity.class);
+                myStartActivity(LoginActivity.class);
             }
         });
 

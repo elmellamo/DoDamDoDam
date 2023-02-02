@@ -43,8 +43,8 @@ public class SignUpActivity extends AppCompatActivity {
 
 //        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -77,9 +77,6 @@ public class SignUpActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) { //회원가입 성공시
                                     startToast("회원가입 성공!");
-
-
-
 
 
                                     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -121,26 +118,26 @@ public class SignUpActivity extends AppCompatActivity {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public void onBackPressed() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
-        builder.setMessage("도담도담 앱을 종료하시겠습니까?");
-        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        builder.setNegativeButton("네", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                moveTaskToBack(true); // 태스크를 백그라운드로 이동
-                finishAndRemoveTask(); // 액티비티 종료 + 태스크 리스트에서 지우기
-                android.os.Process.killProcess(android.os.Process.myPid()); // 앱 프로세스 종료
-            }
-        });
-        builder.show();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        final AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+//        builder.setMessage("도담도담 앱을 종료하시겠습니까?");
+//        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//            }
+//        });
+//        builder.setNegativeButton("네", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                moveTaskToBack(true); // 태스크를 백그라운드로 이동
+//                finishAndRemoveTask(); // 액티비티 종료 + 태스크 리스트에서 지우기
+//                android.os.Process.killProcess(android.os.Process.myPid()); // 앱 프로세스 종료
+//            }
+//        });
+//        builder.show();
+//    }
 
 
 }

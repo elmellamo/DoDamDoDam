@@ -102,10 +102,10 @@
         app:layout_constraintTop_toBottomOf="@id/checkBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/gotosignupBtn" />
+        app:layout_constraintBottom_toTopOf="@id/signupBtn" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/gotosignupBtn"
+        android:id="@+id/signupBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/white_rounded_button"

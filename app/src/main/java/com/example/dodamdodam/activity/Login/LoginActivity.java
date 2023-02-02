@@ -76,12 +76,12 @@ public class LoginActivity extends BasicActivity {
         }
         findViewById(R.id.checkBtn).setOnClickListener(onClickListener);
         findViewById(R.id.gotoPasswordResetBtn).setOnClickListener(onClickListener);
-        findViewById(R.id.gotosignupBtn).setOnClickListener(onClickListener);
+        findViewById(R.id.signupBtn).setOnClickListener(onClickListener);
 
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("도담도담");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setTitle("도담도담");
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -94,7 +94,7 @@ public class LoginActivity extends BasicActivity {
                 case R.id.gotoPasswordResetBtn:
                     myStartActivity(PasswordResetActivity.class);
                     break;
-                case R.id.gotosignupBtn:
+                case R.id.signupBtn:
                     myStartActivity(SignUpActivity.class);
                     break;
             }
