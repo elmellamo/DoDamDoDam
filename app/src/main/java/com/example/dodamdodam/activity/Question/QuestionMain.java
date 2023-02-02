@@ -65,7 +65,7 @@ public class QuestionMain extends AppCompatActivity {
     public String str_ans = null;
     private EditText et_ques;
 
-    private TextView show_question,tv_show_answer1,tv_show_answer2;
+    private TextView show_question,tv_show_answer1,tv_show_answer2,tv_today_question,tv_no_answer,tv_happy;
 
     public String questionkey,getTime;
 
@@ -116,6 +116,9 @@ public class QuestionMain extends AppCompatActivity {
         str_ans=et_ques.getText().toString();
         ques_submit_btn=findViewById(R.id.ques_submit_btn);
 
+        tv_today_question=findViewById(R.id.tv_today_question);
+        tv_no_answer=findViewById(R.id.tv_no_answer);
+        tv_happy=findViewById(R.id.tv_happy);
         show_question=findViewById(R.id.tv_show_question);
 
         now=System.currentTimeMillis();
@@ -136,6 +139,9 @@ public class QuestionMain extends AppCompatActivity {
                                 for(DataSnapshot snapshot1 : datasnapshot1.getChildren()){
                                 if(snapshot1.hasChild(user.getUid())&&snapshot1.hasChild(LOVERUID)) {
                                     database.child("Num").child(user.getUid()).setValue(Integer.toString(num + 1));
+                                    tv_today_question.setVisibility(View.VISIBLE);
+                                    tv_happy.setVisibility(View.INVISIBLE);
+                                    tv_no_answer.setVisibility(View.INVISIBLE);
                                     et_ques.setVisibility(View.VISIBLE);
                                     ques_submit_btn.setVisibility(View.VISIBLE);
                                     tv_show_answer1.setVisibility(View.INVISIBLE);
@@ -164,7 +170,15 @@ public class QuestionMain extends AppCompatActivity {
                                         tv_show_answer1.setText("나 : "+childSnapshot.child(user.getUid()).getValue().toString());
                                         if(childSnapshot.hasChild(LOVERUID)) {
                                             tv_show_answer2.setText("너 : " + childSnapshot.child(LOVERUID).getValue().toString());
+                                            tv_happy.setVisibility(View.VISIBLE);
+                                            tv_today_question.setVisibility(View.INVISIBLE);
+                                            tv_no_answer.setVisibility(View.INVISIBLE);
                                             tv_show_answer2.setVisibility(View.VISIBLE);
+                                        }
+                                        else{
+                                            tv_happy.setVisibility(View.INVISIBLE);
+                                            tv_today_question.setVisibility(View.INVISIBLE);
+                                            tv_no_answer.setVisibility(View.VISIBLE);
                                         }
                                         tv_show_answer1.setVisibility(View.VISIBLE);
 
