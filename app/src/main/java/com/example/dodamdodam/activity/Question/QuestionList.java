@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dodamdodam.R;
 
+import com.example.dodamdodam.activity.Calendar.CalendarMain;
+import com.example.dodamdodam.activity.Setting.SettingMain;
+import com.example.dodamdodam.activity.album.AlbumMain;
 import com.example.dodamdodam.adapter.QuestionAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +33,7 @@ import java.util.function.LongToIntFunction;
 public class QuestionList extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    public ImageButton question_Btn,calendar_Btn,album_Btn, setting_Btn;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<QuestionListObject> arrayList;
@@ -57,7 +63,10 @@ public class QuestionList extends AppCompatActivity {
         recyclerView.setAdapter((questionAdapter));
         databaseReference = database.getReference("Question");
         databaseReference1=database1.getReference("UpdateDay");
-
+        question_Btn = findViewById(R.id.question_main_btn);
+        calendar_Btn=findViewById(R.id.calendarBtn_l);
+        album_Btn = findViewById(R.id.albumBtn_l);
+        setting_Btn = findViewById(R.id.settingBtn_l);
 
         Intent intent =getIntent();
         userUid = intent.getStringExtra("userUid");
@@ -104,45 +113,41 @@ public class QuestionList extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
-        /*
-        for(int i=1;i<=how_many_question;i++) {
-            databaseReference.child(Integer.toString(i)).addListenerForSingleValueEvent(new ValueEventListener() {
 
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
-
-                    for (DataSnapshot snapshot1 : dataSnapshot1.getChildren()) {
-                        questionkey = snapshot1.getKey();
-                        if (snapshot1.hasChild(userUid)) {
-                            question = questionkey;
-                        } else question = null;
-
-                        if (snapshot1.hasChild(userUid)) {
-                            answer1 = snapshot1.child(userUid).getValue().toString();
-                        }
-                        else answer1=null;
-                        if (snapshot1.hasChild(loverUid)) {
-                            answer2 = snapshot1.child(loverUid).getValue().toString();
-                        }
-                        else answer2=null;
-                        QuestionListObject questionlistObject = new QuestionListObject(question, answer1, answer2);
-                        arrayList.add(questionlistObject);
-
-                    }
-                    questionAdapter.notifyDataSetChanged();
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
-            });
-
-        }
-        */
-
+        album_Btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                myStartActivity(AlbumMain.class);
+            }
+        });
+        setting_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(SettingMain.class);
+            }
+        });
+        question_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(QuestionMain.class);
+            }
+        });
+        calendar_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myStartActivity(CalendarMain.class);
+            }
+        });
     }
-
-
+    private void myStartActivity(Class c){
+        Intent intent = new Intent(this, c);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
 }
+
+
