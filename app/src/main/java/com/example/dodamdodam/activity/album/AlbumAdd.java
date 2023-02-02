@@ -38,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -47,6 +48,8 @@ public class AlbumAdd extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();;
     private ArrayList<Uri> pathList = new ArrayList<>();
+    private List<String> stringUri;
+    private String postId;
     private RecyclerViewItem rItem = new RecyclerViewItem();
     private CustomAdapter mAdapter;
     private int postCount =0;
@@ -108,7 +111,7 @@ public class AlbumAdd extends AppCompatActivity {
                         Log.e("로그", "onActivityResult: currentUri" + currentUri.toString());
 
                         handlePickerResponse(currentUri);
-                        getContentResolver().takePersistableUriPermission(currentUri, flag);
+                        //getContentResolver().takePersistableUriPermission(currentUri, flag);
 
                     }
 
@@ -201,7 +204,11 @@ public class AlbumAdd extends AppCompatActivity {
         final String contents = ((EditText)findViewById(R.id.contets_edit)).getText().toString();
         if(title.length()>0 && !pathList.isEmpty()){
 
-            mFirebaseMethods.uploadNewPost(title, contents,postCount,pathList);
+            stringUri = new ArrayList<String>();
+
+            stringUri = mFirebaseMethods.changeString(pathList);
+            postId = mFirebaseMethods.addAlbumToDatabase(title, contents, stringUri);
+            mFirebaseMethods.uploadNewPost(title, contents, postId, pathList);
 
         }else if(title.length()==0){
             startToast("제목을 작성해주세요.");

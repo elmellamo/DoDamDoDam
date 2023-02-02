@@ -69,19 +69,29 @@ public class FirebaseMethods {
         return count;
     }
 
-    public void uploadNewPost(final String title, final String caption, int count, ArrayList<Uri> imgUrl) {
+    public List<String> changeString(ArrayList<Uri> imgUri){
+        pleaseUpload = new ArrayList<String>();
+
+        for(int i=1; i<=imgUri.size(); i++){
+            pleaseUpload.add(imgUri.get(i - 1).toString());
+        }
+
+        return pleaseUpload;
+    }
+
+    public void uploadNewPost(final String title, final String caption, String postId, ArrayList<Uri> imgUrl) {
         Log.e("로그", "uploadNewPhoto: uploading NEW photo.");
 
         String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         uploadkey=1;
         Bitmap bm = null;
-        pleaseUpload = new ArrayList<String>();
+        //pleaseUpload = new ArrayList<String>();
 
         for(int i=1; i<=imgUrl.size(); i++){
             final StorageReference storageReference = mStorageReference
-                    .child("album/users/" + user_id + "/photo" + (count + i));
+                    .child("album/users/" + postId+"/photo" + i);
 
-            pleaseUpload.add(imgUrl.get(i - 1).toString());
+            //pleaseUpload.add(imgUrl.get(i - 1).toString());
 
             try {
                 Log.e("로그", "알려줄게요>>> "+imgUrl.get(i - 1).toString());
@@ -101,7 +111,7 @@ public class FirebaseMethods {
                         storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Uri firebaseUrl = uri;
+                                //Uri firebaseUrl = uri;
                                 Log.e("로그", "photo upload success");
                                 Toast.makeText(mContext, "photo upload success", Toast.LENGTH_SHORT).show();
 
@@ -124,10 +134,10 @@ public class FirebaseMethods {
 
         if(uploadkey==1){
             if(caption==null){
-                addAlbumToDatabase(title, null, pleaseUpload);
+                //addAlbumToDatabase(title, null, pleaseUpload);
                 Log.e("로그", "내용 없슈!!!");
             }else{
-                addAlbumToDatabase(title, caption, pleaseUpload);
+                //addAlbumToDatabase(title, caption, pleaseUpload);
                 Log.e("로그", "진짜진짜 성공!!!");
             }
 
@@ -137,7 +147,7 @@ public class FirebaseMethods {
         }
     }
 
-    private void addAlbumToDatabase(String title, String caption, List<String> imgurl){
+    public String addAlbumToDatabase(String title, String caption, List<String> imgurl){
         Log.e("로그", "addPhotoToDatabase: 데이터 베이스에 사진 추가");
 
         String newPostKey = myRef.child(mContext.getString(R.string.dbname_posts)).push().getKey();
@@ -154,6 +164,8 @@ public class FirebaseMethods {
         myRef.child(mContext.getString(R.string.dbname_user_posts)).
                 child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(newPostKey).setValue(post);
         myRef.child(mContext.getString(R.string.dbname_posts)).child(newPostKey).setValue(post);
+
+        return newPostKey;
     }
 
     private String getTimeStamp(){

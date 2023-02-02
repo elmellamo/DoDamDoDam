@@ -2,7 +2,6 @@ package com.example.dodamdodam.activity.album;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -168,23 +167,23 @@ public class AlbumMain extends BasicActivity {
                         post.setImage_path((List<String>) objectMap.get("image_path"));
 
 
-                        try {
-                            final int flag =  Intent.FLAG_GRANT_READ_URI_PERMISSION;
-                            for(int tmp=0; tmp<post.getImage_path().size(); tmp++){
-                                final Uri tmpuri = Uri.parse(post.getImage_path().get(tmp));
-
-                                Log.e("로그", (post.getImage_path().get(tmp)));
-
-                                AlbumMain.this.grantUriPermission(getPackageName(), tmpuri, flag);
-                                Log.e("로그", "안되고 있겠죠?2");
-                                AlbumMain.this.getContentResolver().takePersistableUriPermission(tmpuri, flag);
-                                Log.e("로그", "안되고 있겠죠?3");
-                            }
-                            Log.e("로그", "안되고 있겠죠?1");
-                        }
-                        catch (SecurityException e) {
-                            // OK, we were not offered any persistable permissions
-                        }
+//                        try {
+//                            final int flag =  Intent.FLAG_GRANT_READ_URI_PERMISSION;
+//                            for(int tmp=0; tmp<post.getImage_path().size(); tmp++){
+//                                final Uri tmpuri = Uri.parse(post.getImage_path().get(tmp));
+//
+//                                Log.e("로그", (post.getImage_path().get(tmp)));
+//
+//                                AlbumMain.this.grantUriPermission(getPackageName(), tmpuri, flag);
+//                                Log.e("로그", "안되고 있겠죠?2");
+//                                AlbumMain.this.getContentResolver().takePersistableUriPermission(tmpuri, flag);
+//                                Log.e("로그", "안되고 있겠죠?3");
+//                            }
+//                            Log.e("로그", "안되고 있겠죠?1");
+//                        }
+//                        catch (SecurityException e) {
+//                            // OK, we were not offered any persistable permissions
+//                        }
 
 
                         mPosts.add(post);
@@ -217,13 +216,13 @@ public class AlbumMain extends BasicActivity {
         int imageWidth = gridWidth/3;
         gridView.setColumnWidth(imageWidth);
 
-        ArrayList<String> imgUrls = new ArrayList<>();
+        ArrayList<String> postIds = new ArrayList<>();
         for(int i=0 ; i<mPosts.size();i++){
-            imgUrls.add(mPosts.get(i).getImage_path().get(0));
-            Log.e("로그", "포스트 링크 >> "+ imgUrls.get(i));
+            postIds.add(mPosts.get(i).getPost_id());
+            Log.e("로그", "포스트 아이디 >> "+ postIds.get(i));
         }
 
-        adapter = new AlbumMainListAdapter(AlbumMain.this,R.layout.layout_grid_imageview,"",imgUrls);
+        adapter = new AlbumMainListAdapter(AlbumMain.this,R.layout.layout_grid_imageview,"",postIds);
 
         if(adapter.isEmpty()){
             emptytxt.setVisibility(adapter.getCount()==0?  View.VISIBLE : View.GONE);
