@@ -7,6 +7,7 @@ import android.provider.ContactsContract;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View;
 
@@ -69,7 +70,7 @@ public class QuestionMain extends AppCompatActivity {
 
     public String questionkey,getTime;
 
-
+    private ImageView r1,r2,r3;
     private int num,number;
     private long now;
     public ImageButton ALBUMBTN,CALENDARBTN,SETTINGBTN;
@@ -121,6 +122,9 @@ public class QuestionMain extends AppCompatActivity {
         tv_happy=findViewById(R.id.tv_happy);
         show_question=findViewById(R.id.tv_show_question);
 
+        r1=findViewById(R.id.rabbit);
+        r2=findViewById(R.id.sadrabbit);
+        r3=findViewById(R.id.happyrabbit);
         now=System.currentTimeMillis();
         Date date =new Date(now);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -142,6 +146,9 @@ public class QuestionMain extends AppCompatActivity {
                                     tv_today_question.setVisibility(View.VISIBLE);
                                     tv_happy.setVisibility(View.INVISIBLE);
                                     tv_no_answer.setVisibility(View.INVISIBLE);
+                                    r1.setVisibility(View.VISIBLE);
+                                    r2.setVisibility(View.INVISIBLE);
+                                    r3.setVisibility(View.INVISIBLE);
                                     et_ques.setVisibility(View.VISIBLE);
                                     ques_submit_btn.setVisibility(View.VISIBLE);
                                     tv_show_answer1.setVisibility(View.INVISIBLE);
@@ -172,6 +179,9 @@ public class QuestionMain extends AppCompatActivity {
                                         if(childSnapshot.hasChild(LOVERUID)) {//상대도 답변했음
                                             tv_show_answer2.setText("너 : " + childSnapshot.child(LOVERUID).getValue().toString());
                                             tv_happy.setVisibility(View.VISIBLE);
+                                            r1.setVisibility(View.INVISIBLE);
+                                            r2.setVisibility(View.INVISIBLE);
+                                            r3.setVisibility(View.VISIBLE);
                                             tv_today_question.setVisibility(View.INVISIBLE);
                                             tv_no_answer.setVisibility(View.INVISIBLE);
                                             tv_show_answer2.setVisibility(View.VISIBLE);
@@ -180,6 +190,11 @@ public class QuestionMain extends AppCompatActivity {
                                             tv_happy.setVisibility(View.INVISIBLE);
                                             tv_today_question.setVisibility(View.INVISIBLE);
                                             tv_no_answer.setVisibility(View.VISIBLE);
+                                            r1.setVisibility(View.INVISIBLE);
+                                            r2.setVisibility(View.VISIBLE);
+                                            r3.setVisibility(View.INVISIBLE);
+                                            tv_show_answer2.setText("너 : ");
+                                            tv_show_answer2.setVisibility(View.VISIBLE);
                                         }
                                         tv_show_answer1.setVisibility(View.VISIBLE);
 
@@ -266,6 +281,16 @@ public class QuestionMain extends AppCompatActivity {
                                     if(childSnapshot.hasChild(LOVERUID)){
                                         tv_show_answer2.setText("너 : "+childSnapshot.child(LOVERUID).getValue().toString());
                                         tv_show_answer2.setVisibility(View.VISIBLE);
+                                        r3.setVisibility(View.VISIBLE);
+                                        r1.setVisibility(View.INVISIBLE);
+                                        r2.setVisibility(View.INVISIBLE);
+                                    }
+                                    else{
+                                        tv_show_answer2.setText("너 : ");
+                                        tv_show_answer2.setVisibility(View.VISIBLE);
+                                        r2.setVisibility(View.VISIBLE);
+                                        r3.setVisibility(View.INVISIBLE);
+                                        r1.setVisibility(View.INVISIBLE);
                                     }
                                 }
                             }

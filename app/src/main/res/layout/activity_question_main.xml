@@ -20,10 +20,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="80dp"
-            android:id="@+id/profile_photo"
+            android:id="@+id/rabbit"
+            android:visibility="visible"
             app:civ_border_color="@color/black"
             app:civ_border_width="0.5dp"
             android:src="@drawable/img"
+            android:layout_centerVertical="true"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
+            android:id="@+id/sadrabbit"
+            android:visibility="invisible"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="0.5dp"
+            android:src="@drawable/sadrabbit"
+            android:layout_centerVertical="true"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
+            android:visibility="invisible"
+            android:id="@+id/happyrabbit"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="0.5dp"
+            android:src="@drawable/happyrabbit"
             android:layout_centerVertical="true"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
