@@ -25,10 +25,10 @@ public class FindLover extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_find_lover);
 
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         myUid = (TextView)findViewById(R.id.myUID);
