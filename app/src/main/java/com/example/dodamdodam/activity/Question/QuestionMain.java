@@ -39,6 +39,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Login.BasicActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -63,7 +65,7 @@ public class QuestionMain extends AppCompatActivity {
     public String str_ans = null;
     private EditText et_ques;
 
-    private TextView show_question;
+    private TextView show_question,tv_show_answer1,tv_show_answer2;
 
     public String questionkey,getTime;
 
@@ -107,7 +109,12 @@ public class QuestionMain extends AppCompatActivity {
                 }
             }
         });//LoverUID받아오기
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+        tv_show_answer1=findViewById(R.id.tv_show_answer1);
+        tv_show_answer2=findViewById(R.id.tv_show_answer2);
+        et_ques=(EditText)findViewById(R.id.et_question);
+        str_ans=et_ques.getText().toString();
+        ques_submit_btn=findViewById(R.id.ques_submit_btn);
 
         show_question=findViewById(R.id.tv_show_question);
 
@@ -115,9 +122,6 @@ public class QuestionMain extends AppCompatActivity {
         Date date =new Date(now);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         getTime = sdf.format(date);
-
-        //snapshot.hasChild(user.getUid())&&snapshot.hasChild(LOVERUID)
-        //snapshot.child("Info").child(user.getUid()).getValue().toString()).equals(getTime)==false
 
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -132,6 +136,10 @@ public class QuestionMain extends AppCompatActivity {
                                 for(DataSnapshot snapshot1 : datasnapshot1.getChildren()){
                                 if(snapshot1.hasChild(user.getUid())&&snapshot1.hasChild(LOVERUID)) {
                                     database.child("Num").child(user.getUid()).setValue(Integer.toString(num + 1));
+                                    et_ques.setVisibility(View.VISIBLE);
+                                    ques_submit_btn.setVisibility(View.VISIBLE);
+                                    tv_show_answer1.setVisibility(View.INVISIBLE);
+                                    tv_show_answer2.setVisibility(View.INVISIBLE);
                                 }
                                 }
                             }
@@ -142,7 +150,7 @@ public class QuestionMain extends AppCompatActivity {
                         database.child("Info").child(user.getUid()).setValue(getTime);
 
                     }
-                    else{
+                    else{//날짜 안지남
                         num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
                         databaseReference.child(Integer.toString(num)).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -150,6 +158,17 @@ public class QuestionMain extends AppCompatActivity {
                                 for(DataSnapshot childSnapshot:snapshot.getChildren()){
                                     questionkey=childSnapshot.getKey();
                                     show_question.setText(questionkey);
+                                    if(childSnapshot.hasChild(user.getUid())){//내 답변이 등록되있을떄
+                                        et_ques.setVisibility(View.INVISIBLE);
+                                        ques_submit_btn.setVisibility(View.INVISIBLE);
+                                        tv_show_answer1.setText("나 : "+childSnapshot.child(user.getUid()).getValue().toString());
+                                        if(childSnapshot.hasChild(LOVERUID)) {
+                                            tv_show_answer2.setText("너 : " + childSnapshot.child(LOVERUID).getValue().toString());
+                                            tv_show_answer2.setVisibility(View.VISIBLE);
+                                        }
+                                        tv_show_answer1.setVisibility(View.VISIBLE);
+
+                                    }
                                 }
                             }
                             @Override
@@ -166,6 +185,7 @@ public class QuestionMain extends AppCompatActivity {
             }
         });
 
+////////////////질문 띄우기//////////////////////////////////////////////////////////////////////////////////////////////////////////
         ques_show_btn=findViewById(R.id.ques_show_btn);
         ques_show_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,6 +204,9 @@ public class QuestionMain extends AppCompatActivity {
                                     questionkey=childSnapshot.getKey();
                                     show_question.setText(questionkey);
                                     database.child("Info").child(user.getUid()).setValue(getTime);
+                                    if(childSnapshot.hasChild(LOVERUID)){
+                                        tv_show_answer2.setText(childSnapshot.child(LOVERUID).getValue().toString());
+                                    }
                                 }
                             }
                             @Override
@@ -201,17 +224,21 @@ public class QuestionMain extends AppCompatActivity {
             }
         });
 
+     ///답변 입력하기///////////////////////////////////////////////////////////////////////
 
-        et_ques=(EditText)findViewById(R.id.et_question);
-        str_ans=et_ques.getText().toString();
-        ques_submit_btn=findViewById(R.id.ques_submit_btn);
+
         ques_submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 et_ques=(EditText)findViewById(R.id.et_question);
                 str_ans=et_ques.getText().toString();
-
                 databaseReference.child(Integer.toString(num)).child(questionkey).child(user.getUid()).setValue(str_ans);
+                Toast myToast = Toast.makeText(getApplicationContext(),"답변이 등록되었습니다!", Toast.LENGTH_SHORT);
+                myToast.show();
+                tv_show_answer1.setText("나 : "+str_ans);
+                et_ques.setVisibility(View.INVISIBLE);
+                ques_submit_btn.setVisibility(View.INVISIBLE);
+                tv_show_answer1.setVisibility(View.VISIBLE);
 
             }
         });
@@ -221,14 +248,7 @@ public class QuestionMain extends AppCompatActivity {
 
 
 
-
-
-
-
-
-
-
-
+////////밑의 버튼들/////////////////////////////////////////////////////////////////
         question_list_btn=findViewById(R.id.question_list_btn);
         question_list_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,7 +259,6 @@ public class QuestionMain extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
         ALBUMBTN.setOnClickListener(new View.OnClickListener()
         {
@@ -261,8 +280,6 @@ public class QuestionMain extends AppCompatActivity {
                 myStartActivity(CalendarMain.class);
             }
         });
-
-
     }
     private void myStartActivity(Class c){
         Intent intent = new Intent(this, c);
@@ -289,5 +306,4 @@ public class QuestionMain extends AppCompatActivity {
         });
         builder.show();
     }
-
 }
