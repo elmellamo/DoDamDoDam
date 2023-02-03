@@ -92,11 +92,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="title"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:id="@+id/image_title"
+            android:layout_marginTop="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_title"
             android:text="mitch.tabian moutains #mountains"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:id="@+id/image_caption"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"

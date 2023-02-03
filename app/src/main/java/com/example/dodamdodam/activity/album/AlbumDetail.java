@@ -2,6 +2,7 @@ package com.example.dodamdodam.activity.album;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager2.widget.ViewPager2;
@@ -29,6 +30,7 @@ import me.relex.circleindicator.CircleIndicator3;
 public class AlbumDetail  extends BasicActivity {
     private ViewPager2 mPager;
     private CircleIndicator3 mindicator;
+    private TextView image_title, image_caption, image_time_posted;
     private String postId;
     private MyAdapter myAdapter;
     private FirebaseAuth mAuth;
@@ -44,6 +46,9 @@ public class AlbumDetail  extends BasicActivity {
 
         mPager = findViewById(R.id.pager_images);
         mindicator = findViewById(R.id.indicator);
+        image_caption = findViewById(R.id.image_caption);
+        image_title = findViewById(R.id.image_title);
+        image_time_posted = findViewById(R.id.image_time_posted);
         setImage();
 
     }
@@ -68,6 +73,11 @@ public class AlbumDetail  extends BasicActivity {
 
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
                     Map<String, Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
+                    objectMap.get("caption").toString();
+                    image_caption.setText(objectMap.get("caption").toString());
+                    image_title.setText(objectMap.get("title").toString());
+                    image_time_posted.setText(objectMap.get("date_created").toString());
+
                     postCount = ((List<String>) objectMap.get("image_path")).size();
 
                     detailInfos = new ArrayList<>();
