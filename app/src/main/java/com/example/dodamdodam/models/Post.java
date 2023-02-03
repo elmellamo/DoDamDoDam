@@ -17,7 +17,7 @@ public class Post implements Parcelable {
     }
 
     public Post(String title, String caption, String date_created, List<String> image_path, String post_id,
-                 String user_id) {
+                String user_id) {
         this.caption = caption;
         this.date_created = date_created;
         this.image_path = image_path;

@@ -121,6 +121,7 @@ public class QuestionMain extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                if(snapshot.child("Info").child(user.getUid()).getValue()!=null){
                 if((snapshot.child("Info").child(user.getUid()).getValue().toString()).equals(getTime)==false){//하루지났을때
 
                     num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
@@ -193,7 +194,7 @@ public class QuestionMain extends AppCompatActivity {
 
                         }
                     });
-                }
+                }}
 
             }
             @Override

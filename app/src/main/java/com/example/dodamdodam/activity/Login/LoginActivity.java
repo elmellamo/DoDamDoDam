@@ -108,9 +108,6 @@ public class LoginActivity extends BasicActivity {
                                 startToast("로그인 성공!");
 
 
-
-
-
                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                                 DocumentReference document = db.collection("users")
                                         .document(user.getUid());
@@ -126,7 +123,6 @@ public class LoginActivity extends BasicActivity {
                                                     }
                                                     else {
                                                         if (mylover == null) {
-
                                                             myStartActivity(FindLover.class);
                                                         } else {
                                                             myStartActivity(QuestionMain.class);

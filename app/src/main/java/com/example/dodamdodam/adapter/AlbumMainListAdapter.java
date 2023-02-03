@@ -104,7 +104,7 @@ public class AlbumMainListAdapter extends ArrayAdapter {
 
         }
 
-            return convertView;
+        return convertView;
     }
 
     public int getCount(){

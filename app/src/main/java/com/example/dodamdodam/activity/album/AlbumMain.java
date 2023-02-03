@@ -135,7 +135,7 @@ public class AlbumMain extends BasicActivity {
                 }
             });
 
-    }}
+        }}
 
     private void getPosts(){
         Log.e("로그", "getPhotos: getting photos");

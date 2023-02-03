@@ -3,8 +3,6 @@ package com.example.dodamdodam.activity.Question;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -15,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dodamdodam.R;
-
 import com.example.dodamdodam.activity.Calendar.CalendarMain;
 import com.example.dodamdodam.activity.Setting.SettingMain;
 import com.example.dodamdodam.activity.album.AlbumMain;
@@ -27,8 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.function.LongToIntFunction;
 
 public class QuestionList extends AppCompatActivity {
 
@@ -149,5 +144,4 @@ public class QuestionList extends AppCompatActivity {
         startActivity(intent);
     }
 }
-
 
