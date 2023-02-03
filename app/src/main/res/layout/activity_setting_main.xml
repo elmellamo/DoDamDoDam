@@ -6,11 +6,12 @@
     android:id="@+id/activity_setting_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="#FFF7D2"
     android:orientation="vertical"
-    android:paddingLeft="25dp"
+
     android:paddingTop="20dp"
-    android:paddingRight="25dp"
+
     tools:context=".activity.album.AlbumMain">
 
 
@@ -29,6 +30,8 @@
         android:id="@+id/setting_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
         android:layout_marginTop="50dp"
 
         app:layout_constraintBottom_toTopOf="@id/setting_layout2"
@@ -258,6 +261,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
+        android:paddingLeft="25dp"
+        android:paddingRight="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -317,6 +322,8 @@
         android:id="@+id/imageBtnLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintVertical_weight="0.05"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -329,7 +336,7 @@
             android:contentDescription="설정"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintLeft_toRightOf="@id/calendarBtn2"
             app:layout_constraintRight_toRightOf="parent"
             app:srcCompat="@drawable/settingicon" />

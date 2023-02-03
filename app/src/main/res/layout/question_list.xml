@@ -20,12 +20,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="질문 : "
-                    android:textSize="17sp"
+                    android:text="질 문 : "
+                    android:textSize="20dp"
+                    android:fontFamily="@font/font_1"
                     android:layout_margin="5dp"/>
                 <TextView
                     android:id="@+id/tv_ques"
-                    android:textSize="17sp"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/font_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"/>
@@ -38,12 +40,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="17sp"
-                    android:text="답변1 : "
+                    android:textSize="20dp"
+                    android:fontFamily="@font/font_1"
+                    android:text="답 변 1 : "
                     android:layout_margin="5dp"/>
                 <TextView
                 android:id="@+id/tv_ans1"
-                    android:textSize="17sp"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/font_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"/>
@@ -57,12 +61,14 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="17sp"
-                    android:text="답변2 : "
+                    android:textSize="20dp"
+                    android:fontFamily="@font/font_1"
+                    android:text="답 변 2 : "
                     android:layout_margin="5dp"/>
                 <TextView
                     android:id="@+id/tv_ans2"
-                    android:textSize="17sp"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/font_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"/>
