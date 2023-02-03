@@ -48,7 +48,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"
             app:layout_constraintEnd_toStartOf="@+id/ourAnniversaryEditText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/ourAnniversaryEditText" />
 
         <TextView
             android:id="@+id/myNickName"
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:text="상대방 애칭"
             android:textSize="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/loverNickNameEditText"
             app:layout_constraintEnd_toStartOf="@+id/loverNickNameEditText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/loverNickNameEditText" />
@@ -122,22 +122,31 @@
             android:id="@+id/ourAnniversaryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/ourAnniversaryEditText"
             app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"
-            app:layout_constraintStart_toStartOf="@+id/ourAnniversaryEditText" />
+            app:layout_constraintStart_toStartOf="@+id/ourAnniversaryEditText"
+            app:layout_constraintEnd_toEndOf="@id/ourAnniversaryEditText"
+            />
 
         <TextView
             android:id="@+id/myNickNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/myNickNameEditText"
             app:layout_constraintBottom_toBottomOf="@+id/myNickNameEditText"
-            app:layout_constraintStart_toStartOf="@+id/myNickNameEditText" />
+            app:layout_constraintStart_toStartOf="@+id/myNickNameEditText"
+            app:layout_constraintEnd_toEndOf="@id/myNickNameEditText"
+            />
 
         <TextView
             android:id="@+id/loverNickNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/loverNickNameEditText"
             app:layout_constraintBottom_toBottomOf="@+id/loverNickNameEditText"
-            app:layout_constraintStart_toStartOf="@+id/loverNickNameEditText" />
+            app:layout_constraintStart_toStartOf="@+id/loverNickNameEditText"
+            app:layout_constraintEnd_toEndOf="@id/loverNickNameEditText"
+            />
 
 
         <Button
@@ -148,7 +157,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ourAnniversaryEditText"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/ourAnniversaryEditText" />
 
         <Button
             android:id="@+id/chaBtn2"
@@ -166,7 +175,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="수정"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/loverNickNameEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/loverNickNameEditText"
             app:layout_constraintTop_toTopOf="@+id/loverNickNameEditText" />
