@@ -19,18 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
 
         />
-    <TextView
-        android:layout_marginTop="220dp"
-        android:layout_marginBottom="30dp"
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="당신의 코드"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,6 +27,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="당신의 코드"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@id/myUID"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/myUID"
@@ -50,7 +49,7 @@
             app:layout_constraintBottom_toTopOf="@id/sharebtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"  />
+            app:layout_constraintTop_toBottomOf="@id/textView3"  />
 
 <!--        <Button-->
 <!--            android:id="@+id/sharebtn"-->

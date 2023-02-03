@@ -30,8 +30,9 @@
         android:id="@+id/setting_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="50dp"
+        android:paddingTop="50dp"
+        app:layout_constraintBottom_toTopOf="@id/setting_layout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -44,7 +45,7 @@
             android:text="만난 날"
             android:textSize="15dp"
 
-            app:layout_constraintBottom_toTopOf="@+id/myNickName"
+            app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"
             app:layout_constraintEnd_toStartOf="@+id/ourAnniversaryEditText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -56,10 +57,10 @@
             android:text="나의 애칭"
             android:textSize="15dp"
 
-            app:layout_constraintBottom_toTopOf="@+id/loverNickName"
+            app:layout_constraintBottom_toBottomOf="@+id/myNickNameEditText"
             app:layout_constraintEnd_toStartOf="@+id/myNickNameEditText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ourAnniversary" />
+            app:layout_constraintTop_toTopOf="@+id/myNickNameEditText" />
 
         <TextView
             android:id="@+id/loverNickName"
@@ -70,7 +71,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/loverNickNameEditText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/myNickName" />
+            app:layout_constraintTop_toTopOf="@+id/loverNickNameEditText" />
 
 
         <EditText
@@ -81,6 +82,8 @@
             android:inputType="textMultiLine"
             android:maxLines="1"
             android:textSize="15dp"
+
+            android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/myNickNameEditText"
             app:layout_constraintEnd_toStartOf="@+id/chaBtn1"
             app:layout_constraintStart_toEndOf="@+id/ourAnniversary"
@@ -95,6 +98,8 @@
             android:inputType="textMultiLine"
             android:maxLines="1"
             android:textSize="15dp"
+            android:layout_marginBottom="10dp"
+
             app:layout_constraintBottom_toTopOf="@+id/loverNickNameEditText"
             app:layout_constraintEnd_toStartOf="@+id/chaBtn2"
             app:layout_constraintStart_toEndOf="@+id/myNickName"
@@ -117,21 +122,21 @@
             android:id="@+id/ourAnniversaryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/ourAnniversary"
+            app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"
             app:layout_constraintStart_toStartOf="@+id/ourAnniversaryEditText" />
 
         <TextView
             android:id="@+id/myNickNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/myNickName"
+            app:layout_constraintBottom_toBottomOf="@+id/myNickNameEditText"
             app:layout_constraintStart_toStartOf="@+id/myNickNameEditText" />
 
         <TextView
             android:id="@+id/loverNickNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/loverNickName"
+            app:layout_constraintBottom_toBottomOf="@+id/loverNickNameEditText"
             app:layout_constraintStart_toStartOf="@+id/loverNickNameEditText" />
 
 
@@ -140,7 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="수정"
-            app:layout_constraintBottom_toTopOf="@+id/chaBtn2"
+            app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ourAnniversaryEditText"
             app:layout_constraintTop_toTopOf="parent" />
@@ -151,10 +156,10 @@
             android:layout_height="wrap_content"
             android:text="수정"
 
-            app:layout_constraintBottom_toTopOf="@+id/chaBtn3"
+            app:layout_constraintBottom_toBottomOf="@+id/myNickNameEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/myNickNameEditText"
-            app:layout_constraintTop_toBottomOf="@id/chaBtn1" />
+            app:layout_constraintTop_toTopOf="@id/myNickNameEditText" />
 
         <Button
             android:id="@+id/chaBtn3"
@@ -164,7 +169,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/loverNickNameEditText"
-            app:layout_constraintTop_toBottomOf="@+id/chaBtn2" />
+            app:layout_constraintTop_toTopf="@+id/loverNickNameEditText" />
 
         <Button
             android:id="@+id/saveBtn1"
@@ -193,31 +198,63 @@
 
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-    <Button
-        android:id="@+id/askBtn"
-        android:layout_width="wrap_content"
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/setting_layout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="문의하기"
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/setting_layout"
-        app:layout_constraintBottom_toTopOf="@+id/withdrawBtn" />
+        >
 
-    <Button
-        android:id="@+id/withdrawBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="탈퇴하기"
-        app:layout_constraintStart_toStartOf="@+id/askBtn"
-        app:layout_constraintTop_toBottomOf="@+id/askBtn" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/askBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_rounded_button"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:text="문 의 하 기"
+            app:layout_constraintBottom_toTopOf="@id/withdrawBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/logoutBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="로그아웃"
-        app:layout_constraintStart_toStartOf="@+id/withdrawBtn"
-        app:layout_constraintTop_toBottomOf="@+id/withdrawBtn" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/withdrawBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_rounded_button"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+
+            android:text="탈 퇴 하 기"
+            app:layout_constraintBottom_toTopOf="@id/logoutBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/askBtn"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/logoutBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/white_rounded_button"
+            android:layout_marginBottom="50dp"
+
+            android:padding="12dp"
+            android:text="로 그 아 웃"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/withdrawBtn"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/imageBtnLayout"
         android:layout_width="match_parent"
