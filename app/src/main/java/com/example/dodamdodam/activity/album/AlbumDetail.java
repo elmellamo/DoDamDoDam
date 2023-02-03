@@ -9,11 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.dodamdodam.R;
-import com.example.dodamdodam.Utils.FirebaseMethods;
 import com.example.dodamdodam.activity.Login.BasicActivity;
 import com.example.dodamdodam.adapter.MyAdapter;
 import com.example.dodamdodam.models.DetailInfo;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.dodamdodam.models.Post;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,12 +33,10 @@ public class AlbumDetail  extends BasicActivity {
     private TextView image_title, image_caption, image_time_posted;
     private String postId;
     private MyAdapter myAdapter;
-    private FirebaseAuth mAuth;
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference myRef;
-    private FirebaseMethods mFirebaseMethods;
+    private DatabaseReference reference;
     private int postCount;
     private ArrayList<DetailInfo> detailInfos;
+    private Post tmpPost;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,40 +47,40 @@ public class AlbumDetail  extends BasicActivity {
         image_caption = findViewById(R.id.image_caption);
         image_title = findViewById(R.id.image_title);
         image_time_posted = findViewById(R.id.image_time_posted);
+        setupImage();
         setImage();
 
     }
 
-    private void setImage(){
+    private void setupImage(){
         Intent receivedIntent = getIntent();
         postId = (String) receivedIntent.getExtras().get("postId");
 
-        Log.e("로그", postId);
+        Log.e("로그", "AlbumDetail 포스트 아이디>> "+postId);
+    }
 
-        mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase= FirebaseDatabase.getInstance();
-        myRef=mFirebaseDatabase.getReference();
+    private void setImage(){
+        reference = FirebaseDatabase.getInstance().getReference();
 
-        Query query = myRef
+        Query query = reference
                 .child("posts")
-                .child(postId)
-                .orderByChild("post_id")
-                .equalTo(postId);
+                .child(postId);
 
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
-                    Map<String, Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
+                    Map<String, Object> objectMap=(HashMap<String,Object>)dataSnapshot.getValue();
 
+                    Log.e("로그", "되고 있나요?");
                     image_caption.setText(objectMap.get("caption").toString());
                     image_title.setText(objectMap.get("title").toString());
                     image_time_posted.setText(objectMap.get("date_created").toString());
 
                     postCount = ((List<String>) objectMap.get("image_path")).size();
 
-                    Log.e("로그", objectMap.get("caption").toString());
+                    Log.e("로그", "제목>>> "+objectMap.get("title").toString());
+                    Log.e("로그", "개수>>> "+postCount);
                     detailInfos = new ArrayList<>();
                     for(int i=1; i<=postCount; i++){
                         DetailInfo detailInfo = new DetailInfo(postId, i);
@@ -98,11 +95,11 @@ public class AlbumDetail  extends BasicActivity {
                     mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
                     mPager.setCurrentItem(0);
                     mPager.setOffscreenPageLimit(10);
-                }}
+                }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Log.e("로그", "안되고 있네요ㅎㅎ");
             }
         });
     }

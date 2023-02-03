@@ -54,7 +54,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         Context context = parent.getContext();
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View view = inflater.inflate(R.layout.layout_grid_imageview, parent, false);
+        View view = inflater.inflate(R.layout.layout_viewpager_grid, parent, false);
         MyAdapter.ViewHolder vh = new MyAdapter.ViewHolder(view);
         return vh;
     }
