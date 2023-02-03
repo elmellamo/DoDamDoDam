@@ -206,12 +206,18 @@ public class SettingMain extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
+                if(editText_1.getText().toString().length()==8){
                 databaseReference.child("anniversary").child(user.getUid()).setValue(editText_1.getText().toString());
                 textView_1.setText(editText_1.getText().toString());
                 savebtn_1.setVisibility(View.INVISIBLE);
                 chabtn_1.setVisibility(View.VISIBLE);
                 editText_1.setVisibility(View.INVISIBLE);
                 textView_1.setVisibility(View.VISIBLE);
+                }
+                else{
+                    Toast.makeText(SettingMain.this, "양식에 맞게 다시 입력해주십시오", Toast.LENGTH_SHORT).show();
+
+                }
             }
         });
         savebtn_2.setOnClickListener(new View.OnClickListener()

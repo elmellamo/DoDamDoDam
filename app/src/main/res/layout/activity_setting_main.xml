@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:paddingTop="50dp"
+
         app:layout_constraintBottom_toTopOf="@id/setting_layout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -149,61 +149,146 @@
             />
 
 
-        <Button
+<!--        <Button-->
+<!--            android:id="@+id/chaBtn1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="수정"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/ourAnniversaryEditText"-->
+<!--            app:layout_constraintTop_toTopOf="@id/ourAnniversaryEditText" />-->
+
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/chaBtn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="수정"
+            android:background="@drawable/white_rounded_button"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:text="수 정"
             app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ourAnniversaryEditText"
-            app:layout_constraintTop_toTopOf="@id/ourAnniversaryEditText" />
+            app:layout_constraintTop_toTopOf="@id/ourAnniversaryEditText"/>
 
-        <Button
+
+<!--        <Button-->
+<!--            android:id="@+id/chaBtn2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="수정"-->
+
+<!--            app:layout_constraintBottom_toBottomOf="@+id/myNickNameEditText"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/myNickNameEditText"-->
+<!--            app:layout_constraintTop_toTopOf="@id/myNickNameEditText" />-->
+<!--        -->
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/chaBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="수정"
-
+            android:background="@drawable/white_rounded_button"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:text="수 정"
             app:layout_constraintBottom_toBottomOf="@+id/myNickNameEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/myNickNameEditText"
-            app:layout_constraintTop_toTopOf="@id/myNickNameEditText" />
+            app:layout_constraintTop_toTopOf="@id/myNickNameEditText"/>
 
-        <Button
+<!--        <Button-->
+<!--            android:id="@+id/chaBtn3"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="수정"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/loverNickNameEditText"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/loverNickNameEditText"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/loverNickNameEditText" />-->
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/chaBtn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="수정"
+            android:background="@drawable/white_rounded_button"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:text="수 정"
             app:layout_constraintBottom_toBottomOf="@id/loverNickNameEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/loverNickNameEditText"
             app:layout_constraintTop_toTopOf="@+id/loverNickNameEditText" />
 
-        <Button
+
+
+<!--        <Button-->
+<!--            android:id="@+id/saveBtn1"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="저장"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/chaBtn1"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/chaBtn1" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/saveBtn2"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="저장"-->
+
+<!--            app:layout_constraintBottom_toBottomOf="@+id/chaBtn2"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/chaBtn2" />-->
+
+<!--        <Button-->
+<!--            android:id="@+id/saveBtn3"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="저장"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/chaBtn3"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/chaBtn3" />-->
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveBtn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저장"
+            android:background="@drawable/white_rounded_button"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:text="저 장"
+            app:layout_constraintEnd_toEndOf="@+id/chaBtn1"
+            app:layout_constraintTop_toTopOf="@+id/chaBtn1"
             app:layout_constraintBottom_toBottomOf="@+id/chaBtn1"
-            app:layout_constraintStart_toStartOf="@+id/chaBtn1" />
+            app:layout_constraintStart_toStartOf="@+id/chaBtn1"  />
 
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveBtn2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저장"
-
+            android:background="@drawable/white_rounded_button"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:text="저 장"
+            app:layout_constraintEnd_toEndOf="@+id/chaBtn2"
+            app:layout_constraintTop_toTopOf="@+id/chaBtn2"
             app:layout_constraintBottom_toBottomOf="@+id/chaBtn2"
-            app:layout_constraintStart_toStartOf="@+id/chaBtn2" />
+            app:layout_constraintStart_toStartOf="@+id/chaBtn2"  />
 
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveBtn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="저장"
+            android:background="@drawable/white_rounded_button"
+            android:padding="12dp"
+            android:layout_marginBottom="10dp"
+            android:text="저 장"
+            app:layout_constraintEnd_toEndOf="@+id/chaBtn3"
+            app:layout_constraintTop_toTopOf="@+id/chaBtn3"
             app:layout_constraintBottom_toBottomOf="@+id/chaBtn3"
             app:layout_constraintStart_toStartOf="@+id/chaBtn3" />
+
 
 
 
