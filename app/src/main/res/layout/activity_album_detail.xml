@@ -30,8 +30,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="담담이"
+            android:text="담 담 이"
+            android:textSize="25dp"
+            android:fontFamily="@font/font_1"
             android:layout_toRightOf="@+id/profile_photo"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
@@ -105,8 +106,8 @@
             android:layout_height="wrap_content"
             android:text="title"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:id="@+id/image_title"
+            android:textSize="23dp"
+            android:fontFamily="@font/font_1"            android:id="@+id/image_title"
             android:layout_marginTop="5dp"/>
         <TextView
             android:layout_width="wrap_content"
@@ -114,8 +115,8 @@
             android:layout_below="@+id/image_title"
             android:text="mitch.tabian moutains #mountains"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:id="@+id/image_caption"
+            android:textSize="23dp"
+            android:fontFamily="@font/font_1"            android:id="@+id/image_caption"
             android:layout_marginTop="10dp"/>
 
         <TextView
@@ -123,8 +124,8 @@
             android:layout_height="wrap_content"
             android:text="3 DAYS AGO"
             android:textColor="@color/grey"
-            android:textSize="18sp"
-            android:layout_below="@+id/image_caption"
+            android:textSize="23dp"
+            android:fontFamily="@font/font_1"            android:layout_below="@+id/image_caption"
             android:id="@+id/image_time_posted"
             android:layout_marginTop="15dp"/>
     </RelativeLayout>

@@ -274,8 +274,6 @@
             android:fontFamily="@font/font_1"
             android:layout_marginBottom="10dp"
             android:text="문 의 하 기"
-
-
             app:layout_constraintBottom_toTopOf="@id/withdrawBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

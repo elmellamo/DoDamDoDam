@@ -28,7 +28,9 @@
                 android:layout_height="match_parent"
                 android:ems="10"
                 android:gravity="top|left"
-                android:hint="제목"
+                android:hint="제 목"
+                android:textSize="20dp"
+                android:fontFamily="@font/font_1"
                 app:layout_constraintBottom_toTopOf="@+id/contents_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +53,9 @@
                     android:inputType="textMultiLine"
                     android:ems="10"
                     android:gravity="top|left"
-                    android:hint="내용" />
+                    android:hint="내 용"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/font_1"/>
             </LinearLayout>
 
 

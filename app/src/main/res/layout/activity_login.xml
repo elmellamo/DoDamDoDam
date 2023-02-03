@@ -12,6 +12,7 @@
     android:paddingLeft="25dp"
     android:paddingRight="25dp">
     <ImageView
+        android:id="@+id/dodamlogo"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
         android:layout_gravity="center_horizontal"
@@ -28,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dodamlogo"
         android:layout_marginBottom="20dp">
 
         <TextView
@@ -72,6 +73,7 @@
             android:textSize="20dp"
             android:fontFamily="@font/font_1"
             android:paddingBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:inputType="textPassword"
             app:layout_constraintBottom_toTopOf="@id/checkBtn"
             app:layout_constraintEnd_toEndOf="parent"
@@ -119,6 +121,7 @@
             android:textSize="20dp"
             android:fontFamily="@font/font_1"
             android:text="비 밀 번 호 재 설 정"
+            android:layout_marginBottom="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

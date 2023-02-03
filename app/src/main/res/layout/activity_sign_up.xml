@@ -11,6 +11,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
+        android:id="@+id/dodamlogo"
         android:layout_width="wrap_content"
         android:layout_height="75dp"
         android:layout_gravity="center_horizontal"
@@ -27,14 +28,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/dodamlogo">
 
         <TextView
             android:id="@+id/memberinfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingBottom="70dp"
+            android:paddingBottom="50dp"
             android:textSize="37dp"
             android:fontFamily="@font/font_1"
             android:text="회 원 가 입"
