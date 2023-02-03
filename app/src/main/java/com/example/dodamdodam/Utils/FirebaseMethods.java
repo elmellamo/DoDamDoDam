@@ -69,6 +69,15 @@ public class FirebaseMethods {
         return count;
     }
 
+    public int getPictureCount(DataSnapshot dataSnapshot, String postId) {
+        int count = 0;
+        for (DataSnapshot ds : dataSnapshot.child(mContext.getString(R.string.dbname_user_posts))
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(postId).getChildren()) {
+            count++;
+        }
+        return count;
+    }
+
     public List<String> changeString(ArrayList<Uri> imgUri){
         pleaseUpload = new ArrayList<String>();
 
@@ -85,13 +94,10 @@ public class FirebaseMethods {
         String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         uploadkey=1;
         Bitmap bm = null;
-        //pleaseUpload = new ArrayList<String>();
 
         for(int i=1; i<=imgUrl.size(); i++){
             final StorageReference storageReference = mStorageReference
                     .child("album/users/" + postId+"/photo" + i);
-
-            //pleaseUpload.add(imgUrl.get(i - 1).toString());
 
             try {
                 Log.e("로그", "알려줄게요>>> "+imgUrl.get(i - 1).toString());

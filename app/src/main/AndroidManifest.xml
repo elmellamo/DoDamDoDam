@@ -71,6 +71,9 @@
         <activity android:name=".activity.Setting.SettingMain"
             android:exported="true">
         </activity>
+        <activity android:name=".activity.album.AlbumDetail"
+            android:exported="true">
+        </activity>
 
     </application>
 

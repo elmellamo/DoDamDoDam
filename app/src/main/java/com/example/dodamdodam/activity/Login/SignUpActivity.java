@@ -1,31 +1,23 @@
 package com.example.dodamdodam.activity.Login;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.dodamdodam.R;
-import com.example.dodamdodam.activity.Question.QuestionMain;
 import com.example.dodamdodam.models.MemberInfo;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -39,11 +31,11 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance(); //유저를 받아오기 위해서
 
         findViewById(R.id.signUpBtn).setOnClickListener(onClickListener);
-       // findViewById(R.id.goto_login).setOnClickListener(onClickListener);
+        // findViewById(R.id.goto_login).setOnClickListener(onClickListener);
 
 //        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
-       // Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
+        // Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }

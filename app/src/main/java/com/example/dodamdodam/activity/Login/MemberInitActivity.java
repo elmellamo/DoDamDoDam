@@ -76,9 +76,9 @@ public class MemberInitActivity extends AppCompatActivity {
             }else{
                 startToast("회원정보를 양식에 맞게 입력해주세요.");
             }
-            }
+        }
         else {
-                startToast("회원정보를 입력해주세요.");
+            startToast("회원정보를 입력해주세요.");
         }
     }
 

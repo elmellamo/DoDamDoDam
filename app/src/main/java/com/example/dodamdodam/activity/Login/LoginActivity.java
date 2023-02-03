@@ -1,16 +1,14 @@
 package com.example.dodamdodam.activity.Login;
 
 import android.content.DialogInterface;
-
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Question.QuestionMain;
@@ -21,14 +19,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class LoginActivity extends BasicActivity {
     private FirebaseAuth mAuth;
@@ -107,62 +100,62 @@ public class LoginActivity extends BasicActivity {
 
         if (email.length() > 0 && password.length() > 0) {
             mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    startToast("로그인 성공!");
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                startToast("로그인 성공!");
 
 
 
 
 
-                                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                    DocumentReference document = db.collection("users")
-                                            .document(user.getUid());
-                                    document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                                @Override
-                                                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                                    if (documentSnapshot.exists()) {
-                                                        String mylover = (String) documentSnapshot.get("lover");
-                                                        String myBirth = (String)documentSnapshot.get("birthday");
-                                                        if(myBirth==null){
-                                                            myStartActivity(MemberInitActivity.class);
-                                                            startToast("회원정보를 입력해주세요");
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                DocumentReference document = db.collection("users")
+                                        .document(user.getUid());
+                                document.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                if (documentSnapshot.exists()) {
+                                                    String mylover = (String) documentSnapshot.get("lover");
+                                                    String myBirth = (String)documentSnapshot.get("birthday");
+                                                    if(myBirth==null){
+                                                        myStartActivity(MemberInitActivity.class);
+                                                        startToast("회원정보를 입력해주세요");
+                                                    }
+                                                    else {
+                                                        if (mylover == null) {
+
+                                                            myStartActivity(FindLover.class);
+                                                        } else {
+                                                            myStartActivity(QuestionMain.class);
                                                         }
-                                                        else {
-                                                            if (mylover == null) {
-
-                                                                myStartActivity(FindLover.class);
-                                                            } else {
-                                                                myStartActivity(QuestionMain.class);
-                                                            }
-                                                        }
-                                                    } else
-                                                        startToast("짝꿍이 존재하지 않아요.");
-                                                }
-                                            })
-                                            .addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    startToast("Failed to fetch");
-                                                }
-                                            });
+                                                    }
+                                                } else
+                                                    startToast("짝꿍이 존재하지 않아요.");
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                startToast("Failed to fetch");
+                                            }
+                                        });
 
 
 
 
-                                } else {
-                                    if (task.getException() != null) {
-                                        startToast(task.getException().toString());
-                                    }
+                            } else {
+                                if (task.getException() != null) {
+                                    startToast(task.getException().toString());
                                 }
                             }
-                        });
-            } else {
-                startToast("이메일 또는 비밀번호 입력해주세요!");
-            }
+                        }
+                    });
+        } else {
+            startToast("이메일 또는 비밀번호 입력해주세요!");
+        }
     }
 
 

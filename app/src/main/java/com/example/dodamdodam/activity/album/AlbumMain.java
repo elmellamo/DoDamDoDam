@@ -228,7 +228,6 @@ public class AlbumMain extends BasicActivity {
             emptytxt.setVisibility(adapter.getCount()==0?  View.VISIBLE : View.GONE);
         }
         gridView.setAdapter(adapter);
-
     }
 
     private void startToast(String msg){
@@ -244,5 +243,4 @@ public class AlbumMain extends BasicActivity {
         Intent intent = new Intent(this, c);
         startActivity(intent);
     }
-
 }

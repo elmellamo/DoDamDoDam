@@ -3,27 +3,25 @@ package com.example.dodamdodam.activity.Question;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.view.View;
-
-import com.example.dodamdodam.R;
-import com.example.dodamdodam.activity.Calendar.CalendarMain;
-import com.example.dodamdodam.activity.Login.BasicActivity;
-import com.example.dodamdodam.activity.Setting.SettingMain;
-import com.example.dodamdodam.activity.album.AlbumMain;
-import com.google.android.gms.tasks.OnCompleteListener;
-
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.gms.tasks.Task;
+
+import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Calendar.CalendarMain;
+import com.example.dodamdodam.activity.Setting.SettingMain;
+import com.example.dodamdodam.activity.album.AlbumMain;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,17 +32,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-
-
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.dodamdodam.R;
-import com.example.dodamdodam.activity.Login.BasicActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -134,13 +121,13 @@ public class QuestionMain extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                    if((snapshot.child("Info").child(user.getUid()).getValue().toString()).equals(getTime)==false){//하루지났을때
+                if((snapshot.child("Info").child(user.getUid()).getValue().toString()).equals(getTime)==false){//하루지났을때
 
-                        num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
-                        databaseReference.child(Integer.toString(num)).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot datasnapshot1) {
-                                for(DataSnapshot snapshot1 : datasnapshot1.getChildren()){
+                    num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
+                    databaseReference.child(Integer.toString(num)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot datasnapshot1) {
+                            for(DataSnapshot snapshot1 : datasnapshot1.getChildren()){
                                 if(snapshot1.hasChild(user.getUid())&&snapshot1.hasChild(LOVERUID)) {//둘다 답변이 있다면?
                                     database.child("Num").child(user.getUid()).setValue(Integer.toString(num + 1));
                                     tv_today_question.setVisibility(View.VISIBLE);
@@ -154,59 +141,59 @@ public class QuestionMain extends AppCompatActivity {
                                     tv_show_answer1.setVisibility(View.INVISIBLE);
                                     tv_show_answer2.setVisibility(View.INVISIBLE);
                                 }
-                                }
                             }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                            }
-                        });
-                        database.child("Info").child(user.getUid()).setValue(getTime);
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                    database.child("Info").child(user.getUid()).setValue(getTime);
 
-                    }
-                    else{//날짜 안지남
-                        num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
-                        databaseReference.child(Integer.toString(num)).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for(DataSnapshot childSnapshot:snapshot.getChildren()){
-                                    questionkey=childSnapshot.getKey();
-                                    show_question.setText(questionkey);
+                }
+                else{//날짜 안지남
+                    num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
+                    databaseReference.child(Integer.toString(num)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for(DataSnapshot childSnapshot:snapshot.getChildren()){
+                                questionkey=childSnapshot.getKey();
+                                show_question.setText(questionkey);
 
-                                    if(childSnapshot.hasChild(user.getUid())){//내 답변이 등록되있을떄
-                                        et_ques.setVisibility(View.INVISIBLE);
-                                        ques_submit_btn.setVisibility(View.INVISIBLE);
-                                        tv_show_answer1.setText("나 : "+childSnapshot.child(user.getUid()).getValue().toString());
-                                        if(childSnapshot.hasChild(LOVERUID)) {//상대도 답변했음
-                                            tv_show_answer2.setText("너 : " + childSnapshot.child(LOVERUID).getValue().toString());
-                                            tv_happy.setVisibility(View.VISIBLE);
-                                            r1.setVisibility(View.INVISIBLE);
-                                            r2.setVisibility(View.INVISIBLE);
-                                            r3.setVisibility(View.VISIBLE);
-                                            tv_today_question.setVisibility(View.INVISIBLE);
-                                            tv_no_answer.setVisibility(View.INVISIBLE);
-                                            tv_show_answer2.setVisibility(View.VISIBLE);
-                                        }
-                                        else{//상대 답변없을때
-                                            tv_happy.setVisibility(View.INVISIBLE);
-                                            tv_today_question.setVisibility(View.INVISIBLE);
-                                            tv_no_answer.setVisibility(View.VISIBLE);
-                                            r1.setVisibility(View.INVISIBLE);
-                                            r2.setVisibility(View.VISIBLE);
-                                            r3.setVisibility(View.INVISIBLE);
-                                            tv_show_answer2.setText("너 : ");
-                                            tv_show_answer2.setVisibility(View.VISIBLE);
-                                        }
-                                        tv_show_answer1.setVisibility(View.VISIBLE);
-
+                                if(childSnapshot.hasChild(user.getUid())){//내 답변이 등록되있을떄
+                                    et_ques.setVisibility(View.INVISIBLE);
+                                    ques_submit_btn.setVisibility(View.INVISIBLE);
+                                    tv_show_answer1.setText("나 : "+childSnapshot.child(user.getUid()).getValue().toString());
+                                    if(childSnapshot.hasChild(LOVERUID)) {//상대도 답변했음
+                                        tv_show_answer2.setText("너 : " + childSnapshot.child(LOVERUID).getValue().toString());
+                                        tv_happy.setVisibility(View.VISIBLE);
+                                        r1.setVisibility(View.INVISIBLE);
+                                        r2.setVisibility(View.INVISIBLE);
+                                        r3.setVisibility(View.VISIBLE);
+                                        tv_today_question.setVisibility(View.INVISIBLE);
+                                        tv_no_answer.setVisibility(View.INVISIBLE);
+                                        tv_show_answer2.setVisibility(View.VISIBLE);
                                     }
+                                    else{//상대 답변없을때
+                                        tv_happy.setVisibility(View.INVISIBLE);
+                                        tv_today_question.setVisibility(View.INVISIBLE);
+                                        tv_no_answer.setVisibility(View.VISIBLE);
+                                        r1.setVisibility(View.INVISIBLE);
+                                        r2.setVisibility(View.VISIBLE);
+                                        r3.setVisibility(View.INVISIBLE);
+                                        tv_show_answer2.setText("너 : ");
+                                        tv_show_answer2.setVisibility(View.VISIBLE);
+                                    }
+                                    tv_show_answer1.setVisibility(View.VISIBLE);
+
                                 }
                             }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                            }
-                        });
-                    }
+                        }
+                    });
+                }
 
             }
             @Override
@@ -254,7 +241,7 @@ public class QuestionMain extends AppCompatActivity {
             }
         });
 
-     ///답변 입력하기///////////////////////////////////////////////////////////////////////
+        ///답변 입력하기///////////////////////////////////////////////////////////////////////
 
 
         ques_submit_btn.setOnClickListener(new View.OnClickListener() {

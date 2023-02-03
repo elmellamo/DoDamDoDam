@@ -18,6 +18,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.Utils.ImageClickListener;
 import com.example.dodamdodam.Utils.SquareImageView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -96,6 +97,9 @@ public class AlbumMainListAdapter extends ArrayAdapter {
 
                 }
             });
+
+            ImageClickListener imageClickListener = new ImageClickListener(mContext, postId);
+            viewHolder.profileImage.setOnClickListener(imageClickListener);
 
 
         }

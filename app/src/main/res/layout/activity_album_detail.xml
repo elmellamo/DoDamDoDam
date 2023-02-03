@@ -9,7 +9,7 @@
         android:layout_height="0dp"
         app:layout_constraintVertical_weight="0.1"
         android:id="@+id/relLayout1"
-        app:layout_constraintBottom_toTopOf="@+id/post_detail"
+        app:layout_constraintBottom_toTopOf="@+id/pager_images"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -48,21 +48,33 @@
     </RelativeLayout>
 
 
-
-    <FrameLayout
-        android:layout_gravity="center"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager_images"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_gravity="center"
         app:layout_constraintVertical_weight="0.5"
-        android:scaleType="centerCrop"
-        android:id="@+id/post_detail"
+        android:scaleType="fitXY"
+        android:layout_marginBottom="10dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"
         app:layout_constraintBottom_toTopOf="@+id/relLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relLayout1">
+        app:layout_constraintTop_toBottomOf="@+id/relLayout1"/>
 
-
-    </FrameLayout>
+    <me.relex.circleindicator.CircleIndicator3
+        android:id="@+id/indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        app:layout_constraintVertical_weight="0.1"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/relLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pager_images"/>
 
 
     <RelativeLayout
@@ -73,7 +85,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/post_detail"
+        app:layout_constraintTop_toBottomOf="@+id/indicator"
         android:padding="20dp"
         android:layout_marginBottom="50dp"
         android:background="@color/white">
