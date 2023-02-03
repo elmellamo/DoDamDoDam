@@ -41,10 +41,12 @@
 
         <TextView
             android:id="@+id/ourAnniversary"
-            android:layout_width="80dp"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:text="만난 날"
+            android:letterSpacing="0.15"
+
+
             android:textSize="20dp"
             android:fontFamily="@font/font_1"
             app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"
@@ -54,9 +56,10 @@
 
         <TextView
             android:id="@+id/myNickName"
-            android:layout_width="80dp"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
             android:text="나의 애칭"
+            android:letterSpacing="0.15"
             android:textSize="20dp"
             android:fontFamily="@font/font_1"
 
@@ -67,9 +70,11 @@
 
         <TextView
             android:id="@+id/loverNickName"
-            android:layout_width="80dp"
+            android:layout_width="95dp"
             android:layout_height="wrap_content"
             android:text="상대방 애칭"
+            android:letterSpacing="0.15"
+
             android:textSize="20dp"
             android:fontFamily="@font/font_1"
             app:layout_constraintBottom_toBottomOf="@id/loverNickNameEditText"
@@ -80,9 +85,11 @@
 
         <EditText
             android:id="@+id/ourAnniversaryEditText"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:hint="YYYYMMDD"
+            android:letterSpacing="0.15"
+
             android:inputType="textMultiLine"
             android:maxLines="1"
             android:textSize="20dp"
@@ -97,10 +104,12 @@
 
         <EditText
             android:id="@+id/myNickNameEditText"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:hint="나의 애칭"
             android:inputType="textMultiLine"
+            android:letterSpacing="0.15"
+
             android:maxLines="1"
             android:layout_marginBottom="10dp"
             android:textSize="20dp"
@@ -112,9 +121,10 @@
 
         <EditText
             android:id="@+id/loverNickNameEditText"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:hint="상대방 애칭"
+            android:letterSpacing="0.15"
             android:inputType="textMultiLine"
             android:maxLines="1"
             android:textSize="20dp"
@@ -129,6 +139,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:letterSpacing="0.15"
+
             android:fontFamily="@font/font_1"
             app:layout_constraintTop_toTopOf="@id/ourAnniversaryEditText"
             app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"
@@ -141,6 +153,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:letterSpacing="0.15"
+
             android:fontFamily="@font/font_1"
             app:layout_constraintTop_toTopOf="@id/myNickNameEditText"
             app:layout_constraintBottom_toBottomOf="@+id/myNickNameEditText"
@@ -152,6 +166,8 @@
             android:id="@+id/loverNickNameTextView"
             android:layout_width="wrap_content"
             android:textSize="20dp"
+            android:letterSpacing="0.15"
+
             android:fontFamily="@font/font_1"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/loverNickNameEditText"
