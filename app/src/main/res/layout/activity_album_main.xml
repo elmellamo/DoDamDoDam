@@ -5,6 +5,7 @@
     android:id="@+id/activity_album_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF7D2"
     tools:context=".activity.album.AlbumMain">
 
 
@@ -36,13 +37,12 @@
         <ImageButton
             android:id="@+id/album_add"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:layout_margin="5dp"
             android:background="@android:color/transparent"
-            android:padding="7dp"
             android:scaleType="centerInside"
             android:src="@drawable/album_add_pencil"
             app:layout_constraintBottom_toBottomOf="parent"

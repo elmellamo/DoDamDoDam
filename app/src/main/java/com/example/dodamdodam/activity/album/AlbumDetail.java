@@ -12,7 +12,6 @@ import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Login.BasicActivity;
 import com.example.dodamdodam.adapter.MyAdapter;
 import com.example.dodamdodam.models.DetailInfo;
-import com.example.dodamdodam.models.Post;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,10 +19,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -36,8 +41,8 @@ public class AlbumDetail  extends BasicActivity {
     private DatabaseReference reference;
     private int postCount;
     private ArrayList<DetailInfo> detailInfos;
-    private Post tmpPost;
-
+    private String tmpTime;
+    private String timestampDiff;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_detail);
@@ -75,12 +80,17 @@ public class AlbumDetail  extends BasicActivity {
                     Log.e("로그", "되고 있나요?");
                     image_caption.setText(objectMap.get("caption").toString());
                     image_title.setText(objectMap.get("title").toString());
-                    image_time_posted.setText(objectMap.get("date_created").toString());
+
+                    tmpTime = objectMap.get("date_created").toString();
+                    String timestampDiff = getTimestampDifference(tmpTime);
+                    if(!timestampDiff.equals("0")){
+                        image_time_posted.setText(timestampDiff + " DAYS AGO");
+                    }else{
+                        image_time_posted.setText("TODAY");
+                    }
 
                     postCount = ((List<String>) objectMap.get("image_path")).size();
 
-                    Log.e("로그", "제목>>> "+objectMap.get("title").toString());
-                    Log.e("로그", "개수>>> "+postCount);
                     detailInfos = new ArrayList<>();
                     for(int i=1; i<=postCount; i++){
                         DetailInfo detailInfo = new DetailInfo(postId, i);
@@ -102,6 +112,27 @@ public class AlbumDetail  extends BasicActivity {
                 Log.e("로그", "안되고 있네요ㅎㅎ");
             }
         });
+    }
+
+    private String getTimestampDifference(String date_created){
+        Log.e("로그", "getTimestampDifference: getting timestamp difference.");
+
+        String difference = "";
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.CANADA);
+        sdf.setTimeZone(TimeZone.getTimeZone("Canada/Pacific"));//google 'android list of timezones'
+        Date today = c.getTime();
+        sdf.format(today);
+        Date timestamp;
+        final String photoTimestamp = date_created;
+        try{
+            timestamp = sdf.parse(photoTimestamp);
+            difference = String.valueOf(Math.round(((today.getTime() - timestamp.getTime()) / 1000 / 60 / 60 / 24 )));
+        }catch (ParseException e){
+            Log.e("로그", "getTimestampDifference: ParseException: " + e.getMessage() );
+            difference = "0";
+        }
+        return difference;
     }
 
 
