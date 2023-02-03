@@ -39,7 +39,7 @@ import java.util.Date;
 
 public class QuestionMain extends AppCompatActivity {
 
-    private DatabaseReference databaseReference,database;
+    private DatabaseReference databaseReference,database,databasesetting;
     private FirebaseUser user;
     private DatabaseReference userdatabaseReference;
     private DatabaseReference loveruidReference;
@@ -77,7 +77,7 @@ public class QuestionMain extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         database = FirebaseDatabase.getInstance().getReference("UpdateDay");
-
+        databasesetting = FirebaseDatabase.getInstance().getReference("Setting");
         DocumentReference docRef = db.collection("users").document(user.getUid());
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -163,9 +163,28 @@ public class QuestionMain extends AppCompatActivity {
                                 if(childSnapshot.hasChild(user.getUid())){//내 답변이 등록되있을떄
                                     et_ques.setVisibility(View.INVISIBLE);
                                     ques_submit_btn.setVisibility(View.INVISIBLE);
-                                    tv_show_answer1.setText("나 : "+childSnapshot.child(user.getUid()).getValue().toString());
+                                    databasesetting.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if(snapshot.child("mynickname").child(user.getUid()).getValue()!=null){
+                                                String mynick = snapshot.child("mynickname").child(user.getUid()).getValue().toString();
+                                                tv_show_answer1.setText(mynick+"의 답변 : "+childSnapshot.child(user.getUid()).getValue().toString());
+                                            }
+                                            else{
+                                                tv_show_answer1.setText("나의 답변 : "+childSnapshot.child(user.getUid()).getValue().toString());
+                                                Toast.makeText(QuestionMain.this, "설정에 가서 닉네임을 등록해주세요", Toast.LENGTH_SHORT).show();
+
+                                            }
+
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                     if(childSnapshot.hasChild(LOVERUID)) {//상대도 답변했음
-                                        tv_show_answer2.setText("너 : " + childSnapshot.child(LOVERUID).getValue().toString());
+
+                                        //tv_show_answer2.setText("너 : " + childSnapshot.child(LOVERUID).getValue().toString());
                                         tv_happy.setVisibility(View.VISIBLE);
                                         r1.setVisibility(View.INVISIBLE);
                                         r2.setVisibility(View.INVISIBLE);
@@ -173,6 +192,25 @@ public class QuestionMain extends AppCompatActivity {
                                         tv_today_question.setVisibility(View.INVISIBLE);
                                         tv_no_answer.setVisibility(View.INVISIBLE);
                                         tv_show_answer2.setVisibility(View.VISIBLE);
+                                        databasesetting.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                if(snapshot.child("lovernickname").child(user.getUid()).getValue()!=null){
+                                                    String lovernick = snapshot.child("lovernickname").child(user.getUid()).getValue().toString();
+                                                    tv_show_answer2.setText(lovernick+"의 답변 : "+childSnapshot.child(LOVERUID).getValue().toString());
+                                                }
+                                                else{
+                                                    tv_show_answer2.setText("상대방의 답변 : "+childSnapshot.child(LOVERUID).getValue().toString());
+                                                    Toast.makeText(QuestionMain.this, "설정에 가서 닉네임을 등록해주세요", Toast.LENGTH_SHORT).show();
+
+                                                }
+                                                //설정에 닉네임 등록했으면 출력, 아니면 상대방으로 출력
+                                            }
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
                                     }
                                     else{//상대 답변없을때
                                         tv_happy.setVisibility(View.INVISIBLE);
@@ -181,8 +219,10 @@ public class QuestionMain extends AppCompatActivity {
                                         r1.setVisibility(View.INVISIBLE);
                                         r2.setVisibility(View.VISIBLE);
                                         r3.setVisibility(View.INVISIBLE);
-                                        tv_show_answer2.setText("너 : ");
+                                        tv_show_answer2.setText("상 대 방 이   아 직   답 변 하 지   않 았 어 요...");
                                         tv_show_answer2.setVisibility(View.VISIBLE);
+                                        //너 :
+                                        //보다는 그냥 원래 하던 답변하지 않았다가 나을거 같아서 일단 바꿈
                                     }
                                     tv_show_answer1.setVisibility(View.VISIBLE);
 
