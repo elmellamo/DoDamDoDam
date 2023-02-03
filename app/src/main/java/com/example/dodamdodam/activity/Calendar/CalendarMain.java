@@ -155,7 +155,7 @@ public class CalendarMain extends BasicActivity {
 
                                             }
                                             ddayTextView.setText("우리가 만난지 "+"d+"+Integer.toString(resultnum)+
-                                                    "일\n"+MYNICK+"의 생일 d-"+dminusmy+"일\n"+LOVERNICK+"의 생일 d-"
+                                                    "일\n"+MYNICK+"의 생일 d"+dminusmy+"일\n"+LOVERNICK+"의 생일 d"
                                                     +dminuslover+"일");
                                             showToday();
                                         } else {

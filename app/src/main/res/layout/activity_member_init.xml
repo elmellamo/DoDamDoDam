@@ -37,9 +37,10 @@
 
             android:layout_marginBottom="56dp"
             android:gravity="center"
-            android:text="회원정보"
+            android:text="회 원 정 보"
             android:textColor="#000000"
-            android:textSize="24sp"
+            android:textSize="37dp"
+            android:fontFamily="@font/font_1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/nameEditText"
             app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="195dp"
             android:ems="10"
-            android:hint="이름"
+            android:hint="이 름"
+            android:textSize="20dp"
+            android:fontFamily="@font/font_1"
             android:inputType="textPersonName"
             android:paddingBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -63,21 +66,16 @@
             android:id="@+id/birthDayEditText"
             android:layout_width="361dp"
             android:layout_height="wrap_content"
-
+            android:textSize="20dp"
+            android:fontFamily="@font/font_1"
             android:layout_marginTop="19dp"
             android:ems="10"
-            android:hint="생년월일(YYYYMMDD)"
+            android:hint="생 년 월 일 ( YYYYMMDD )"
             android:inputType="date"
             android:paddingBottom="20dp"
             app:layout_constraintTop_toBottomOf="@+id/nameEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
-
-        <!--            <Button-->
-        <!--                android:id="@+id/checkBtn"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:text="확인" />-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/checkBtn"
@@ -85,6 +83,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/white_rounded_button"
             android:text="확 인"
+            android:textSize="20dp"
+            android:fontFamily="@font/font_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>

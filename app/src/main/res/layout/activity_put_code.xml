@@ -34,9 +34,10 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginBottom="100dp"
-            android:text="짝꿍과 연결되기"
+            android:text="짝 꿍 과   연 결 되 기"
+            android:textSize="37dp"
+            android:fontFamily="@font/font_1"
             android:textColor="#000000"
-            android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@id/putlovercode"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +48,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="짝꿍 코드를 입력하세요."
+            android:hint="짝 꿍   코 드 를   입 력 하 세 요."
+            android:textSize="20dp"
+            android:fontFamily="@font/font_1"
             android:layout_marginBottom="20dp"
             android:paddingBottom="20dp"
             app:layout_constraintBottom_toTopOf="@id/connectBtn"
@@ -55,27 +58,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textView"  />
 
-<!--        <Button-->
-<!--            android:id="@+id/connectBtn"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="연결되기"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/putlovercode"  />-->
-
-
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/connectBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="연결하기"
+            android:text="연 결 하 기"
             android:background="@drawable/white_rounded_button"
             android:layout_marginBottom="155dp"
             android:layout_marginTop="70dp"
             android:padding="12dp"
+            android:textSize="20dp"
+            android:fontFamily="@font/font_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

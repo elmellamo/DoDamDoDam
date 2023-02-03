@@ -9,7 +9,7 @@
     android:background="#FFF7D2"
     android:orientation="vertical"
     android:paddingLeft="25dp"
-    android:paddingTop="50dp"
+    android:paddingTop="20dp"
     android:paddingRight="25dp"
     tools:context=".activity.album.AlbumMain">
 
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="만난 날"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
             app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"
             app:layout_constraintEnd_toStartOf="@+id/ourAnniversaryEditText"
@@ -54,7 +54,7 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="나의 애칭"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
 
             app:layout_constraintBottom_toBottomOf="@+id/myNickNameEditText"
@@ -67,7 +67,8 @@
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:text="상대방 애칭"
-            android:textSize="15dp"
+            android:textSize="20dp"
+            android:fontFamily="@font/font_1"
             app:layout_constraintBottom_toBottomOf="@id/loverNickNameEditText"
             app:layout_constraintEnd_toStartOf="@+id/loverNickNameEditText"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,7 +82,7 @@
             android:hint="YYYYMMDD"
             android:inputType="textMultiLine"
             android:maxLines="1"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
 
             android:layout_marginBottom="10dp"
@@ -98,10 +99,9 @@
             android:hint="나의 애칭"
             android:inputType="textMultiLine"
             android:maxLines="1"
-            android:textSize="15dp"
             android:layout_marginBottom="10dp"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
-
             app:layout_constraintBottom_toTopOf="@+id/loverNickNameEditText"
             app:layout_constraintEnd_toStartOf="@+id/chaBtn2"
             app:layout_constraintStart_toEndOf="@+id/myNickName"
@@ -114,9 +114,8 @@
             android:hint="상대방 애칭"
             android:inputType="textMultiLine"
             android:maxLines="1"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
-
-            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/chaBtn3"
             app:layout_constraintStart_toEndOf="@+id/loverNickName"
@@ -126,8 +125,8 @@
             android:id="@+id/ourAnniversaryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
-
             app:layout_constraintTop_toTopOf="@id/ourAnniversaryEditText"
             app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"
             app:layout_constraintStart_toStartOf="@+id/ourAnniversaryEditText"
@@ -138,8 +137,8 @@
             android:id="@+id/myNickNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
-
             app:layout_constraintTop_toTopOf="@id/myNickNameEditText"
             app:layout_constraintBottom_toBottomOf="@+id/myNickNameEditText"
             app:layout_constraintStart_toStartOf="@+id/myNickNameEditText"
@@ -149,25 +148,14 @@
         <TextView
             android:id="@+id/loverNickNameTextView"
             android:layout_width="wrap_content"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
-
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="@id/loverNickNameEditText"
             app:layout_constraintBottom_toBottomOf="@+id/loverNickNameEditText"
             app:layout_constraintStart_toStartOf="@+id/loverNickNameEditText"
             app:layout_constraintEnd_toEndOf="@id/loverNickNameEditText"
             />
-
-
-<!--        <Button-->
-<!--            android:id="@+id/chaBtn1"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="수정"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/ourAnniversaryEditText"-->
-<!--            app:layout_constraintTop_toTopOf="@id/ourAnniversaryEditText" />-->
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -177,8 +165,8 @@
             android:background="@drawable/white_rounded_button"
             android:padding="12dp"
             android:layout_marginBottom="10dp"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
-
             android:text="수 정"
             app:layout_constraintBottom_toBottomOf="@+id/ourAnniversaryEditText"
             app:layout_constraintEnd_toEndOf="parent"
@@ -186,17 +174,6 @@
             app:layout_constraintTop_toTopOf="@id/ourAnniversaryEditText"/>
 
 
-<!--        <Button-->
-<!--            android:id="@+id/chaBtn2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="수정"-->
-
-<!--            app:layout_constraintBottom_toBottomOf="@+id/myNickNameEditText"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/myNickNameEditText"-->
-<!--            app:layout_constraintTop_toTopOf="@id/myNickNameEditText" />-->
-<!--        -->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/chaBtn2"
             android:layout_width="wrap_content"
@@ -205,22 +182,12 @@
             android:padding="12dp"
             android:layout_marginBottom="10dp"
             android:text="수 정"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
-
             app:layout_constraintBottom_toBottomOf="@+id/myNickNameEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/myNickNameEditText"
             app:layout_constraintTop_toTopOf="@id/myNickNameEditText"/>
-
-<!--        <Button-->
-<!--            android:id="@+id/chaBtn3"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="수정"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/loverNickNameEditText"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toEndOf="@+id/loverNickNameEditText"-->
-<!--            app:layout_constraintTop_toTopOf="@+id/loverNickNameEditText" />-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/chaBtn3"
@@ -229,40 +196,13 @@
             android:background="@drawable/white_rounded_button"
             android:padding="12dp"
             android:layout_marginBottom="10dp"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
-
             android:text="수 정"
             app:layout_constraintBottom_toBottomOf="@id/loverNickNameEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/loverNickNameEditText"
             app:layout_constraintTop_toTopOf="@+id/loverNickNameEditText" />
-
-
-
-<!--        <Button-->
-<!--            android:id="@+id/saveBtn1"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="저장"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/chaBtn1"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/chaBtn1" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/saveBtn2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="저장"-->
-
-<!--            app:layout_constraintBottom_toBottomOf="@+id/chaBtn2"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/chaBtn2" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/saveBtn3"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="저장"-->
-<!--            app:layout_constraintBottom_toBottomOf="@+id/chaBtn3"-->
-<!--            app:layout_constraintStart_toStartOf="@+id/chaBtn3" />-->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/saveBtn1"
@@ -270,10 +210,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/white_rounded_button"
             android:padding="12dp"
-            android:layout_marginBottom="10dp"
             android:text="저 장"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
-
             app:layout_constraintEnd_toEndOf="@+id/chaBtn1"
             app:layout_constraintTop_toTopOf="@+id/chaBtn1"
             app:layout_constraintBottom_toBottomOf="@+id/chaBtn1"
@@ -286,10 +225,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/white_rounded_button"
             android:padding="12dp"
-            android:layout_marginBottom="10dp"
             android:text="저 장"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
-
             app:layout_constraintEnd_toEndOf="@+id/chaBtn2"
             app:layout_constraintTop_toTopOf="@+id/chaBtn2"
             app:layout_constraintBottom_toBottomOf="@+id/chaBtn2"
@@ -302,10 +240,9 @@
             android:layout_height="wrap_content"
             android:background="@drawable/white_rounded_button"
             android:padding="12dp"
-            android:layout_marginBottom="10dp"
             android:text="저 장"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
-
             app:layout_constraintEnd_toEndOf="@+id/chaBtn3"
             app:layout_constraintTop_toTopOf="@+id/chaBtn3"
             app:layout_constraintBottom_toBottomOf="@+id/chaBtn3"
@@ -333,9 +270,11 @@
             android:layout_height="wrap_content"
             android:background="@drawable/white_rounded_button"
             android:padding="12dp"
+            android:textSize="20dp"
+            android:fontFamily="@font/font_1"
             android:layout_marginBottom="10dp"
             android:text="문 의 하 기"
-            android:fontFamily="@font/font_1"
+
 
             app:layout_constraintBottom_toTopOf="@id/withdrawBtn"
             app:layout_constraintEnd_toEndOf="parent"
@@ -349,6 +288,7 @@
             android:background="@drawable/white_rounded_button"
             android:padding="12dp"
             android:layout_marginBottom="10dp"
+            android:textSize="20dp"
             android:fontFamily="@font/font_1"
 
             android:text="탈 퇴 하 기"
@@ -364,7 +304,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/white_rounded_button"
             android:layout_marginBottom="50dp"
-
+            android:textSize="20dp"
+            android:fontFamily="@font/font_1"
             android:padding="12dp"
             android:text="로 그 아 웃"
             app:layout_constraintBottom_toBottomOf="parent"
