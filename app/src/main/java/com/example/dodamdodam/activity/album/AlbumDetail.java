@@ -3,6 +3,9 @@ package com.example.dodamdodam.activity.album;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,6 +46,8 @@ public class AlbumDetail  extends BasicActivity {
     private ArrayList<DetailInfo> detailInfos;
     private String tmpTime;
     private String timestampDiff;
+    private ImageView ic_morebutton;
+    private RelativeLayout buttonsBackgroundLayout;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_detail);
@@ -52,8 +57,26 @@ public class AlbumDetail  extends BasicActivity {
         image_caption = findViewById(R.id.image_caption);
         image_title = findViewById(R.id.image_title);
         image_time_posted = findViewById(R.id.image_time_posted);
+        ic_morebutton = findViewById(R.id.ivEllipses);
+        buttonsBackgroundLayout = findViewById(R.id.buttonsBackgroundLayout);
         setupImage();
         setImage();
+
+        ic_morebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonsBackgroundLayout.setVisibility(View.VISIBLE);
+            }
+        });
+
+        buttonsBackgroundLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (buttonsBackgroundLayout.getVisibility() == View.VISIBLE) {
+                    buttonsBackgroundLayout.setVisibility(View.GONE);
+                }
+            }
+        });
 
     }
 
