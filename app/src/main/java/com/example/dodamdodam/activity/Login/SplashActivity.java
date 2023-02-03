@@ -1,11 +1,8 @@
 package com.example.dodamdodam.activity.Login;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.DisplayMetrics;
-import android.view.Display;
 import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;

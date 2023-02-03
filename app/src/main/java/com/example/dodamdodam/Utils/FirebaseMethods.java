@@ -69,15 +69,6 @@ public class FirebaseMethods {
         return count;
     }
 
-    public int getPictureCount(DataSnapshot dataSnapshot, String postId) {
-        int count = 0;
-        for (DataSnapshot ds : dataSnapshot.child(mContext.getString(R.string.dbname_user_posts))
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(postId).getChildren()) {
-            count++;
-        }
-        return count;
-    }
-
     public List<String> changeString(ArrayList<Uri> imgUri){
         pleaseUpload = new ArrayList<String>();
 

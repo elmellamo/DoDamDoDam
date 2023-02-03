@@ -19,19 +19,21 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.Utils.SquareImageView;
+import com.example.dodamdodam.models.DetailInfo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
-    private int mCount;
-    private String postId;
-    private Context mContext;
+import java.util.ArrayList;
 
-    public MyAdapter(Context context, String postID, int postCnt){
-        this.mCount = postCnt;
-        this.postId = postID;
+public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+    private Context mContext;
+    private ArrayList<DetailInfo> detailInfos;
+    private DetailInfo detailInfo;
+
+    public MyAdapter(Context context, ArrayList<DetailInfo> detailInfos){
+        this.detailInfos = detailInfos;
         this.mContext = context;
     }
 
@@ -62,8 +64,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
 
-        for(int i=1; i<=mCount; i++){
-        StorageReference pathReference = storageReference.child("album/users/" + postId + "/photo"+i);
+        detailInfo = detailInfos.get(position);
+
+
+        StorageReference pathReference = storageReference.child("album/users/" + detailInfo.getPostId() + "/photo"+detailInfo.getPostCnt());
         pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -90,10 +94,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             }
         });
 
-    }}
+    }
 
     @Override
     public int getItemCount() {
-        return mCount;
+        return detailInfos.size();
     }
 }
