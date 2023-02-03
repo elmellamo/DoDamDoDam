@@ -1,34 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_setting_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF7D2"
     android:orientation="vertical"
+    android:paddingLeft="25dp"
+
+    android:paddingTop="50dp"
+    android:paddingRight="25dp"
     tools:context=".activity.album.AlbumMain">
+
 
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@raw/dodamloading"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="75dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/rabbitreallogo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:text="설정"-->
+<!--        android:paddingTop="70dp"-->
+<!--        android:textColor="#000000"-->
 
-    <include layout="@layout/toolbar" />
-
-
+<!--        android:id="@+id/memberinfo"-->
+<!--        android:gravity="center"-->
+<!--        android:textSize="24sp"-->
+<!--        android:layout_marginBottom="10dp"/>-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/setting_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:padding="15dp"
-        >
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/ourAnniversary"
@@ -41,8 +58,7 @@
             app:layout_constraintBottom_toTopOf="@+id/myNickName"
             app:layout_constraintEnd_toStartOf="@+id/ourAnniversaryEditText"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/myNickName"
@@ -60,8 +76,8 @@
             android:id="@+id/loverNickName"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:textSize="15dp"
             android:text="상대방 애칭"
+            android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/loverNickNameEditText"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +86,7 @@
 
         <EditText
             android:id="@+id/ourAnniversaryEditText"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="YYYYMMDD"
             android:inputType="textMultiLine"
@@ -79,13 +95,12 @@
             app:layout_constraintBottom_toTopOf="@+id/myNickNameEditText"
             app:layout_constraintEnd_toStartOf="@+id/chaBtn1"
             app:layout_constraintStart_toEndOf="@+id/ourAnniversary"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_chainStyle="spread" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
         <EditText
             android:id="@+id/myNickNameEditText"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="나의 애칭"
             android:inputType="textMultiLine"
@@ -98,7 +113,7 @@
 
         <EditText
             android:id="@+id/loverNickNameEditText"
-            android:layout_width="200dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="상대방 애칭"
             android:inputType="textMultiLine"
@@ -113,24 +128,22 @@
             android:id="@+id/ourAnniversaryTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/ourAnniversaryEditText"
-            app:layout_constraintBottom_toBottomOf="@+id/ourAnniversary"/>
+            app:layout_constraintBottom_toBottomOf="@+id/ourAnniversary"
+            app:layout_constraintStart_toStartOf="@+id/ourAnniversaryEditText" />
 
         <TextView
             android:id="@+id/myNickNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/myNickNameEditText"
-            app:layout_constraintBottom_toBottomOf="@+id/myNickName"/>
+            app:layout_constraintBottom_toBottomOf="@+id/myNickName"
+            app:layout_constraintStart_toStartOf="@+id/myNickNameEditText" />
 
         <TextView
             android:id="@+id/loverNickNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/loverNickNameEditText"
-            app:layout_constraintBottom_toBottomOf="@+id/loverNickName"/>
-
-
+            app:layout_constraintBottom_toBottomOf="@+id/loverNickName"
+            app:layout_constraintStart_toStartOf="@+id/loverNickNameEditText" />
 
 
         <Button
@@ -138,10 +151,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="수정"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/chaBtn2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ourAnniversaryEditText"
-            app:layout_constraintBottom_toTopOf="@+id/chaBtn2" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/chaBtn2"
@@ -149,28 +162,28 @@
             android:layout_height="wrap_content"
             android:text="수정"
 
-            app:layout_constraintTop_toBottomOf="@id/chaBtn1"
+            app:layout_constraintBottom_toTopOf="@+id/chaBtn3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/myNickNameEditText"
-            app:layout_constraintBottom_toTopOf="@+id/chaBtn3"/>
+            app:layout_constraintTop_toBottomOf="@id/chaBtn1" />
 
         <Button
             android:id="@+id/chaBtn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="수정"
-            app:layout_constraintTop_toBottomOf="@+id/chaBtn2"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/loverNickNameEditText"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/chaBtn2" />
 
         <Button
             android:id="@+id/saveBtn1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="저장"
-            app:layout_constraintStart_toStartOf="@+id/chaBtn1"
-            app:layout_constraintBottom_toBottomOf="@+id/chaBtn1" />
+            app:layout_constraintBottom_toBottomOf="@+id/chaBtn1"
+            app:layout_constraintStart_toStartOf="@+id/chaBtn1" />
 
         <Button
             android:id="@+id/saveBtn2"
@@ -178,46 +191,40 @@
             android:layout_height="wrap_content"
             android:text="저장"
 
-            app:layout_constraintStart_toStartOf="@+id/chaBtn2"
-            app:layout_constraintBottom_toBottomOf="@+id/chaBtn2" />
+            app:layout_constraintBottom_toBottomOf="@+id/chaBtn2"
+            app:layout_constraintStart_toStartOf="@+id/chaBtn2" />
 
         <Button
             android:id="@+id/saveBtn3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="저장"
-            app:layout_constraintStart_toStartOf="@+id/chaBtn3"
-            app:layout_constraintBottom_toBottomOf="@+id/chaBtn3" />
+            app:layout_constraintBottom_toBottomOf="@+id/chaBtn3"
+            app:layout_constraintStart_toStartOf="@+id/chaBtn3" />
 
         <Button
             android:id="@+id/askBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="문의하기"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="15dp"
             app:layout_constraintStart_toStartOf="@+id/loverNickNameEditText"
-            app:layout_constraintTop_toBottomOf="@+id/loverNickNameTextView"/>
+            app:layout_constraintTop_toBottomOf="@+id/loverNickNameTextView" />
 
         <Button
             android:id="@+id/withdrawBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="탈퇴하기"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="15dp"
             app:layout_constraintStart_toStartOf="@+id/askBtn"
-            app:layout_constraintTop_toBottomOf="@+id/askBtn"/>
+            app:layout_constraintTop_toBottomOf="@+id/askBtn" />
 
         <Button
             android:id="@+id/logoutBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="로그아웃"
-            tools:layout_editor_absoluteX="15dp"
-            tools:layout_editor_absoluteY="15dp"
             app:layout_constraintStart_toStartOf="@+id/withdrawBtn"
-            app:layout_constraintTop_toBottomOf="@+id/withdrawBtn"/>
+            app:layout_constraintTop_toBottomOf="@+id/withdrawBtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -225,8 +232,10 @@
         android:id="@+id/imageBtnLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/setting_layout"
-        android:layout_alignParentBottom="true">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/setting_layout">
+
         <ImageButton
             android:id="@+id/settingBtn"
             android:layout_width="0dp"
@@ -278,4 +287,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
