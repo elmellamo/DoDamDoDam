@@ -22,11 +22,14 @@
                     android:layout_height="wrap_content"
                     android:text="질 문 : "
                     android:textSize="20dp"
+
                     android:fontFamily="@font/font_1"
                     android:layout_margin="5dp"/>
                 <TextView
                     android:id="@+id/tv_ques"
                     android:textSize="20dp"
+                    android:letterSpacing="0.15"
+
                     android:fontFamily="@font/font_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -48,7 +51,9 @@
                 android:id="@+id/tv_ans1"
                     android:textSize="20dp"
                     android:fontFamily="@font/font_1"
-                android:layout_width="wrap_content"
+                    android:letterSpacing="0.15"
+
+                    android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"/>
             </LinearLayout>
@@ -71,6 +76,8 @@
                     android:fontFamily="@font/font_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:letterSpacing="0.15"
+
                     android:layout_margin="5dp"/>
 
             </LinearLayout>

@@ -4,85 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp"
-    >
+    android:background="#FFF7D2"
+    android:paddingTop="50dp"
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="170dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
+    >
+    <ImageView
+        android:id="@+id/dodamlogo"
+        android:layout_width="wrap_content"
+        android:layout_height="75dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/rabbitreallogo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            android:id="@+id/whatislover_layout"
+
+        <TextView
+            android:id="@+id/whatislover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoSizeTextType="uniform"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="70dp"
+            android:text="짝 꿍  코 드"
+            android:textSize="37dp"
+            android:fontFamily="@font/font_1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/lovercode"/>
+
+
+        <EditText
+            android:id="@+id/lovercode"
+            android:layout_width="247dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:textSize="20dp"
+            android:fontFamily="@font/font_1"
+            android:letterSpacing="0.15"
+            app:layout_constraintTop_toBottomOf="@id/whatislover"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btn_ok"/>
+
+
+<!--        <Button-->
+<!--            android:id="@+id/btn_ok"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="17dp"-->
+<!--            android:autoSizeTextType="uniform"-->
+<!--            android:padding="10dp"-->
+<!--            android:text="연결하기"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/lovercode"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_ok"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/whatislover"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:autoSizeTextType="uniform"
-                android:gravity="center_vertical"
-                android:text="짝꿍 코드"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/hori_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/btn_ok_layout"
-            android:layout_below="@+id/whatislover_layout"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp">
+            android:background="@drawable/white_rounded_button"
+            android:padding="12dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="200dp"
+            android:textSize="20dp"
+            android:fontFamily="@font/font_1"
+            android:text="연 결 하 기"
+            app:layout_constraintTop_toBottomOf="@id/lovercode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-            <EditText
-                android:id="@+id/lovercode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:inputType="textPersonName"
-                />
 
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/btn_ok_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:gravity="right"
-            android:orientation="vertical"
-            android:paddingTop="10dp"
-            android:paddingRight="5dp"
-            android:paddingBottom="10dp">
-
-            <Button
-                android:id="@+id/btn_ok"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:autoSizeTextType="uniform"
-                android:padding="10dp"
-                android:text="연결하기" />
-        </LinearLayout>
 
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
