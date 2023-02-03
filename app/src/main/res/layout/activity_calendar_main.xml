@@ -24,7 +24,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingTop="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/noteimg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calendarView">
@@ -50,7 +52,7 @@
             app:layout_constraintTop_toBottomOf="@+id/diaryTextView"
             android:textSize="20sp"
             android:gravity="center"
-            android:lines="5"
+            android:lines="3"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
@@ -59,8 +61,8 @@
             android:id="@+id/loverEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:ems="10"
             android:lines="3"
 
@@ -76,6 +78,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             app:layout_constraintBottom_toBottomOf="@+id/loverEditText"
             app:layout_constraintEnd_toEndOf="@+id/loverEditText"
             app:layout_constraintStart_toStartOf="@+id/loverEditText"
@@ -85,11 +88,10 @@
                 android:id="@+id/loverText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:maxLines="3"
+                android:lines="3"
                 android:scrollbars="vertical"
                 app:layout_constraintBottom_toBottomOf="@+id/loverEditText"
                 app:layout_constraintEnd_toEndOf="@+id/loverEditText"
@@ -103,10 +105,11 @@
             android:id="@+id/contextEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:ems="10"
             android:maxLines="3"
+            android:lines="3"
             android:hint="나의 일정이 비어있습니다."
             android:textSize="15sp"
             android:inputType="textMultiLine"
@@ -119,6 +122,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             app:layout_constraintBottom_toBottomOf="@+id/contextEditText"
             app:layout_constraintEnd_toEndOf="@+id/contextEditText"
             app:layout_constraintStart_toStartOf="@+id/contextEditText"
@@ -128,11 +132,11 @@
                 android:id="@+id/todaytext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:textSize="15sp"
+                android:lines="3"
 
                 android:maxLines="3"
                 android:scrollbars="vertical"
@@ -142,7 +146,6 @@
                 app:layout_constraintTop_toTopOf="@+id/contextEditText" />
 
         </ScrollView>
-
 
         <Button
             android:id="@+id/save_Btn"
@@ -199,7 +202,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/save_Btn">
+        >
 
         <ImageButton
             android:id="@+id/settingBtn"
