@@ -36,6 +36,8 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 
 import java.util.Calendar;
 
@@ -65,6 +67,7 @@ public class CalendarMain extends BasicActivity {
     private String MYBIRTH, LOVERBIRTH;
     public int resultnum;
     public String MYNICK,LOVERNICK;
+    public ConstraintLayout scroll_calendar;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -92,9 +95,9 @@ public class CalendarMain extends BasicActivity {
         loveruidReference = userdatabaseReference.child(user.getUid());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         //LOVERUID = db.collection("users").document(user.getUid()).collection("lover").get().toString();
-
-
-
+//        scroll_calendar=findViewById(R.id.scroll_calendar);
+//        scroll_calendar.setMovementMethod(new ScrollingMovementMethod());
+//이거 하면 안 되고 안 해도 원래 스크롤 되어야 한다고 함
         DocumentReference docRef = db.collection("users").document(user.getUid());
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
