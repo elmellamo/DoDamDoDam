@@ -235,7 +235,7 @@ public class QuestionMain extends AppCompatActivity {
                                     show_question.setText(questionkey);
                                     database.child("Info").child(user.getUid()).setValue(getTime);
                                     if(childSnapshot.hasChild(LOVERUID)){
-                                        tv_show_answer2.setText(childSnapshot.child(LOVERUID).getValue().toString());
+                                        tv_show_answer2.setText("너 : "+childSnapshot.child(LOVERUID).getValue().toString());
                                     }
                                 }
                             }
