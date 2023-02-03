@@ -25,18 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-<!--    <TextView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        android:text="설정"-->
-<!--        android:paddingTop="70dp"-->
-<!--        android:textColor="#000000"-->
 
-<!--        android:id="@+id/memberinfo"-->
-<!--        android:gravity="center"-->
-<!--        android:textSize="24sp"-->
-<!--        android:layout_marginBottom="10dp"/>-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/setting_layout"
         android:layout_width="match_parent"
@@ -202,39 +191,40 @@
             app:layout_constraintBottom_toBottomOf="@+id/chaBtn3"
             app:layout_constraintStart_toStartOf="@+id/chaBtn3" />
 
-        <Button
-            android:id="@+id/askBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="문의하기"
-            app:layout_constraintStart_toStartOf="@+id/loverNickNameEditText"
-            app:layout_constraintTop_toBottomOf="@+id/loverNickNameTextView" />
 
-        <Button
-            android:id="@+id/withdrawBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="탈퇴하기"
-            app:layout_constraintStart_toStartOf="@+id/askBtn"
-            app:layout_constraintTop_toBottomOf="@+id/askBtn" />
-
-        <Button
-            android:id="@+id/logoutBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="로그아웃"
-            app:layout_constraintStart_toStartOf="@+id/withdrawBtn"
-            app:layout_constraintTop_toBottomOf="@+id/withdrawBtn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/askBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="문의하기"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setting_layout"
+        app:layout_constraintBottom_toTopOf="@+id/withdrawBtn" />
 
+    <Button
+        android:id="@+id/withdrawBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="탈퇴하기"
+        app:layout_constraintStart_toStartOf="@+id/askBtn"
+        app:layout_constraintTop_toBottomOf="@+id/askBtn" />
+
+    <Button
+        android:id="@+id/logoutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="로그아웃"
+        app:layout_constraintStart_toStartOf="@+id/withdrawBtn"
+        app:layout_constraintTop_toBottomOf="@+id/withdrawBtn" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/imageBtnLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/setting_layout">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <ImageButton
             android:id="@+id/settingBtn"
