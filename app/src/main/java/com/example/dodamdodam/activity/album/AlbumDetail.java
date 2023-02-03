@@ -2,6 +2,7 @@ package com.example.dodamdodam.activity.album;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,6 +58,8 @@ public class AlbumDetail  extends BasicActivity {
         Intent receivedIntent = getIntent();
         postId = (String) receivedIntent.getExtras().get("postId");
 
+        Log.e("로그", postId);
+
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase= FirebaseDatabase.getInstance();
         myRef=mFirebaseDatabase.getReference();
@@ -73,13 +76,14 @@ public class AlbumDetail  extends BasicActivity {
 
                 for(DataSnapshot singleSnapshot : dataSnapshot.getChildren()){
                     Map<String, Object> objectMap = (HashMap<String, Object>) singleSnapshot.getValue();
-                    objectMap.get("caption").toString();
+
                     image_caption.setText(objectMap.get("caption").toString());
                     image_title.setText(objectMap.get("title").toString());
                     image_time_posted.setText(objectMap.get("date_created").toString());
 
                     postCount = ((List<String>) objectMap.get("image_path")).size();
 
+                    Log.e("로그", objectMap.get("caption").toString());
                     detailInfos = new ArrayList<>();
                     for(int i=1; i<=postCount; i++){
                         DetailInfo detailInfo = new DetailInfo(postId, i);

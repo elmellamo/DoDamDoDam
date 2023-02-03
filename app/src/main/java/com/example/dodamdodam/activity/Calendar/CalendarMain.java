@@ -84,7 +84,7 @@ public class CalendarMain extends BasicActivity {
         setting_Btn = findViewById(R.id.settingBtn);
         ddayTextView=findViewById(R.id.dday_TextView);
         ddayTextView.setVisibility(View.VISIBLE);
-
+        //diaryTextView.setVisibility(View.VISIBLE);
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Calendar");
         databaseReference2 = FirebaseDatabase.getInstance().getReference("Setting");
@@ -154,6 +154,7 @@ public class CalendarMain extends BasicActivity {
                                             ddayTextView.setText("우리가 만난지 "+"d+"+Integer.toString(resultnum)+
                                                     "일\n"+MYNICK+"의 생일 d-"+dminusmy+"일\n"+LOVERNICK+"의 생일 d-"
                                                     +dminuslover+"일");
+                                            showToday();
                                         } else {
                                             Log.d(TAG, "없다없다없다없다");
                                             //ddayTextView.setText("상대방 생일1");
@@ -347,6 +348,18 @@ public class CalendarMain extends BasicActivity {
         Intent intent = new Intent(this, c);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    private void showToday(){
+        long now2 = System.currentTimeMillis();
+        Date date = new Date(now2);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        String todayString = dateFormat.format(date);
+        int todayint=Integer.parseInt(todayString);
+        int tyear = todayint/10000;
+        int tmonth = (todayint%10000)/100;
+        int tday = todayint%100;
+        diaryTextView.setText(tyear+" / "+tmonth+" / "+tday);
     }
 
     private int dminusdayActivity(String STR){
