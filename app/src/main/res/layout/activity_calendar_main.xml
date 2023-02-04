@@ -163,7 +163,6 @@
             android:layout_marginRight="40dp"
             android:ems="10"
             android:maxLines="3"
-            android:lines="3"
             android:textSize="20dp"
             android:letterSpacing="0.15"
             android:fontFamily="@font/font_1"
