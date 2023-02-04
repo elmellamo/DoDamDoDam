@@ -108,8 +108,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutq"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
 
@@ -143,7 +143,7 @@
             android:visibility="visible"
             android:background="@drawable/white_rounded_button"
             android:padding="12dp"
-            android:layout_marginBottom="10dp"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_show_question"
@@ -155,7 +155,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:layout_marginTop="32dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
@@ -172,7 +172,7 @@
             android:layout_marginEnd="12dp"
             android:hint="답변을 입력하세요"
             android:letterSpacing="0.15"
-
+            android:maxLength="50"
             android:visibility="visible"
             android:textSize="20dp"
             android:fontFamily="@font/font_1"
@@ -206,8 +206,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout_change"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginTop="100dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -218,7 +218,7 @@
         <TextView
             android:id="@+id/tv_show_answer1"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:visibility="invisible"
             android:textSize="20dp"
             android:letterSpacing="0.15"
@@ -232,7 +232,7 @@
         <TextView
             android:id="@+id/tv_show_answer2"
             android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_height="100dp"
             android:visibility="invisible"
             android:textSize="20dp"
             android:letterSpacing="0.15"
