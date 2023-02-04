@@ -28,7 +28,7 @@
             android:layout_marginBottom="2dp"
             android:gravity="center"
             android:text="도 담 도 담   앨 범"
-            android:textSize="25dp"
+            android:textSize="30dp"
             android:fontFamily="@font/font_1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/album_add"
@@ -76,13 +76,12 @@
         android:id="@+id/emptytxt"
         android:visibility="gone"
         android:orientation="vertical">
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="앨범이 비었어요.\n앨범을 추가해주세요."
-
+        android:text="앨범이 비었어요\n앨범을 추가해주세요."
+        android:fontFamily="@font/font_1"
         android:textSize="30dp"/>
     </LinearLayout>
 

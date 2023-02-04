@@ -166,7 +166,6 @@
             android:lines="3"
             android:textSize="20dp"
             android:letterSpacing="0.15"
-
             android:fontFamily="@font/font_1"
             android:hint="나의 일정이 비어있습니다."
             android:inputType="textMultiLine"

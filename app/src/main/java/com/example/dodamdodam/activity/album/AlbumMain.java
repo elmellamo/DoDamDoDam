@@ -2,6 +2,7 @@ package com.example.dodamdodam.activity.album;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -189,6 +190,11 @@ public class AlbumMain extends BasicActivity {
                         mPosts.add(post);
                     }
 
+                    /*
+                    if(mPosts.isEmpty()){
+                        emptytxt.setVisibility(mPosts.size()==0?  View.VISIBLE : View.GONE);
+                    }*/
+
                     if(count >= mFollowing.size() -1){
                         //display our photos
                         if(mPosts != null){
@@ -223,10 +229,18 @@ public class AlbumMain extends BasicActivity {
         }
 
         adapter = new AlbumMainListAdapter(AlbumMain.this,R.layout.layout_grid_imageview,"",postIds);
+        adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                checkEmpty();
+            }
+            void checkEmpty() {
+                emptytxt.setVisibility(adapter.getCount() == 0 ? View.VISIBLE : View.GONE);
+            }
 
-        if(adapter.isEmpty()){
-            emptytxt.setVisibility(adapter.getCount()==0?  View.VISIBLE : View.GONE);
-        }
+        });
+
         gridView.setAdapter(adapter);
     }
 
