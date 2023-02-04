@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.viewpager2.widget.ViewPager2;
@@ -15,6 +16,8 @@ import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Login.BasicActivity;
 import com.example.dodamdodam.adapter.MyAdapter;
 import com.example.dodamdodam.models.DetailInfo;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,14 +41,14 @@ import me.relex.circleindicator.CircleIndicator3;
 public class AlbumDetail  extends BasicActivity {
     private ViewPager2 mPager;
     private CircleIndicator3 mindicator;
-    private TextView image_title, image_caption, image_time_posted;
-    private String postId;
+    private TextView image_title, image_caption, image_time_posted, username;
+    private String postId, myId;
+    private FirebaseUser user;
     private MyAdapter myAdapter;
-    private DatabaseReference reference;
+    private DatabaseReference reference, dbSetting;
     private int postCount;
     private ArrayList<DetailInfo> detailInfos;
     private String tmpTime;
-    private String timestampDiff;
     private ImageView ic_morebutton;
     private RelativeLayout buttonsBackgroundLayout;
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +59,13 @@ public class AlbumDetail  extends BasicActivity {
         mindicator = findViewById(R.id.indicator);
         image_caption = findViewById(R.id.image_caption);
         image_title = findViewById(R.id.image_title);
+        username = findViewById(R.id.username);
         image_time_posted = findViewById(R.id.image_time_posted);
         ic_morebutton = findViewById(R.id.ivEllipses);
         buttonsBackgroundLayout = findViewById(R.id.buttonsBackgroundLayout);
+        user = FirebaseAuth.getInstance().getCurrentUser();
         setupImage();
         setImage();
-
         ic_morebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +97,6 @@ public class AlbumDetail  extends BasicActivity {
         Query query = reference
                 .child("posts")
                 .child(postId);
-
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -103,7 +106,7 @@ public class AlbumDetail  extends BasicActivity {
                     Log.e("로그", "되고 있나요?");
                     image_caption.setText(objectMap.get("caption").toString());
                     image_title.setText(objectMap.get("title").toString());
-
+                    myId = objectMap.get("user_id").toString();
                     tmpTime = objectMap.get("date_created").toString();
                     String timestampDiff = getTimestampDifference(tmpTime);
                     if(!timestampDiff.equals("0")){
@@ -128,6 +131,8 @@ public class AlbumDetail  extends BasicActivity {
                     mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
                     mPager.setCurrentItem(0);
                     mPager.setOffscreenPageLimit(10);
+
+                    setupName();
                 }
 
             @Override
@@ -156,6 +161,55 @@ public class AlbumDetail  extends BasicActivity {
             difference = "0";
         }
         return difference;
+    }
+
+
+    private void setupName(){
+        dbSetting = FirebaseDatabase.getInstance().getReference("Setting");
+        Log.e("로그", "내 uid>>>"+user.getUid());
+        Log.e("로그", "작성자 uid>>>"+myId);
+
+
+
+        if(user.getUid().equals(myId)){
+            dbSetting.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.child("mynickname").child(user.getUid()).getValue()!=null){
+                        String mynick = snapshot.child("mynickname").child(user.getUid()).getValue().toString();
+                        username.setText(mynick);
+                    }
+                    else{
+                        username.setText("나");
+                        Toast.makeText(AlbumDetail.this, "설정에 가서 닉네임을 등록해주세요", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }else{
+            dbSetting.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.child("lovernickname").child(user.getUid()).getValue()!=null){
+                        String lovernick = snapshot.child("lovernickname").child(user.getUid()).getValue().toString();
+                        username.setText(lovernick);
+                    }
+                    else{
+                        username.setText("짝꿍");
+                        Toast.makeText(AlbumDetail.this, "설정에 가서 닉네임을 등록해주세요", Toast.LENGTH_SHORT).show();
+
+                    }
+                    //설정에 닉네임 등록했으면 출력, 아니면 상대방으로 출력
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
     }
 
 

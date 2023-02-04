@@ -3,44 +3,41 @@ package com.example.dodamdodam.activity.Calendar;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import com.example.dodamdodam.R;
-import com.example.dodamdodam.activity.Login.BasicActivity;
-import com.example.dodamdodam.activity.Login.SignUpActivity;
-import com.example.dodamdodam.activity.Setting.SettingMain;
-import com.example.dodamdodam.activity.album.AlbumMain;
-import com.example.dodamdodam.activity.Question.QuestionMain;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-
-import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 
+import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Login.BasicActivity;
+import com.example.dodamdodam.activity.Question.QuestionMain;
+import com.example.dodamdodam.activity.Setting.SettingMain;
+import com.example.dodamdodam.activity.album.AlbumMain;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
 public class CalendarMain extends BasicActivity {
@@ -166,7 +163,6 @@ public class CalendarMain extends BasicActivity {
                                             }
                                             if(snapshot.child("mynickname").child(user.getUid()).getValue()!=null) {
                                                 MYNICK = snapshot.child("mynickname").child(user.getUid()).getValue().toString();
-
                                             }
                                             ddayTextView.setText("우리가 만난지 "+"d+"+Integer.toString(resultnum)+
                                                     "일\n"+MYNICK+"의 생일 d"+dminusmy+"일\n"+LOVERNICK+"의 생일 d"
