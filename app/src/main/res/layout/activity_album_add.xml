@@ -125,14 +125,12 @@
 
 
     <RelativeLayout
-        android:id="@+id/buttonsBackgroundLayout"
+        android:id="@+id/deleteBackgroundLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#91646464"
         android:visibility="gone"
         >
-
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -144,8 +142,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="5dp">
-
-
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

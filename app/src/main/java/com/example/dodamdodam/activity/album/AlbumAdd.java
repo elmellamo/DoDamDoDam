@@ -11,6 +11,7 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -18,6 +19,7 @@ import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.MimeTypeFilter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,7 +61,8 @@ public class AlbumAdd extends AppCompatActivity {
     private FirebaseMethods mFirebaseMethods;
     private Button post_saves;
     private ImageButton image_btn;
-
+    private RelativeLayout deleteBackgroundLayout;
+    private ConstraintLayout delete_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +72,10 @@ public class AlbumAdd extends AppCompatActivity {
         mFirebaseMethods = new FirebaseMethods(AlbumAdd.this);
 
         recyclerview = findViewById(R.id.addgallery_layout);
-
         post_saves = findViewById(R.id.post_saves);
         image_btn = findViewById(R.id.image_btn);
+        deleteBackgroundLayout = findViewById(R.id.deleteBackgroundLayout);
+        delete_layout = findViewById(R.id.delete_layout);
 
         EditText editText = new EditText(AlbumAdd.this);
         editText.setHint("내용을 입력하세요.");
@@ -92,6 +96,7 @@ public class AlbumAdd extends AppCompatActivity {
                 loadImage();
             }
         });
+
 
     }
 
@@ -122,7 +127,27 @@ public class AlbumAdd extends AppCompatActivity {
                         @Override
                         public void onItemClick(View a_view, int a_position) {
                             final Uri item = rItem.getGalleryuri().get(a_position);
-                            startToast("해당 아이템 정보>>>"+item);
+                            //startToast("해당 아이템 정보>>>"+item);
+                            deleteBackgroundLayout.setVisibility(View.VISIBLE);
+                            deleteBackgroundLayout.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        if (deleteBackgroundLayout.getVisibility() == View.VISIBLE) {
+                                            deleteBackgroundLayout.setVisibility(View.GONE);
+                                        }
+                                    }
+                            });
+
+                            delete_layout.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    deleteBackgroundLayout.setVisibility(View.GONE);
+                                    rItem.getGalleryuri().remove(a_position);
+                                    startToast("해당 포스트가 삭제되었습니다.");
+                                    mAdapter.notifyItemRemoved(a_position);
+                                }
+                            });
+
                         }
                     });
 

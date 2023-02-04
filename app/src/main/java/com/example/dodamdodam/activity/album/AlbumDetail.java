@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.dodamdodam.R;
@@ -46,7 +47,8 @@ import me.relex.circleindicator.CircleIndicator3;
 public class AlbumDetail  extends BasicActivity {
     private ViewPager2 mPager;
     private CircleIndicator3 mindicator;
-    private TextView image_title, image_caption, image_time_posted, username, delete_txt;
+    private TextView image_title, image_caption, image_time_posted, username;
+    private ConstraintLayout delete_layout;
     private String postId, myId;
     private FirebaseUser user;
     private MyAdapter myAdapter;
@@ -72,7 +74,7 @@ public class AlbumDetail  extends BasicActivity {
         ic_morebutton = findViewById(R.id.ivEllipses);
         buttonsBackgroundLayout = findViewById(R.id.buttonsBackgroundLayout);
         user = FirebaseAuth.getInstance().getCurrentUser();
-        delete_txt = findViewById(R.id.delete_txt);
+        delete_layout = findViewById(R.id.delete_layout);
         mFirebaseMethods = new FirebaseMethods(AlbumDetail.this);
 
 
@@ -94,7 +96,7 @@ public class AlbumDetail  extends BasicActivity {
             }
         });
 
-        delete_txt.setOnClickListener(new View.OnClickListener() {
+        delete_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 delPost();
