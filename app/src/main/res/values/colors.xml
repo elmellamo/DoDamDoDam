@@ -12,4 +12,7 @@
     <color name="grey">#bfbfbf</color>
     <color name="light_gray">#D3D3D3</color>
     <color name="dark_yellow">#FCBE54</color>
+    <color name="blue_grey">#5D8FAA</color>
+
+    <color name="orangey_red">#F89720</color>
 </resources>

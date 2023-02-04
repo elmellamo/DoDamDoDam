@@ -82,7 +82,9 @@
         android:gravity="center"
         android:textSize="25dp"
         android:fontFamily="@font/font_1"
-        android:text="상 대 방 이   아 직   답 변 하 지   않 았 어 요..."
+        android:letterSpacing="0.15"
+
+        android:text="상대방이 아직 답변하지 않았어요.."
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

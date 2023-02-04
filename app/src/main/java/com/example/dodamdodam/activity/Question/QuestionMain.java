@@ -219,7 +219,7 @@ public class QuestionMain extends AppCompatActivity {
                                         r1.setVisibility(View.INVISIBLE);
                                         r2.setVisibility(View.VISIBLE);
                                         r3.setVisibility(View.INVISIBLE);
-                                        tv_show_answer2.setText("상 대 방 이   아 직   답 변 하 지   않 았 어 요...");
+                                        tv_show_answer2.setText("상대방이 아직 답변하지 않았어요.");
                                         tv_show_answer2.setVisibility(View.VISIBLE);
                                         //너 :
                                         //보다는 그냥 원래 하던 답변하지 않았다가 나을거 같아서 일단 바꿈
