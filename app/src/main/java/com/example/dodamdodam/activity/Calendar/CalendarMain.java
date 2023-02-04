@@ -39,7 +39,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
 public class CalendarMain extends BasicActivity {
     public String readDay = null;
     public String str = null;
@@ -79,7 +78,6 @@ public class CalendarMain extends BasicActivity {
         todayText = findViewById(R.id.todaytext);
         loverText = findViewById(R.id.loverText);
         contextEditText = findViewById(R.id.contextEditText);
-
         contextEditText.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -90,8 +88,6 @@ public class CalendarMain extends BasicActivity {
                 return false;
             }
         });
-
-
         question_Btn = findViewById(R.id.questionBtn);
         calendar_Btn=findViewById(R.id.calendarBtn2);
         album_Btn = findViewById(R.id.albumBtn);
@@ -105,10 +101,6 @@ public class CalendarMain extends BasicActivity {
         userdatabaseReference = FirebaseDatabase.getInstance().getReference("users");
         loveruidReference = userdatabaseReference.child(user.getUid());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        //LOVERUID = db.collection("users").document(user.getUid()).collection("lover").get().toString();
-//        scroll_calendar=findViewById(R.id.scroll_calendar);
-//        scroll_calendar.setMovementMethod(new ScrollingMovementMethod());
-//이거 하면 안 되고 안 해도 원래 스크롤 되어야 한다고 함
         DocumentReference docRef = db.collection("users").document(user.getUid());
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {

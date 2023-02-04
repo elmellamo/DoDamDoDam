@@ -8,20 +8,22 @@
     android:background="#FFF7D2"
     tools:context=".activity.album.AlbumMain">
 
-
-            <ImageView
-                android:id="@+id/postImg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                app:srcCompat="@drawable/calendarlogo"
-                tools:layout_editor_absoluteX="10dp"
-                tools:layout_editor_absoluteY="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@+id/title_edit"/>
+    <TextView
+        android:id="@+id/Post_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post"
+        android:textStyle="bold"
+        android:textSize="70dp"
+        android:fontFamily="@font/font_title"
+        android:letterSpacing="0.15"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/title_edit"/>
 
             <EditText
                 android:id="@+id/title_edit"
@@ -39,7 +41,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/contents_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/postImg" />
+                app:layout_constraintTop_toBottomOf="@+id/Post_text" />
 
             <LinearLayout
                 android:id="@+id/contents_layout"

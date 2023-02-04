@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.activity.Question.QuestionMain;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -90,7 +91,7 @@ public class PutCode extends BasicActivity {
                                     database.child("Info").child(loveruid).setValue(getTime);
 
 
-                                    myStartActivity(MainActivity.class);
+                                    myStartActivity(QuestionMain.class);
                                 } else {
                                     startToast("해당 짝꿍은 연결되어 있는 사람이 있어요.");
                                 }
