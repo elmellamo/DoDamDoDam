@@ -70,16 +70,19 @@
             app:civ_border_width="0.5dp"
             android:src="@drawable/sadr"
             android:layout_centerVertical="true"/>
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
 
-            android:visibility="invisible"
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/happyrabbit"
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:src="@drawable/happyr"
+            android:visibility="invisible"
             app:civ_border_color="@color/black"
             app:civ_border_width="0.5dp"
-            android:src="@drawable/happyr"
-            android:layout_centerVertical="true"/>
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
