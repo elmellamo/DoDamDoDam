@@ -141,7 +141,7 @@ public class QuestionMain extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if(snapshot.child("Info").child(user.getUid()).getValue()!=null){
+
                 if((snapshot.child("Info").child(user.getUid()).getValue().toString()).equals(getTime)==false){//하루지났을때
 
                     num=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
@@ -151,6 +151,7 @@ public class QuestionMain extends AppCompatActivity {
                             for(DataSnapshot snapshot1 : datasnapshot1.getChildren()){
                                 if(snapshot1.hasChild(user.getUid())&&snapshot1.hasChild(LOVERUID)) {//둘다 답변이 있다면?
                                     database.child("Num").child(user.getUid()).setValue(Integer.toString(num + 1));
+                                    database.child("Info").child(user.getUid()).setValue(getTime);
                                     tv_today_question.setVisibility(View.VISIBLE);
                                     tv_happy.setVisibility(View.INVISIBLE);
                                     tv_no_answer.setVisibility(View.INVISIBLE);
@@ -168,7 +169,7 @@ public class QuestionMain extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
-                    database.child("Info").child(user.getUid()).setValue(getTime);
+
 
                 }
                 else{//날짜 안지남
@@ -256,7 +257,7 @@ public class QuestionMain extends AppCompatActivity {
                     });
                 }}
 
-            }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 

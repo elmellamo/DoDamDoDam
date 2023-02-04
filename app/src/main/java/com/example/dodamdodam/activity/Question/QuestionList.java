@@ -37,7 +37,7 @@ public class QuestionList extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private DatabaseReference databaseReference1;
     private QuestionAdapter questionAdapter;
-    private String num,questionkey,question,answer1,answer2,userUid,loverUid,answer11,answer22;
+    private String num,questionkey,question,answer1,answer2,userUid,loverUid,answer11,answer22,list_num;
     private int how_many_question;
     private String Num;
     private TextView uiduid;
@@ -51,7 +51,7 @@ public class QuestionList extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         arrayList = new ArrayList<>();
-        questionAdapter = new QuestionAdapter(arrayList);
+        questionAdapter = new QuestionAdapter(this,arrayList);
 
         database = FirebaseDatabase.getInstance();
         database1 = FirebaseDatabase.getInstance();
@@ -73,13 +73,16 @@ public class QuestionList extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String num=snapshot.child("Num").child(userUid).getValue().toString();
                 for(int i=1;i<=Integer.valueOf(num);i++) {
+
                     databaseReference.child(Integer.toString(i)).addListenerForSingleValueEvent(new ValueEventListener() {
 
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
-
+                            list_num=dataSnapshot1.getKey();
                             for (DataSnapshot snapshot1 : dataSnapshot1.getChildren()) {
+
                                 if(snapshot1.hasChild(userUid)&&snapshot1.hasChild(loverUid)) {
+
                                     questionkey = snapshot1.getKey();
                                     if (snapshot1.hasChild(userUid)) {
                                         question = questionkey;
@@ -91,7 +94,7 @@ public class QuestionList extends AppCompatActivity {
                                     if (snapshot1.hasChild(loverUid)) {
                                         answer2 = snapshot1.child(loverUid).getValue().toString();
                                     } else answer2 = null;
-                                    QuestionListObject questionlistObject = new QuestionListObject(question, answer1, answer2);
+                                    QuestionListObject questionlistObject = new QuestionListObject(question, answer1, answer2,list_num);
                                     arrayList.add(questionlistObject);
                                 }
                             }

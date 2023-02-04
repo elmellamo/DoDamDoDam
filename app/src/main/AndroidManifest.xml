@@ -70,7 +70,9 @@
         <activity android:name=".activity.album.AlbumDetail"
             android:exported="true">
         </activity>
-
+        <activity android:name=".activity.Question.AnswerPop"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

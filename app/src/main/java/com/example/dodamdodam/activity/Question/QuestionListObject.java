@@ -5,12 +5,13 @@ public class QuestionListObject {
     private String ques;
     private String ans1;
     private String ans2;
+    private String list_num;
 
-
-    public QuestionListObject(String ques, String ans1, String ans2) {
+    public QuestionListObject(String ques, String ans1, String ans2,String list_num) {
         this.ques = ques;
         this.ans1 = ans1;
         this.ans2 = ans2;
+        this.list_num=list_num;
     }
 
     public String getQues() {
@@ -34,5 +35,13 @@ public class QuestionListObject {
 
     public void setAns2(String ans2) {
         this.ans2 = ans2;
+    }
+
+    public String getList_num() {
+        return list_num;
+    }
+
+    public void setList_num(String list_num) {
+        this.list_num = list_num;
     }
 }
