@@ -261,9 +261,6 @@ public class QuestionMain extends AppCompatActivity {
                                     questionkey=childSnapshot.getKey();
                                     show_question.setText(questionkey);
                                     database.child("Info").child(user.getUid()).setValue(getTime);
-                                    if(childSnapshot.hasChild(LOVERUID)){
-                                        tv_show_answer2.setText("너 : "+childSnapshot.child(LOVERUID).getValue().toString());
-                                    }
                                 }
                             }
                             @Override
@@ -300,6 +297,7 @@ public class QuestionMain extends AppCompatActivity {
                             myToast.show();
                             et_ques.setVisibility(View.INVISIBLE);
                             ques_submit_btn.setVisibility(View.INVISIBLE);
+
                             database.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -353,6 +351,9 @@ public class QuestionMain extends AppCompatActivity {
                                                             r3.setVisibility(View.VISIBLE);
                                                             r1.setVisibility(View.INVISIBLE);
                                                             r2.setVisibility(View.INVISIBLE);
+                                                            tv_no_answer.setVisibility(View.INVISIBLE);
+                                                            tv_today_question.setVisibility(View.INVISIBLE);
+                                                            tv_happy.setVisibility(View.VISIBLE);
                                                             //설정에 닉네임 등록했으면 출력, 아니면 상대방으로 출력
                                                         }
                                                         @Override
@@ -368,6 +369,9 @@ public class QuestionMain extends AppCompatActivity {
                                                     r2.setVisibility(View.VISIBLE);
                                                     r3.setVisibility(View.INVISIBLE);
                                                     r1.setVisibility(View.INVISIBLE);
+                                                    tv_no_answer.setVisibility(View.VISIBLE);
+                                                    tv_today_question.setVisibility(View.INVISIBLE);
+                                                    tv_happy.setVisibility(View.INVISIBLE);
                                                 }
                                             }
                                         }
