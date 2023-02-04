@@ -30,13 +30,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="담 담 이"
+            android:text="타 이 틀"
             android:textSize="25dp"
             android:fontFamily="@font/font_1"
             android:layout_toRightOf="@+id/profile_photo"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="15dp"
             android:layout_centerVertical="true"
-            android:id="@+id/username"
+            android:id="@+id/image_title"
             android:textColor="@color/black"
             />
         <ImageView
@@ -104,23 +104,24 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="title"
+            android:text="담담이"
             android:textColor="@color/black"
             android:textSize="23dp"
             android:letterSpacing="0.15"
-
-            android:fontFamily="@font/font_1"            android:id="@+id/image_title"
+            android:fontFamily="@font/font_1"
+            android:id="@+id/username"
+            android:textStyle="bold"
             android:layout_marginTop="5dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/image_title"
+            android:layout_below="@+id/username"
             android:text="mitch.tabian moutains #mountains"
             android:textColor="@color/black"
             android:letterSpacing="0.15"
-
             android:textSize="23dp"
-            android:fontFamily="@font/font_1"            android:id="@+id/image_caption"
+            android:fontFamily="@font/font_1"
+            android:id="@+id/image_caption"
             android:layout_marginTop="10dp"/>
 
         <TextView
@@ -129,9 +130,9 @@
             android:text="3 DAYS AGO"
             android:textColor="@color/grey"
             android:letterSpacing="0.15"
-
             android:textSize="23dp"
-            android:fontFamily="@font/font_1"            android:layout_below="@+id/image_caption"
+            android:fontFamily="@font/font_1"
+            android:layout_below="@+id/image_caption"
             android:id="@+id/image_time_posted"
             android:layout_marginTop="15dp"/>
     </RelativeLayout>

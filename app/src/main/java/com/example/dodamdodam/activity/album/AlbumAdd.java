@@ -39,7 +39,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class AlbumAdd extends AppCompatActivity {
@@ -67,11 +66,6 @@ public class AlbumAdd extends AppCompatActivity {
         setContentView(R.layout.activity_album_add);
 
         mFirebaseMethods = new FirebaseMethods(AlbumAdd.this);
-
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("게시글 작성");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         recyclerview = findViewById(R.id.addgallery_layout);
 
@@ -222,7 +216,7 @@ public class AlbumAdd extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         pathList.clear();
-        mAdapter.notifyDataSetChanged();
+        //mAdapter.notifyDataSetChanged();
         finish();
     }
 

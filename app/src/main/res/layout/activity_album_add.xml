@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_album_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:background="#FFF7D2"
     tools:context=".activity.album.AlbumMain">
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:orientation="vertical">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/postImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:srcCompat="@drawable/calendarlogo"
+                tools:layout_editor_absoluteX="10dp"
+                tools:layout_editor_absoluteY="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/title_edit"/>
 
             <EditText
                 android:id="@+id/title_edit"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:ems="10"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:gravity="top|left"
                 android:hint="제 목"
                 android:textSize="20dp"
@@ -34,7 +39,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/contents_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/postImg" />
 
             <LinearLayout
                 android:id="@+id/contents_layout"
@@ -44,7 +49,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/addgallery_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/title_edit">
+                app:layout_constraintTop_toBottomOf="@+id/title_edit">
 
                 <EditText
                     android:id="@+id/contets_edit"
@@ -53,6 +58,10 @@
                     android:inputType="textMultiLine"
                     android:ems="10"
                     android:gravity="top|left"
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginStart="30dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
                     android:hint="내 용"
                     android:textSize="20dp"
                     android:fontFamily="@font/font_1"/>
@@ -62,7 +71,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/addgallery_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 app:layout_constraintBottom_toTopOf="@+id/btn_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -71,38 +84,115 @@
 
             </androidx.recyclerview.widget.RecyclerView>
 
-            <LinearLayout
-                android:id="@+id/btn_layout"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/post_saves"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/contents_layout">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/addgallery_layout">
 
-                <ImageButton
-                    android:id="@+id/image_btn"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:src="@drawable/camera" />
+        <ImageButton
+            android:id="@+id/image_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:src="@drawable/camera"
+            android:paddingBottom="25dp"
+            app:layout_constraintBottom_toTopOf="@+id/post_saves"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_layout"
+            app:layout_constraintVertical_weight="1" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/post_saves"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="저장"
+            android:background="@drawable/white_rounded_button"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_btn"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/buttonsBackgroundLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#91646464"
+        android:visibility="gone"
+        >
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:elevation="10dp"
+            app:cardCornerRadius="15dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/delete_layout"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/delete_img"
+                        android:id="@+id/delete_src"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/delete_txt"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_weight="0.3"
+                        />
+
+                    <TextView
+                        app:layout_constraintVertical_weight="0.7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="삭제"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"
+                        android:id="@+id/delete_txt"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/delete_src"
+                        app:layout_constraintTop_toTopOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
             </LinearLayout>
 
+        </androidx.cardview.widget.CardView>
 
-            <Button
-                android:id="@+id/post_saves"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="저장"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_layout" />
+    </RelativeLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
