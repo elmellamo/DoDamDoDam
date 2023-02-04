@@ -79,22 +79,21 @@ public class QuestionList extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
 
                             for (DataSnapshot snapshot1 : dataSnapshot1.getChildren()) {
-                                questionkey = snapshot1.getKey();
-                                if (snapshot1.hasChild(userUid)) {
-                                    question = questionkey;
-                                } else question = null;
+                                if(snapshot1.hasChild(userUid)&&snapshot1.hasChild(loverUid)) {
+                                    questionkey = snapshot1.getKey();
+                                    if (snapshot1.hasChild(userUid)) {
+                                        question = questionkey;
+                                    } else question = null;
 
-                                if (snapshot1.hasChild(userUid)) {
-                                    answer1 = snapshot1.child(userUid).getValue().toString();
+                                    if (snapshot1.hasChild(userUid)) {
+                                        answer1 = snapshot1.child(userUid).getValue().toString();
+                                    } else answer1 = null;
+                                    if (snapshot1.hasChild(loverUid)) {
+                                        answer2 = snapshot1.child(loverUid).getValue().toString();
+                                    } else answer2 = null;
+                                    QuestionListObject questionlistObject = new QuestionListObject(question, answer1, answer2);
+                                    arrayList.add(questionlistObject);
                                 }
-                                else answer1=null;
-                                if (snapshot1.hasChild(loverUid)) {
-                                    answer2 = snapshot1.child(loverUid).getValue().toString();
-                                }
-                                else answer2=null;
-                                QuestionListObject questionlistObject = new QuestionListObject(question, answer1, answer2);
-                                arrayList.add(questionlistObject);
-
                             }
                             questionAdapter.notifyDataSetChanged();
                         }
