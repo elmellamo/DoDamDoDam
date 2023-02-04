@@ -285,58 +285,116 @@ public class QuestionMain extends AppCompatActivity {
         ///답변 입력하기///////////////////////////////////////////////////////////////////////
 
 
-        ques_submit_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                et_ques=(EditText)findViewById(R.id.et_question);
-                str_ans=et_ques.getText().toString();
-                databaseReference.child(Integer.toString(num)).child(questionkey).child(user.getUid()).setValue(str_ans);
-                Toast myToast = Toast.makeText(getApplicationContext(),"답변이 등록되었습니다!", Toast.LENGTH_SHORT);
-                myToast.show();
-                tv_show_answer1.setText("나 : "+str_ans);
-                et_ques.setVisibility(View.INVISIBLE);
-                ques_submit_btn.setVisibility(View.INVISIBLE);
-                tv_show_answer1.setVisibility(View.VISIBLE);
-                database.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        number=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
+            ques_submit_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-                        databaseReference.child(Integer.toString(number)).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                for(DataSnapshot childSnapshot:snapshot.getChildren()){
-                                    if(childSnapshot.hasChild(LOVERUID)){
-                                        tv_show_answer2.setText("너 : "+childSnapshot.child(LOVERUID).getValue().toString());
-                                        tv_show_answer2.setVisibility(View.VISIBLE);
-                                        r3.setVisibility(View.VISIBLE);
-                                        r1.setVisibility(View.INVISIBLE);
-                                        r2.setVisibility(View.INVISIBLE);
-                                    }
-                                    else{
-                                        tv_show_answer2.setText("너 : ");
-                                        tv_show_answer2.setVisibility(View.VISIBLE);
-                                        r2.setVisibility(View.VISIBLE);
-                                        r3.setVisibility(View.INVISIBLE);
-                                        r1.setVisibility(View.INVISIBLE);
-                                    }
+                    database.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            number=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
+                            et_ques=(EditText)findViewById(R.id.et_question);
+                            str_ans=et_ques.getText().toString();
+                            databaseReference.child(Integer.toString(number)).child(questionkey).child(user.getUid()).setValue(str_ans);
+                            Toast myToast = Toast.makeText(getApplicationContext(),"답변이 등록되었습니다!", Toast.LENGTH_SHORT);
+                            myToast.show();
+                            et_ques.setVisibility(View.INVISIBLE);
+                            ques_submit_btn.setVisibility(View.INVISIBLE);
+                            database.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    number=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
+
+                                    databaseReference.child(Integer.toString(number)).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for(DataSnapshot childSnapshot:snapshot.getChildren()){
+                                                tv_show_answer1=findViewById(R.id.tv_show_answer1);
+                                                tv_show_answer2=findViewById(R.id.tv_show_answer2);
+                                                databasesetting.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        if(snapshot.child("lovernickname").child(user.getUid()).getValue()!=null){
+                                                            String mynick = snapshot.child("mynickname").child(LOVERUID).getValue().toString();
+                                                            tv_show_answer1.setText(mynick+"의 답변 : "+childSnapshot.child(user.getUid()).getValue().toString());
+                                                        }
+                                                        else{
+
+                                                            Toast.makeText(QuestionMain.this, "설정에 가서 닉네임을 등록해주세요", Toast.LENGTH_SHORT).show();
+
+                                                        }
+
+                                                        tv_show_answer1.setVisibility(View.VISIBLE);
+                                                        //설정에 닉네임 등록했으면 출력, 아니면 상대방으로 출력
+                                                    }
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+                                                if(childSnapshot.hasChild(LOVERUID)){
+                                                    databasesetting.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        @Override
+                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                            if(snapshot.child("lovernickname").child(user.getUid()).getValue()!=null){
+                                                                String lovernick = snapshot.child("lovernickname").child(user.getUid()).getValue().toString();
+                                                                String mynick = snapshot.child("mynickname").child(LOVERUID).getValue().toString();
+                                                                tv_show_answer2.setText(lovernick+"의 답변 : "+childSnapshot.child(LOVERUID).getValue().toString());
+                                                                tv_show_answer1.setText(mynick+"의 답변 : "+childSnapshot.child(user.getUid()).getValue().toString());
+                                                            }
+                                                            else{
+                                                                tv_show_answer2.setText("상대방의 답변 : "+childSnapshot.child(LOVERUID).getValue().toString());
+                                                                Toast.makeText(QuestionMain.this, "설정에 가서 닉네임을 등록해주세요", Toast.LENGTH_SHORT).show();
+
+                                                            }
+
+                                                            tv_show_answer2.setVisibility(View.VISIBLE);
+                                                            tv_show_answer1.setVisibility(View.VISIBLE);
+                                                            r3.setVisibility(View.VISIBLE);
+                                                            r1.setVisibility(View.INVISIBLE);
+                                                            r2.setVisibility(View.INVISIBLE);
+                                                            //설정에 닉네임 등록했으면 출력, 아니면 상대방으로 출력
+                                                        }
+                                                        @Override
+                                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                                        }
+                                                    });
+
+                                                }
+                                                else{
+                                                    tv_show_answer2.setText("상대방이 아직 답변하지 않았었요...");
+                                                    tv_show_answer2.setVisibility(View.VISIBLE);
+                                                    r2.setVisibility(View.VISIBLE);
+                                                    r3.setVisibility(View.INVISIBLE);
+                                                    r1.setVisibility(View.INVISIBLE);
+                                                }
+                                            }
+                                        }
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                                 }
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
 
-                            }
-                        });
-                    }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                                }
+                            });
+                        }
 
-                    }
-                });
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                        }
+                    });
+
+
+                }
+            });
 
 
 
