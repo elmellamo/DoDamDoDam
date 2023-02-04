@@ -164,7 +164,6 @@ public class AlbumAdd extends AppCompatActivity {
                     case VIDEO_MP4:
                     case VIDEO_WEBM:
                         pathList.add(currentUri);
-
                         break;
                 }
             }, () -> Log.e("로그", "handlePickerResponse: error!"));

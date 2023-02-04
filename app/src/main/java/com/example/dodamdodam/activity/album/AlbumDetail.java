@@ -16,6 +16,8 @@ import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Login.BasicActivity;
 import com.example.dodamdodam.adapter.MyAdapter;
 import com.example.dodamdodam.models.DetailInfo;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,16 +45,18 @@ import me.relex.circleindicator.CircleIndicator3;
 public class AlbumDetail  extends BasicActivity {
     private ViewPager2 mPager;
     private CircleIndicator3 mindicator;
-    private TextView image_title, image_caption, image_time_posted, username;
+    private TextView image_title, image_caption, image_time_posted, username, delete_txt;
     private String postId, myId;
     private FirebaseUser user;
     private MyAdapter myAdapter;
-    private DatabaseReference reference, dbSetting;
+    private DatabaseReference reference, dbSetting, delRef, delRef2;
     private int postCount;
     private ArrayList<DetailInfo> detailInfos;
     private String tmpTime;
     private ImageView ic_morebutton;
     private RelativeLayout buttonsBackgroundLayout;
+    private StorageReference fileRef;
+    private ArrayList<Integer> tmpCnt;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_album_detail);
@@ -64,6 +70,10 @@ public class AlbumDetail  extends BasicActivity {
         ic_morebutton = findViewById(R.id.ivEllipses);
         buttonsBackgroundLayout = findViewById(R.id.buttonsBackgroundLayout);
         user = FirebaseAuth.getInstance().getCurrentUser();
+        delete_txt = findViewById(R.id.delete_txt);
+
+
+
         setupImage();
         setImage();
         ic_morebutton.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +92,15 @@ public class AlbumDetail  extends BasicActivity {
             }
         });
 
+        delete_txt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delPost();
+            }
+        });
+
+
+
     }
 
     private void setupImage(){
@@ -93,6 +112,7 @@ public class AlbumDetail  extends BasicActivity {
 
     private void setImage(){
         reference = FirebaseDatabase.getInstance().getReference();
+        tmpCnt = new ArrayList<Integer>();
 
         Query query = reference
                 .child("posts")
@@ -116,6 +136,7 @@ public class AlbumDetail  extends BasicActivity {
                     }
 
                     postCount = ((List<String>) objectMap.get("image_path")).size();
+                    tmpCnt.add(postCount);
 
                     detailInfos = new ArrayList<>();
                     for(int i=1; i<=postCount; i++){
@@ -211,6 +232,25 @@ public class AlbumDetail  extends BasicActivity {
             });
         }
     }
+
+    private void delPost() {
+        Log.e("로그", "개수>>> "+ tmpCnt.get(0));
+        for (int i = 1; i <= tmpCnt.get(0); i++) {
+            fileRef = FirebaseStorage.getInstance().getReference().child("album/users/" + postId + "/photo" + i);
+            fileRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                }
+            });
+        }
+
+
+
+}
 
 
 }

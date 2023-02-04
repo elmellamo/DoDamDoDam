@@ -59,6 +59,16 @@ public class FirebaseMethods {
         }
     }
 
+    public void deletePost(String postId){
+        myRef.child("user_posts").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(postId).removeValue();
+        myRef.child("posts").child(postId).removeValue();
+
+        Toast.makeText(mContext, "해당 포스트가 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(mContext, AlbumMain.class);
+        mContext.startActivity(intent);
+    }
+
     public int getPostCount(DataSnapshot dataSnapshot) {
         int count = 0;
         for (DataSnapshot ds : dataSnapshot.child(mContext.getString(R.string.dbname_user_posts))
