@@ -63,7 +63,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
+
             android:id="@+id/sadrabbit"
             android:visibility="invisible"
             app:civ_border_color="@color/black"
@@ -73,7 +73,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="75dp"
+
             android:visibility="invisible"
             android:id="@+id/happyrabbit"
             app:civ_border_color="@color/black"
