@@ -2,7 +2,9 @@ package com.example.dodamdodam.activity.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,11 +24,49 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final String TAG = "SignUpActivity"; //앱에 뜨게 하려고
-
+    private EditText emailEditText,passwordEditText,passwordCheckEditText;
+    private Button signUpBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        emailEditText = findViewById(R.id.emailEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
+        passwordCheckEditText = findViewById(R.id.passwordCheckEditText);
+        signUpBtn = findViewById(R.id.signUpBtn);
+        emailEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+                    passwordEditText.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        passwordEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+                    passwordCheckEditText.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+        passwordCheckEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+                    signUpBtn.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
 
         mAuth = FirebaseAuth.getInstance(); //유저를 받아오기 위해서
 

@@ -47,21 +47,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
+
         <EditText
             android:id="@+id/nameEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="195dp"
+            android:layout_marginBottom="196dp"
             android:ems="10"
-            android:hint="이 름"
-            android:textSize="20dp"
             android:fontFamily="@font/font_1"
+            android:hint="이 름"
             android:inputType="textPersonName"
             android:paddingBottom="20dp"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
-
 
         <EditText
             android:id="@+id/birthDayEditText"

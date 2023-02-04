@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import com.example.dodamdodam.R;
@@ -81,6 +82,19 @@ public class CalendarMain extends BasicActivity {
         todayText = findViewById(R.id.todaytext);
         loverText = findViewById(R.id.loverText);
         contextEditText = findViewById(R.id.contextEditText);
+
+        contextEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+                    save_Btn.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
         question_Btn = findViewById(R.id.questionBtn);
         calendar_Btn=findViewById(R.id.calendarBtn2);
         album_Btn = findViewById(R.id.albumBtn);
@@ -222,7 +236,7 @@ public class CalendarMain extends BasicActivity {
                             todayText.setVisibility(View.VISIBLE);
                             cha_Btn.setVisibility(View.VISIBLE);
                             del_Btn.setVisibility(View.VISIBLE);
-                            diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
+                            diaryTextView.setText(String.format("%d/%d/%d", year, month + 1, dayOfMonth));
                             //todayText.setText(snapshot.getKey().toString());
                             //todayText.setText(String.valueOf(dayOfWeek));
                             ddayTextView.setVisibility(View.INVISIBLE);
@@ -236,7 +250,7 @@ public class CalendarMain extends BasicActivity {
                             todayText.setVisibility(View.INVISIBLE);
                             cha_Btn.setVisibility(View.INVISIBLE);
                             del_Btn.setVisibility(View.INVISIBLE);
-                            diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
+                            diaryTextView.setText(String.format("%d/%d/%d", year, month + 1, dayOfMonth));
                             ddayTextView.setVisibility(View.INVISIBLE);
 
                         }
@@ -362,7 +376,7 @@ public class CalendarMain extends BasicActivity {
         int tyear = todayint/10000;
         int tmonth = (todayint%10000)/100;
         int tday = todayint%100;
-        diaryTextView.setText(tyear+" / "+tmonth+" / "+tday);
+        diaryTextView.setText(tyear+"/"+tmonth+"/"+tday);
     }
 
     private int dminusdayActivity(String STR){

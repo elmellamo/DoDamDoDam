@@ -2,7 +2,9 @@ package com.example.dodamdodam.activity.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,12 +28,27 @@ import java.util.Date;
 public class PutCode extends BasicActivity {
     TextView myUid;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
+    private EditText putlovercode;
+    private Button connectBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_put_code);
+        putlovercode = findViewById(R.id.putlovercode);
+        connectBtn = findViewById(R.id.connectBtn);
+        putlovercode.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+                    connectBtn.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
         findViewById(R.id.connectBtn).setOnClickListener(onClickListener);
     }
 

@@ -4,7 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,12 +24,39 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MemberInitActivity extends AppCompatActivity {
     private static final String TAG = "MemberInitActivity";
-
+    private EditText nameEditText,birthDayEditText;
+    private Button checkBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_init);
+        nameEditText = findViewById(R.id.nameEditText);
+        birthDayEditText = findViewById(R.id.birthDayEditText);
+        checkBtn = findViewById(R.id.checkBtn);
+        nameEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+                    birthDayEditText.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        birthDayEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+                    checkBtn.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+
 
         findViewById(R.id.checkBtn).setOnClickListener(onClickListener);
 

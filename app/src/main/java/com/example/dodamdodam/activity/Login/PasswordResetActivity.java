@@ -1,7 +1,9 @@
 package com.example.dodamdodam.activity.Login;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,11 +16,25 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class PasswordResetActivity extends BasicActivity {
     private FirebaseAuth mAuth;
-
+    private EditText emailEditText;
+    private Button sendBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_reset);
+        emailEditText = findViewById(R.id.emailEditText);
+        sendBtn = findViewById(R.id.sendBtn);
+        emailEditText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+                    sendBtn.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
 
         mAuth = FirebaseAuth.getInstance();
 
