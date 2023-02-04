@@ -8,6 +8,35 @@
     android:background="#FFF7D2"
 
     >
+    <ImageView
+        android:id="@+id/rabbitimg"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:src="@drawable/question"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/rabbitimg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        >
+
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,23 +45,13 @@
         app:layout_constraintBottom_toTopOf="@id/tv_today_question"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:src="@drawable/question"
-            android:layout_marginTop="5dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
 
-            />
+        >
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="80dp"
             android:id="@+id/rabbit"
             android:visibility="visible"
             app:civ_border_color="@color/black"
@@ -245,6 +264,9 @@
             app:layout_constraintTop_toBottomOf="@id/tv_show_answer1"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/BottomButton"
         android:layout_width="match_parent"
