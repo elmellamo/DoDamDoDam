@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,6 +62,39 @@ public class SettingMain extends AppCompatActivity {
         editText_1=findViewById(R.id.ourAnniversaryEditText);
         editText_2=findViewById(R.id.myNickNameEditText);
         editText_3=findViewById(R.id.loverNickNameEditText);
+
+        editText_1.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+                    savebtn_1.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        editText_2.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+                    savebtn_2.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+        editText_3.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+                    savebtn_3.performClick();
+                    return true;
+                }
+                return false;
+            }
+        });
+
         textView_1=findViewById(R.id.ourAnniversaryTextView);
         textView_2=findViewById(R.id.myNickNameTextView);
         textView_3=findViewById(R.id.loverNickNameTextView);

@@ -75,7 +75,6 @@ public class QuestionMain extends AppCompatActivity {
         userdatabaseReference = FirebaseDatabase.getInstance().getReference("users");
         loveruidReference = userdatabaseReference.child(user.getUid());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-
         database = FirebaseDatabase.getInstance().getReference("UpdateDay");
         databasesetting = FirebaseDatabase.getInstance().getReference("Setting");
         DocumentReference docRef = db.collection("users").document(user.getUid());
