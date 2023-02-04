@@ -90,7 +90,7 @@ public class FirebaseMethods {
     }
 
     public void uploadNewPost(final String title, final String caption, String postId, ArrayList<Uri> imgUrl) {
-        Log.e("로그", "uploadNewPhoto: uploading NEW photo.");
+        Log.e("로그", "포스트 업로드에 성공하였습니다.");
 
         String user_id = FirebaseAuth.getInstance().getCurrentUser().getUid();
         uploadkey=1;
@@ -120,7 +120,7 @@ public class FirebaseMethods {
                             public void onSuccess(Uri uri) {
                                 //Uri firebaseUrl = uri;
                                 Log.e("로그", "photo upload success");
-                                Toast.makeText(mContext, "photo upload success", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, "앨범이 성공적으로 등록되었습니다.", Toast.LENGTH_SHORT).show();
 
                                 //새로운 앨범 게시물을 'posts'랑 'user_posts' 카테고리에 추가
                             }

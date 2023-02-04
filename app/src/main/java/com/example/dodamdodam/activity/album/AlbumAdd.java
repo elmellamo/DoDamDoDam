@@ -47,6 +47,7 @@ public class AlbumAdd extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();;
     private ArrayList<Uri> pathList = new ArrayList<>();
+    private ArrayList<Uri> changePath   = new ArrayList<>();
     private List<String> stringUri;
     private String postId;
     private RecyclerViewItem rItem = new RecyclerViewItem();
@@ -87,6 +88,7 @@ public class AlbumAdd extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 pathList.clear();
+                changePath.clear();
                 loadImage();
             }
         });
@@ -106,14 +108,24 @@ public class AlbumAdd extends AppCompatActivity {
 
                         handlePickerResponse(currentUri);
                         //getContentResolver().takePersistableUriPermission(currentUri, flag);
-
                     }
 
+                    for(int i=0; i<uris.size(); i++){
+                        changePath.add(pathList.get(i));
+                    }
                     rItem.setPublisher(user.getUid());
                     rItem.setMcreatedAt(new Date());
-                    rItem.setGalleryuri(pathList);
+                    rItem.setGalleryuri(changePath);
 
                     mAdapter = new CustomAdapter(rItem, getApplicationContext());
+                    mAdapter.setOnItemClickListener(new CustomAdapter.OnItemClickEventListener() {
+                        @Override
+                        public void onItemClick(View a_view, int a_position) {
+                            final Uri item = rItem.getGalleryuri().get(a_position);
+                            startToast("해당 아이템 정보>>>"+item);
+                        }
+                    });
+
                     recyclerview.setAdapter(mAdapter);
                     mLayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
                     recyclerview.setLayoutManager(mLayoutManager);
@@ -176,14 +188,14 @@ public class AlbumAdd extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase= FirebaseDatabase.getInstance();
         myRef=mFirebaseDatabase.getReference();
-        Log.e("로그", "onDataChange: image count : "+postCount);
+        //Log.e("로그", "onDataChange: image count : "+postCount);
 
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                postCount = mFirebaseMethods.getPostCount(dataSnapshot);
-                Log.e("로그", "onDataChange: post count : "+postCount);
+                //postCount = mFirebaseMethods.getPostCount(dataSnapshot);
+                //Log.e("로그", "onDataChange: post count : "+postCount);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -199,9 +211,9 @@ public class AlbumAdd extends AppCompatActivity {
 
             stringUri = new ArrayList<String>();
 
-            stringUri = mFirebaseMethods.changeString(pathList);
+            stringUri = mFirebaseMethods.changeString(changePath);
             postId = mFirebaseMethods.addAlbumToDatabase(title, contents, stringUri);
-            mFirebaseMethods.uploadNewPost(title, contents, postId, pathList);
+            mFirebaseMethods.uploadNewPost(title, contents, postId, changePath);
 
         }else if(title.length()==0){
             startToast("제목을 작성해주세요.");
@@ -215,6 +227,7 @@ public class AlbumAdd extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         pathList.clear();
+        changePath.clear();
         //mAdapter.notifyDataSetChanged();
         finish();
     }

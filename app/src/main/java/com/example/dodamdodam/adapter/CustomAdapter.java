@@ -14,17 +14,34 @@ import com.example.dodamdodam.R;
 import com.example.dodamdodam.models.RecyclerViewItem;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder> {
+    public interface OnItemClickEventListener{
+        void onItemClick(View a_view, int a_position);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgView_item;
-
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView, final OnItemClickEventListener a_itemClickListener) {
             super(itemView);
             imgView_item = (ImageView) itemView.findViewById(R.id.imgView_item);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION){
+                        a_itemClickListener.onItemClick(view, position);
+                    }
+                }
+            });
         }
     }
 
     private RecyclerViewItem mList = null;
     private Context mContext = null;
+    private OnItemClickEventListener mItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickEventListener a_listener){
+        mItemClickListener = a_listener;
+    }
 
     public CustomAdapter(RecyclerViewItem list, Context context) {
         this.mList = list;
@@ -38,7 +55,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         View view = inflater.inflate(R.layout.item_add, parent, false);
-        CustomAdapter.ViewHolder vh = new CustomAdapter.ViewHolder(view);
+        CustomAdapter.ViewHolder vh = new CustomAdapter.ViewHolder(view, mItemClickListener);
         return vh;
     }
 
