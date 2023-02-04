@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -100,6 +101,26 @@ public class QuestionMain extends AppCompatActivity {
         tv_show_answer1=findViewById(R.id.tv_show_answer1);
         tv_show_answer2=findViewById(R.id.tv_show_answer2);
         et_ques=(EditText)findViewById(R.id.et_question);
+
+        et_ques.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+
+                    return true;
+                }
+                return false;
+            }
+        });
+        //엔터 안 되게끔 일단 해놨는데 확인 못 함
+
+
+
+
+
+
+
+
         str_ans=et_ques.getText().toString();
         ques_submit_btn=findViewById(R.id.ques_submit_btn);
 

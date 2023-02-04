@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -88,6 +89,22 @@ public class CalendarMain extends BasicActivity {
                 return false;
             }
         });
+
+//        contextEditText.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (v.getId() == R.id.contextEditText) {
+//                    v.getParent().requestDisallowInterceptTouchEvent(true);
+//                    switch (event.getAction()&MotionEvent.ACTION_MASK){
+//                        case MotionEvent.ACTION_UP:
+//                            v.getParent().requestDisallowInterceptTouchEvent(false);
+//                            break;
+//                    }
+//                }
+//                return false;
+//            }
+//        });
+
         question_Btn = findViewById(R.id.questionBtn);
         calendar_Btn=findViewById(R.id.calendarBtn2);
         album_Btn = findViewById(R.id.albumBtn);
@@ -225,8 +242,7 @@ public class CalendarMain extends BasicActivity {
                             cha_Btn.setVisibility(View.VISIBLE);
                             del_Btn.setVisibility(View.VISIBLE);
                             diaryTextView.setText(String.format("%d/%d/%d", year, month + 1, dayOfMonth));
-                            //todayText.setText(snapshot.getKey().toString());
-                            //todayText.setText(String.valueOf(dayOfWeek));
+
                             ddayTextView.setVisibility(View.INVISIBLE);
 
                         }
@@ -240,6 +256,24 @@ public class CalendarMain extends BasicActivity {
                             del_Btn.setVisibility(View.INVISIBLE);
                             diaryTextView.setText(String.format("%d/%d/%d", year, month + 1, dayOfMonth));
                             ddayTextView.setVisibility(View.INVISIBLE);
+
+
+//                            contextEditText.setOnTouchListener(new View.OnTouchListener() {
+//                                @Override
+//                                public boolean onTouch(View v, MotionEvent event) {
+//                                    if (v.getId() ==R.id.contextEditText) {
+//                                        v.getParent().requestDisallowInterceptTouchEvent(true);
+//                                        switch (event.getAction()&MotionEvent.ACTION_MASK){
+//                                            case MotionEvent.ACTION_UP:
+//                                                v.getParent().requestDisallowInterceptTouchEvent(false);
+//                                                break;
+//                                        }
+//                                    }
+//                                    return false;
+//                                }
+//                            });
+
+
 
                         }
 
