@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.dodamdodam.R;
+import com.example.dodamdodam.Utils.FirebaseMethods;
 import com.example.dodamdodam.activity.Login.BasicActivity;
 import com.example.dodamdodam.adapter.MyAdapter;
 import com.example.dodamdodam.models.DetailInfo;
@@ -49,7 +50,8 @@ public class AlbumDetail  extends BasicActivity {
     private String postId, myId;
     private FirebaseUser user;
     private MyAdapter myAdapter;
-    private DatabaseReference reference, dbSetting, delRef, delRef2;
+    private DatabaseReference reference, dbSetting;
+    private FirebaseMethods mFirebaseMethods;
     private int postCount;
     private ArrayList<DetailInfo> detailInfos;
     private String tmpTime;
@@ -71,7 +73,7 @@ public class AlbumDetail  extends BasicActivity {
         buttonsBackgroundLayout = findViewById(R.id.buttonsBackgroundLayout);
         user = FirebaseAuth.getInstance().getCurrentUser();
         delete_txt = findViewById(R.id.delete_txt);
-
+        mFirebaseMethods = new FirebaseMethods(AlbumDetail.this);
 
 
         setupImage();
@@ -248,8 +250,7 @@ public class AlbumDetail  extends BasicActivity {
             });
         }
 
-
-
+        mFirebaseMethods.deletePost(postId);
 }
 
 
