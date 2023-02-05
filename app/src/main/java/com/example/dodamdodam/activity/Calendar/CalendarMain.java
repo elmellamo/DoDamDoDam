@@ -13,6 +13,7 @@ import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -77,35 +78,24 @@ public class CalendarMain extends BasicActivity {
         del_Btn = findViewById(R.id.del_Btn);
         cha_Btn = findViewById(R.id.cha_Btn);
         todayText = findViewById(R.id.todaytext);
+
         loverText = findViewById(R.id.loverText);
-        contextEditText = findViewById(R.id.contextEditText);
+        contextEditText = (EditText) findViewById(R.id.contextEditText);
 
-//        contextEditText.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-//                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
-//                    save_Btn.performClick();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-
-//        contextEditText.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (v.getId() == R.id.contextEditText) {
-//                    v.getParent().requestDisallowInterceptTouchEvent(true);
-//                    switch (event.getAction()&MotionEvent.ACTION_MASK){
-//                        case MotionEvent.ACTION_UP:
-//                            v.getParent().requestDisallowInterceptTouchEvent(false);
-//                            break;
-//                    }
-//                }
-//                return false;
-//            }
-//        });
-
+        contextEditText.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View view, MotionEvent event) {
+                // TODO Auto-generated method stub
+                if (view.getId() ==R.id.contextEditText) {
+                    view.getParent().requestDisallowInterceptTouchEvent(true);
+                    switch (event.getAction()&MotionEvent.ACTION_MASK){
+                        case MotionEvent.ACTION_UP:
+                            view.getParent().requestDisallowInterceptTouchEvent(false);
+                            break;
+                    }
+                }
+                return false;
+            }
+        });
         question_Btn = findViewById(R.id.questionBtn);
         calendar_Btn=findViewById(R.id.calendarBtn2);
         album_Btn = findViewById(R.id.albumBtn);
@@ -236,6 +226,7 @@ public class CalendarMain extends BasicActivity {
                         if(snapshot.child(user.getUid()).getValue()!=null){
                             thisdayText = snapshot.child(user.getUid()).getValue().toString();
                             todayText.setText(snapshot.child(user.getUid()).getValue().toString());
+                            contextEditText.setText(snapshot.child(user.getUid()).getValue().toString());
                             diaryTextView.setVisibility(View.VISIBLE);
                             save_Btn.setVisibility(View.INVISIBLE);
                             contextEditText.setVisibility(View.INVISIBLE);
@@ -258,21 +249,6 @@ public class CalendarMain extends BasicActivity {
                             diaryTextView.setText(String.format("%d/%d/%d", year, month + 1, dayOfMonth));
                             ddayTextView.setVisibility(View.INVISIBLE);
 
-
-//                            contextEditText.setOnTouchListener(new View.OnTouchListener() {
-//                                @Override
-//                                public boolean onTouch(View v, MotionEvent event) {
-//                                    if (v.getId() ==R.id.contextEditText) {
-//                                        v.getParent().requestDisallowInterceptTouchEvent(true);
-//                                        switch (event.getAction()&MotionEvent.ACTION_MASK){
-//                                            case MotionEvent.ACTION_UP:
-//                                                v.getParent().requestDisallowInterceptTouchEvent(false);
-//                                                break;
-//                                        }
-//                                    }
-//                                    return false;
-//                                }
-//                            });
 
 
 
@@ -300,6 +276,13 @@ public class CalendarMain extends BasicActivity {
 
             }
         });
+
+
+
+
+
+
+
         save_Btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -318,12 +301,23 @@ public class CalendarMain extends BasicActivity {
                 databaseReference.child(stringDateSelected).child(user.getUid()).setValue(contextEditText.getText().toString());
             }
         });
+        todayText.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                showDialog(todayText.getText().toString());
+            }
+        });
+
+
 
         cha_Btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
+
                 contextEditText.setVisibility(View.VISIBLE);
                 todayText.setVisibility(View.INVISIBLE);
                 contextEditText.setText(thisdayText);
@@ -382,6 +376,20 @@ public class CalendarMain extends BasicActivity {
         });
     }
 
+    void showDialog(String str) {
+        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(CalendarMain.this)
+                .setTitle("나의 일정")
+                .setMessage(str)
+                .setPositiveButton("닫기", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //Toast.makeText(CalendarMain.this, "취소하였습니다", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        AlertDialog msgDlg = msgBuilder.create();
+        msgDlg.show();
+    }
 
 
     private void myStartActivity(Class c){

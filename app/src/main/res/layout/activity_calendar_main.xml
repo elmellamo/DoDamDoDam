@@ -128,21 +128,22 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/diaryTextView" />
 
-                    <TextView
-                        android:id="@+id/loverText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        android:textSize="20dp"
-                        android:letterSpacing="0.15"
-                        android:maxLines="3"
-                        android:fontFamily="@font/font_1"
-                        android:scrollbars="vertical"
-                        app:layout_constraintBottom_toBottomOf="@+id/loverEditText"
-                        app:layout_constraintEnd_toEndOf="@+id/loverEditText"
-                        app:layout_constraintStart_toStartOf="@+id/loverEditText"
-                        app:layout_constraintTop_toTopOf="@+id/loverEditText" />
+                <TextView
+                    android:id="@+id/loverText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:textSize="20dp"
+                    android:letterSpacing="0.15"
+                    android:maxLines="3"
+                    android:lines="3"
+                    android:ellipsize="end"                        android:fontFamily="@font/font_1"
+                    android:scrollbars="vertical"
+                    app:layout_constraintBottom_toBottomOf="@+id/loverEditText"
+                    app:layout_constraintEnd_toEndOf="@+id/loverEditText"
+                    app:layout_constraintStart_toStartOf="@+id/loverEditText"
+                    app:layout_constraintTop_toTopOf="@+id/loverEditText" />
 
 
                 <EditText
@@ -159,30 +160,32 @@
                     android:hint="나의 일정이 비어있습니다."
                     android:inputType="textMultiLine"
                     android:visibility="invisible"
+
                     android:clickable="true"
                     app:layout_constraintBottom_toTopOf="@+id/save_Btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/loverText" />
 
-                    <TextView
-                        android:id="@+id/todaytext"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:letterSpacing="0.15"
+                <TextView
+                    android:id="@+id/todaytext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.15"
+                    android:background="?attr/selectableItemBackground"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:maxLines="3"
+                    android:lines="3"
+                    android:ellipsize="end"
+                    android:textSize="20dp"
+                    android:fontFamily="@font/font_1"
 
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        android:maxLines="3"
-                        android:ellipsize="end"
-                        android:textSize="20dp"
-                        android:fontFamily="@font/font_1"
-
-                        android:scrollbars="vertical"
-                        app:layout_constraintBottom_toTopOf="@+id/cha_Btn"
-                        app:layout_constraintEnd_toEndOf="@+id/contextEditText"
-                        app:layout_constraintStart_toStartOf="@+id/contextEditText"
-                        app:layout_constraintTop_toBottomOf="@+id/loverText" />
+                    android:scrollbars="vertical"
+                    app:layout_constraintBottom_toTopOf="@+id/cha_Btn"
+                    app:layout_constraintEnd_toEndOf="@+id/contextEditText"
+                    app:layout_constraintStart_toStartOf="@+id/contextEditText"
+                    app:layout_constraintTop_toBottomOf="@+id/loverText" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/save_Btn"
@@ -194,7 +197,7 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:text="저 장"
                     android:textSize="20dp"
                     android:fontFamily="@font/font_1"
@@ -212,7 +215,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:text="수 정"
                     android:textSize="20dp"
                     android:fontFamily="@font/font_1"
@@ -231,10 +234,9 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
                     android:background="@drawable/white_rounded_button"
-                    android:padding="12dp"
                     android:text="삭 제"
                     android:textSize="20dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="5dp"
 
                     android:fontFamily="@font/font_1"
                     android:visibility="invisible"
