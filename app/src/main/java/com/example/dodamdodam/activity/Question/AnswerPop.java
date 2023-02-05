@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,11 +28,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class AnswerPop extends AppCompatActivity {
 
-    private DatabaseReference databaseReference,userdatabaseReference,loveruidReference;
+    private DatabaseReference databaseReference,userdatabaseReference,loveruidReference,databasesetting;
     private FirebaseUser user;
     private String TAG;
-    private String LOVERUID,questionkey,answer1,answer2,List_Num,question;
-    private TextView tv_answer1_field,tv_answer2_field,tv_question_field,tv_question_title;
+    private String LOVERUID,questionkey,answer1,answer2,List_Num,question,mynick,lovernick;
+    private TextView tv_answer1_field,tv_answer2_field,tv_question_field,tv_question_title,tv_answer1_title,tv_answer2_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,7 @@ public class AnswerPop extends AppCompatActivity {
         loveruidReference = userdatabaseReference.child(user.getUid());
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         DocumentReference docRef = db.collection("users").document(user.getUid());
-
+        databasesetting = FirebaseDatabase.getInstance().getReference("Setting");
 
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -82,6 +83,24 @@ public class AnswerPop extends AppCompatActivity {
                         tv_question_field.setText(questionkey);
                         tv_answer1_field.setText(answer1);
                         tv_answer2_field.setText(answer2);
+                        databasesetting.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                tv_answer1_title=findViewById(R.id.tv_answer1_title);
+                                tv_answer2_title=findViewById(R.id.tv_answer2_title);
+                                if(snapshot.child("mynickname").child(user.getUid()).getValue()!=null){
+                                    mynick = snapshot.child("mynickname").child(user.getUid()).getValue().toString();
+                                    tv_answer1_title.setText(mynick+"님의 답변");
+                                    lovernick=snapshot.child("lovernickname").child(LOVERUID).getValue().toString();
+                                    tv_answer2_title.setText(lovernick+"님의 답변");
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                 }
             }
@@ -89,25 +108,6 @@ public class AnswerPop extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }

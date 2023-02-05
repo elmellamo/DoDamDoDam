@@ -115,7 +115,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:fontFamily="@font/font_title"
-                        android:text="답변 1"
+
                         android:textSize="30dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/tv_answer1_field"
@@ -149,7 +149,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:fontFamily="@font/font_title"
-                        android:text="답변 2"
+
                         android:textSize="30dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/tv_answer2_field"
