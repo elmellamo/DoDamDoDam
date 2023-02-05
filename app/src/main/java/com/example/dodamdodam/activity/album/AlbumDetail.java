@@ -224,6 +224,8 @@ public class AlbumDetail  extends BasicActivity {
                 }
             });
         }else{
+            ic_morebutton.setVisibility(View.GONE);
+
             dbSetting.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
