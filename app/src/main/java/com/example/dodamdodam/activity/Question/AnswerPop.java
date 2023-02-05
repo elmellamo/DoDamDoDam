@@ -78,8 +78,8 @@ public class AnswerPop extends AppCompatActivity {
                         questionkey=snapshot1.getKey();
                         answer1=snapshot1.child(user.getUid()).getValue().toString();
                         answer2=snapshot1.child(LOVERUID).getValue().toString();
-                        tv_question_title.setText(List_Num+"번째 질문");
-                        tv_question_field.setText("질문 : "+questionkey);
+                        tv_question_title.setText("우리의 "+List_Num+"번째 질문");
+                        tv_question_field.setText(questionkey);
                         tv_answer1_field.setText(answer1);
                         tv_answer2_field.setText(answer2);
                     }
