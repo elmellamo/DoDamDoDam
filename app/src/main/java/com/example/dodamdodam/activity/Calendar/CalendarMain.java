@@ -1,5 +1,6 @@
 package com.example.dodamdodam.activity.Calendar;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
@@ -67,11 +69,17 @@ public class CalendarMain extends BasicActivity {
     public int resultnum;
     public String MYNICK,LOVERNICK;
     public ConstraintLayout scroll_calendar;
+    Dialog dilaog01; // 커스텀 다이얼로그
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_main);
+
+        dilaog01 = new Dialog(CalendarMain.this);       // Dialog 초기화
+        dilaog01.requestWindowFeature(Window.FEATURE_NO_TITLE); // 타이틀 제거
+        dilaog01.setContentView(R.layout.dialog01);
+
         calendarView = findViewById(R.id.calendarView);
         diaryTextView = findViewById(R.id.diaryTextView);
         save_Btn = findViewById(R.id.save_Btn);
@@ -81,7 +89,8 @@ public class CalendarMain extends BasicActivity {
 
         loverText = findViewById(R.id.loverText);
         contextEditText = (EditText) findViewById(R.id.contextEditText);
-
+        todayText.setVisibility(View.INVISIBLE);
+        loverText.setVisibility(View.INVISIBLE);
         contextEditText.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View view, MotionEvent event) {
                 // TODO Auto-generated method stub
@@ -203,6 +212,8 @@ public class CalendarMain extends BasicActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth)
             {
+                loverText.setVisibility(View.VISIBLE);
+
                 Calendar calendar = Calendar.getInstance();
                 calendar.set(year, month,dayOfMonth);
                 int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
@@ -306,10 +317,20 @@ public class CalendarMain extends BasicActivity {
             @Override
             public void onClick(View view)
             {
-                showDialog(todayText.getText().toString());
+                //showDialog(todayText.getText().toString());
+                showDialog01(todayText.getText().toString());
             }
         });
 
+        loverText.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                //showDialog(loverText.getText().toString());
+                showDialog01(loverText.getText().toString());
+            }
+        });
 
 
         cha_Btn.setOnClickListener(new View.OnClickListener()
@@ -346,8 +367,6 @@ public class CalendarMain extends BasicActivity {
 
             }
         });
-
-
         album_Btn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -376,20 +395,25 @@ public class CalendarMain extends BasicActivity {
         });
     }
 
-    void showDialog(String str) {
-        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(CalendarMain.this)
-                .setTitle("나의 일정")
-                .setMessage(str)
-                .setPositiveButton("닫기", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //Toast.makeText(CalendarMain.this, "취소하였습니다", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-        AlertDialog msgDlg = msgBuilder.create();
-        msgDlg.show();
-    }
+//    void showDialog(String str) {
+//        AlertDialog.Builder msgBuilder = new AlertDialog.Builder(CalendarMain.this)
+//                .setTitle("나의 일정")
+//                .setMessage(str)
+//                .setPositiveButton("닫기", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        //Toast.makeText(CalendarMain.this, "취소하였습니다", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+//        AlertDialog msgDlg = msgBuilder.create();
+//        msgDlg.show();
+//
+//        TextView textView = (TextView) dialog.findViewById(android.R.id.message);
+//        Typeface face = Typeface.createFromAsset(getAssets(),"font/font_1");
+//        textView.setTypeface(face);
+//
+//    }
 
 
     private void myStartActivity(Class c){
@@ -453,5 +477,18 @@ public class CalendarMain extends BasicActivity {
             }
         });
         builder.show();
+    }
+    public void showDialog01(String str){
+        TextView tmptext = dilaog01.findViewById(R.id.dialogtextView);
+        tmptext.setMovementMethod(new ScrollingMovementMethod());
+        tmptext.setText(str);
+        dilaog01.show();
+        dilaog01.findViewById(R.id.yesBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dilaog01.dismiss();          // 앱 종료
+            }
+        });
     }
 }
