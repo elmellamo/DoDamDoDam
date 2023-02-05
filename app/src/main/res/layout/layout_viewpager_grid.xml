@@ -13,12 +13,14 @@
     <ProgressBar
         android:id="@+id/circle_progress_bar"
         android:layout_width="50dp"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_height="50dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/circular_progress_background"
+        android:progressBackgroundTint="@color/light_gray"
+        android:progressTint="#FCBE54"
         android:indeterminate="false"
         android:max="120"
-        android:progress="0"
+        android:progress="20"
         android:progressDrawable="@drawable/circular_progress_bar" />
 
 </RelativeLayout>
