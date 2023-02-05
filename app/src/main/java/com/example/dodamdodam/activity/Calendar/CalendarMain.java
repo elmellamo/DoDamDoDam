@@ -79,16 +79,17 @@ public class CalendarMain extends BasicActivity {
         todayText = findViewById(R.id.todaytext);
         loverText = findViewById(R.id.loverText);
         contextEditText = findViewById(R.id.contextEditText);
-        contextEditText.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
-                    save_Btn.performClick();
-                    return true;
-                }
-                return false;
-            }
-        });
+
+//        contextEditText.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+//                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+//                    save_Btn.performClick();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 
 //        contextEditText.setOnTouchListener(new View.OnTouchListener() {
 //            @Override
