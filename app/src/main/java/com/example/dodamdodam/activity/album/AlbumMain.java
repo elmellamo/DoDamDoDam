@@ -234,4 +234,8 @@ public class AlbumMain extends BasicActivity {
         Intent intent = new Intent(this, c);
         startActivity(intent);
     }
+
+    protected void onResume() {
+        super.onResume();
+    }
 }
