@@ -42,27 +42,6 @@ public class LoginActivity extends BasicActivity {
         email_text = textInputLayout.getEditText().getText().toString();
         TextInputLayout textInputLayout2 = findViewById(R.id.passwordEditText);
         password_text = textInputLayout2.getEditText().getText().toString();
-//        idEditText.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-//                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
-//                    //passwordEditText.requestFocus();
-//                    passwordEditText.performClick();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
-//        passwordEditText.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-//                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
-//                    checkBtn.performClick();
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
 
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser()!=null){
