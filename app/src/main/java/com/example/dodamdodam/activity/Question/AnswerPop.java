@@ -91,7 +91,7 @@ public class AnswerPop extends AppCompatActivity {
                                 if(snapshot.child("mynickname").child(user.getUid()).getValue()!=null){
                                     mynick = snapshot.child("mynickname").child(user.getUid()).getValue().toString();
                                     tv_answer1_title.setText(mynick+"님의 답변");
-                                    lovernick=snapshot.child("lovernickname").child(LOVERUID).getValue().toString();
+                                    lovernick=snapshot.child("lovernickname").child(user.getUid()).getValue().toString();
                                     tv_answer2_title.setText(lovernick+"님의 답변");
                                 }
                             }

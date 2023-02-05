@@ -5,12 +5,13 @@
     android:id="@+id/activity_second"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.Login.LoginActivity"
     android:background="#FFF7D2"
-    android:paddingTop="50dp"
+    android:orientation="vertical"
     android:paddingLeft="25dp"
-    android:paddingRight="25dp">
+    android:paddingTop="50dp"
+    android:paddingRight="25dp"
+    tools:context=".activity.Login.LoginActivity">
+
     <ImageView
         android:id="@+id/dodamlogo"
         android:layout_width="wrap_content"
@@ -18,49 +19,49 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="40dp"
         android:src="@drawable/rabbitreallogo"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dodamlogo"
-        android:layout_marginBottom="20dp">
+        app:layout_constraintTop_toBottomOf="@+id/dodamlogo">
 
         <TextView
             android:id="@+id/memberinfo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="80dp"
+            android:fontFamily="@font/font_1"
             android:gravity="center"
             android:text="로 그 인"
             android:textColor="#000000"
-            android:layout_marginBottom="80dp"
             android:textSize="37dp"
-            android:fontFamily="@font/font_1"
             app:layout_constraintBottom_toTopOf="@id/emailEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:ems="10"
+            android:fontFamily="@font/font_1"
             android:hint="이 메 일"
             android:inputType="textEmailAddress"
-            android:textSize="20dp"
-            android:fontFamily="@font/font_1"
-            android:layout_marginBottom="20dp"
             android:letterSpacing="0.15"
-
             android:paddingBottom="20dp"
+
+            android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@id/passwordEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,46 +71,81 @@
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="비 밀 번 호"
-            android:textSize="20dp"
-            android:fontFamily="@font/font_1"
-            android:paddingBottom="20dp"
             android:layout_marginBottom="10dp"
-            android:letterSpacing="0.15"
-
+            android:ems="10"
+            android:fontFamily="@font/font_1"
+            android:hint="비 밀 번 호"
             android:inputType="textPassword"
+            android:letterSpacing="0.15"
+            android:paddingBottom="20dp"
+
+            android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@id/checkBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emailEditText"/>
+            app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+
+
+        <!--        <com.google.android.material.textfield.TextInputLayout-->
+        <!--            android:id="@+id/textInputLayout"-->
+        <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+        <!--            android:layout_width="300dp"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="32dp"-->
+        <!--            android:maxLines="3"-->
+        <!--            android:lines="3"-->
+        <!--            app:counterEnabled="true"-->
+        <!--            android:inputType="textMultiLine"-->
+        <!--            app:counterMaxLength="10"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+
+        <!--            >-->
+
+        <!--        <com.google.android.material.textfield.TextInputEditText-->
+        <!--            android:id="@+id/multilinetest"-->
+        <!--            android:maxLines="3"-->
+        <!--            android:gravity="top|left"-->
+        <!--            android:inputType="textMultiLine"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:hint="나의 답변"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            />-->
+        <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/checkBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/white_rounded_button"
             android:layout_marginTop="70dp"
             android:layout_marginBottom="15dp"
-            android:padding="12dp"
-            android:textSize="20dp"
+            android:background="@drawable/white_rounded_button"
             android:fontFamily="@font/font_1"
+            android:padding="12dp"
             android:text="로 그 인"
+            android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@id/signupBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/passwordEditText"/>
+            app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/signupBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/white_rounded_button"
-            android:padding="12dp"
-            android:textSize="20dp"
-            android:fontFamily="@font/font_1"
-            android:text="회 원 가 입"
             android:layout_marginBottom="15dp"
+            android:background="@drawable/white_rounded_button"
+            android:fontFamily="@font/font_1"
+            android:padding="12dp"
+            android:text="회 원 가 입"
+            android:textSize="20dp"
 
             app:layout_constraintBottom_toTopOf="@id/gotoPasswordResetBtn"
             app:layout_constraintEnd_toEndOf="parent"
@@ -120,35 +156,49 @@
             android:id="@+id/gotoPasswordResetBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/white_rounded_button"
-            android:padding="12dp"
-            android:textSize="20dp"
-            android:fontFamily="@font/font_1"
-            android:text="비 밀 번 호 재 설 정"
             android:layout_marginBottom="50dp"
+            android:background="@drawable/white_rounded_button"
+            android:fontFamily="@font/font_1"
+            android:padding="12dp"
+            android:text="비 밀 번 호 재 설 정"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/signupBtn"/>
+            app:layout_constraintTop_toBottomOf="@id/signupBtn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--            <Button-->
-    <!--                android:id="@+id/checkBtn"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="로그인" />-->
 
-    <!--            <Button-->
-    <!--                android:id="@+id/gotoPasswordResetBtn"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="비밀번호 재설정" />-->
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/textInputLayout"-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--            android:layout_width="300dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="32dp"-->
+<!--            android:inputType="textMultiLine"-->
+<!--            android:lines="3"-->
+<!--            android:maxLines="3"-->
+<!--            app:counterEnabled="true"-->
+<!--            app:counterMaxLength="10"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent">-->
 
-    <!--            <Button-->
-    <!--                android:id="@+id/gotosignupBtn"-->
-    <!--                android:layout_width="wrap_content"-->
-    <!--                android:layout_height="wrap_content"-->
-    <!--                android:text="회원가입" />-->
+
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/multilinetest"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:gravity="top|left"-->
+<!--                android:hint="나의 답변"-->
+<!--                android:inputType="textMultiLine"-->
+<!--                android:maxLines="3"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
