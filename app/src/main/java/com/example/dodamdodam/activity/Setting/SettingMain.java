@@ -1,11 +1,14 @@
 package com.example.dodamdodam.activity.Setting;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -49,10 +52,18 @@ public class SettingMain extends AppCompatActivity {
     public String TAG,LOVERUID2;
     public ImageView imageView2;
     public Boolean chkVariable = true;
+    Dialog dilaog02;
+    Dialog dilaog03;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting_main);
+        dilaog02 = new Dialog(SettingMain.this);       // Dialog 초기화
+        dilaog02.requestWindowFeature(Window.FEATURE_NO_TITLE); // 타이틀 제거
+        dilaog02.setContentView(R.layout.dialog02);
+        dilaog03 = new Dialog(SettingMain.this);       // Dialog 초기화
+        dilaog03.requestWindowFeature(Window.FEATURE_NO_TITLE); // 타이틀 제거
+        dilaog03.setContentView(R.layout.logoutdialog);
         chabtn_1 = findViewById(R.id.chaBtn1);
         chabtn_2 = findViewById(R.id.chaBtn2);
         chabtn_3 = findViewById(R.id.chaBtn3);
@@ -353,14 +364,15 @@ public class SettingMain extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                showDialog();
+                showDialog01();
             }
         });
         logoutbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                myStartActivity(LoginActivity.class);
+                showDialog03();
+//                FirebaseAuth.getInstance().signOut();
+//                myStartActivity(LoginActivity.class);
             }
         });
 
@@ -420,8 +432,43 @@ public class SettingMain extends AppCompatActivity {
         msgDlg.show();
     }
 
+    public void showDialog01(){
+        TextView tmptext = dilaog02.findViewById(R.id.dialogtextView);
 
+        dilaog02.show();
+        dilaog02.findViewById(R.id.withdrawBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WITHDRAW();
+            }
+        });
+        dilaog02.findViewById(R.id.closeBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                dilaog02.dismiss();          // 앱 종료
+            }
+        });
+    }
+
+    public void showDialog03(){
+
+        dilaog03.show();
+        dilaog03.findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                myStartActivity(LoginActivity.class);
+            }
+        });
+        dilaog03.findViewById(R.id.closeBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                dilaog03.dismiss();          // 앱 종료
+            }
+        });
+    }
 
     void WITHDRAW(){
         //user = FirebaseAuth.getInstance().getCurrentUser();
