@@ -170,6 +170,10 @@ public class SignUpActivity extends AppCompatActivity {
 //        });
 //        builder.show();
 //    }
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
 }

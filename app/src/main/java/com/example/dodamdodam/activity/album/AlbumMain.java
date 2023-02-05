@@ -1,6 +1,7 @@
 package com.example.dodamdodam.activity.album;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.DataSetObserver;
 import android.os.Bundle;
@@ -13,11 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dodamdodam.R;
 import com.example.dodamdodam.activity.Calendar.CalendarMain;
 import com.example.dodamdodam.activity.Login.BasicActivity;
+import com.example.dodamdodam.activity.Login.LoginActivity;
 import com.example.dodamdodam.activity.Question.QuestionMain;
 import com.example.dodamdodam.activity.Setting.SettingMain;
 import com.example.dodamdodam.adapter.AlbumMainListAdapter;
@@ -224,12 +227,11 @@ public class AlbumMain extends BasicActivity {
     private void startToast(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
-    }
+    //   @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        finish();
+//    }
     private void myStartActivity(Class c){
         Intent intent = new Intent(this, c);
         startActivity(intent);
@@ -237,5 +239,25 @@ public class AlbumMain extends BasicActivity {
 
     protected void onResume() {
         super.onResume();
+    }
+    @Override
+    public void onBackPressed() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(AlbumMain.this);
+        builder.setMessage("도담도담 앱을 종료하시겠습니까?");
+        builder.setPositiveButton("아니오", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.setNegativeButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                moveTaskToBack(true); // 태스크를 백그라운드로 이동
+                finishAndRemoveTask(); // 액티비티 종료 + 태스크 리스트에서 지우기
+                finish();
+            }
+        });
+        builder.show();
     }
 }

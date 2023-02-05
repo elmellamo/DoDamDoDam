@@ -30,6 +30,7 @@ import com.example.dodamdodam.adapter.CustomAdapter;
 import com.example.dodamdodam.models.MediaType;
 import com.example.dodamdodam.models.RecyclerViewItem;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -227,7 +228,9 @@ public class AlbumAdd extends AppCompatActivity {
     }
 
     private void storageUpload(){
-        final String title = ((EditText)findViewById(R.id.title_edit)).getText().toString();
+        TextInputLayout textInputLayout2 = findViewById(R.id.title_edit);
+        final String title =textInputLayout2.getEditText().getText().toString();
+        //final String title = ((EditText)findViewById(R.id.title_edit)).getText().toString();
         final String contents = ((EditText)findViewById(R.id.contets_edit)).getText().toString();
         if(title.length()>0 && !pathList.isEmpty()){
 

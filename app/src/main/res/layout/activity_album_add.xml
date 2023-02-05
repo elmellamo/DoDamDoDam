@@ -25,25 +25,79 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/title_edit"/>
 
-            <EditText
-                android:id="@+id/title_edit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:layout_marginEnd="30dp"
-                android:layout_marginStart="30dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:gravity="top|left"
-                android:hint="제 목"
-                android:textSize="20dp"
-                android:fontFamily="@font/font_1"
-                app:layout_constraintBottom_toTopOf="@+id/contents_layout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Post_text" />
 
-            <LinearLayout
+<!--    -->
+<!--            <EditText-->
+<!--                android:id="@+id/title_edit"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:ems="10"-->
+<!--                android:layout_marginEnd="30dp"-->
+<!--                android:layout_marginStart="30dp"-->
+<!--                android:paddingLeft="20dp"-->
+<!--                android:paddingRight="20dp"-->
+<!--                android:gravity="top|left"-->
+<!--                android:hint="제 목"-->
+<!--                android:textSize="20dp"-->
+<!--                android:fontFamily="@font/font_1"-->
+<!--                app:layout_constraintBottom_toTopOf="@+id/contents_layout"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/Post_text" />-->
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/title_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        app:counterEnabled="true"
+        app:counterMaxLength="20"
+        app:layout_constraintBottom_toTopOf="@+id/contents_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Post_text"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/title_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:paddingBottom="20dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textSize="20dp"
+            android:fontFamily="@font/font_1"
+            android:letterSpacing="0.15"
+            android:hint="제 목"
+            android:maxLength="20"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <LinearLayout
                 android:id="@+id/contents_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

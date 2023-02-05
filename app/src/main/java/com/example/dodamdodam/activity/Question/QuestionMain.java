@@ -312,7 +312,7 @@ public class QuestionMain extends AppCompatActivity {
                             //et_ques=findViewById(R.id.textinput_edittext);
                             TextInputLayout textInputLayout2 = findViewById(R.id.et_question);
                             str_ans=textInputLayout2.getEditText().getText().toString();
-                            tv_show_answer1.setText(str_ans);
+                            tv_show_answer1.setText("나의 답변 : "+str_ans);
                             tv_show_answer1.setVisibility(View.VISIBLE);
                             databaseReference.child(Integer.toString(number)).child(questionkey).child(user.getUid()).setValue(str_ans);
                             Toast myToast = Toast.makeText(getApplicationContext(),"답변이 등록되었습니다!", Toast.LENGTH_SHORT);
