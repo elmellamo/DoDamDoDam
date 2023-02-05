@@ -52,9 +52,7 @@ public class QuestionAdapter  extends RecyclerView.Adapter<QuestionAdapter.Queti
     @Override
     public void onBindViewHolder(@NonNull QuestionAdapter.QuetionViewHolder holder, int position) {
         holder.tv_ques.setText(arrayList.get(position).getQues());
-        holder.tv_ans1.setText(arrayList.get(position).getAns1());
-        holder.tv_ans2.setText(arrayList.get(position).getAns2());
-        holder.tv_list_num.setText(arrayList.get(position).getList_num());
+        holder.tv_list_num.setText("#"+arrayList.get(position).getList_num());
 
     }
 
@@ -66,21 +64,17 @@ public class QuestionAdapter  extends RecyclerView.Adapter<QuestionAdapter.Queti
     public class QuetionViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView tv_ques;
-        protected TextView tv_ans1;
-        protected TextView tv_ans2;
         protected TextView tv_list_num;
         public QuetionViewHolder(@NonNull View itemView) {
             super(itemView);
             this.tv_ques=(TextView) itemView.findViewById(R.id.tv_ques);
-            this.tv_ans1=(TextView) itemView.findViewById(R.id.tv_ans1);
-            this.tv_ans2=(TextView) itemView.findViewById(R.id.tv_ans2);
             this.tv_list_num=(TextView) itemView.findViewById(R.id.tv_list_num);
 
             itemView.setClickable(true);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int pos=getAdapterPosition();
+                    int pos=getAdapterPosition()+1;
                     if(pos!=RecyclerView.NO_POSITION){
                         Intent intent=new Intent(mContext,AnswerPop.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("List_Num",Integer.toString(pos));

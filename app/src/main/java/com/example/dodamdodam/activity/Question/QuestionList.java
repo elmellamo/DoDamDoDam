@@ -87,14 +87,7 @@ public class QuestionList extends AppCompatActivity {
                                     if (snapshot1.hasChild(userUid)) {
                                         question = questionkey;
                                     } else question = null;
-
-                                    if (snapshot1.hasChild(userUid)) {
-                                        answer1 = snapshot1.child(userUid).getValue().toString();
-                                    } else answer1 = null;
-                                    if (snapshot1.hasChild(loverUid)) {
-                                        answer2 = snapshot1.child(loverUid).getValue().toString();
-                                    } else answer2 = null;
-                                    QuestionListObject questionlistObject = new QuestionListObject(question, answer1, answer2,list_num);
+                                    QuestionListObject questionlistObject = new QuestionListObject(question,list_num);
                                     arrayList.add(questionlistObject);
                                 }
                             }
