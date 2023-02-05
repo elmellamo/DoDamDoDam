@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -29,34 +30,39 @@ public class LoginActivity extends BasicActivity {
     private FirebaseAuth mAuth;
     private EditText idEditText, passwordEditText;
     private Button checkBtn;
+    private String email_text, password_text;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        idEditText=findViewById(R.id.emailEditText);
-        passwordEditText=findViewById(R.id.passwordEditText);
+        //idEditText=findViewById(R.id.emailEditText);
+        //passwordEditText=findViewById(R.id.passwordEditText);
         checkBtn = findViewById(R.id.checkBtn);
-        idEditText.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
-                    //passwordEditText.requestFocus();
-                    passwordEditText.performClick();
-                    return true;
-                }
-                return false;
-            }
-        });
-        passwordEditText.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View view, int i, KeyEvent keyEvent) {
-                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
-                    checkBtn.performClick();
-                    return true;
-                }
-                return false;
-            }
-        });
+        TextInputLayout textInputLayout = findViewById(R.id.emailEditText);
+        email_text = textInputLayout.getEditText().getText().toString();
+        TextInputLayout textInputLayout2 = findViewById(R.id.passwordEditText);
+        password_text = textInputLayout2.getEditText().getText().toString();
+//        idEditText.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+//                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+//                    //passwordEditText.requestFocus();
+//                    passwordEditText.performClick();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
+//        passwordEditText.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+//                if((keyEvent.getAction()==keyEvent.ACTION_DOWN)&& i == KeyEvent.KEYCODE_ENTER){
+//                    checkBtn.performClick();
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
 
         mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser()!=null){
@@ -97,11 +103,6 @@ public class LoginActivity extends BasicActivity {
         findViewById(R.id.checkBtn).setOnClickListener(onClickListener);
         findViewById(R.id.gotoPasswordResetBtn).setOnClickListener(onClickListener);
         findViewById(R.id.signupBtn).setOnClickListener(onClickListener);
-
-        //androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        //getSupportActionBar().setTitle("도담도담");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -122,8 +123,11 @@ public class LoginActivity extends BasicActivity {
     };
 
     private void login() {
-        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
-        String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
+        TextInputLayout textInputLayout = findViewById(R.id.emailEditText);
+        String email = textInputLayout.getEditText().getText().toString();
+        //String email = ((EditText) findViewById(R.id.textinput_edittext)).getText().toString();
+        TextInputLayout textInputLayout2 = findViewById(R.id.passwordEditText);
+        String password = textInputLayout2.getEditText().getText().toString();
 
         if (email.length() > 0 && password.length() > 0) {
             mAuth.signInWithEmailAndPassword(email, password)

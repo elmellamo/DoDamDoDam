@@ -49,75 +49,98 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+<!--        <EditText-->
+<!--            android:id="@+id/emailEditText"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/font_1"-->
+<!--            android:hint="이 메 일"-->
+<!--            android:inputType="textEmailAddress"-->
+<!--            android:letterSpacing="0.15"-->
+<!--            android:paddingBottom="20dp"-->
+
+<!--            android:textSize="20dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/passwordEditText"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/memberinfo" />-->
+
+
+
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:ems="10"
-            android:fontFamily="@font/font_1"
-            android:hint="이 메 일"
-            android:inputType="textEmailAddress"
-            android:letterSpacing="0.15"
-            android:paddingBottom="20dp"
-
-            android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@id/passwordEditText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/memberinfo" />
+            app:layout_constraintTop_toBottomOf="@id/memberinfo"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textinput_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingBottom="20dp"
+                android:textSize="20dp"
+                android:fontFamily="@font/font_1"
+                android:letterSpacing="0.15"
+                android:hint="이 메 일"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
+<!--        <EditText-->
+<!--            android:id="@+id/passwordEditText"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginBottom="10dp"-->
+<!--            android:ems="10"-->
+<!--            android:fontFamily="@font/font_1"-->
+<!--            android:hint="비 밀 번 호"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:letterSpacing="0.15"-->
+<!--            android:paddingBottom="20dp"-->
+
+<!--            android:textSize="20dp"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/checkBtn"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/emailEditText" />-->
+
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:ems="10"
-            android:fontFamily="@font/font_1"
-            android:hint="비 밀 번 호"
-            android:inputType="textPassword"
-            android:letterSpacing="0.15"
-            android:paddingBottom="20dp"
-
-            android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@id/checkBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emailEditText" />
+            app:layout_constraintTop_toBottomOf="@id/emailEditText"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textinput_edittext2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:paddingBottom="20dp"
+                android:textSize="20dp"
+                android:fontFamily="@font/font_1"
+                android:letterSpacing="0.15"
+                android:hint="비 밀 번 호"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-        <!--        <com.google.android.material.textfield.TextInputLayout-->
-        <!--            android:id="@+id/textInputLayout"-->
-        <!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-        <!--            android:layout_width="300dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="32dp"-->
-        <!--            android:maxLines="3"-->
-        <!--            android:lines="3"-->
-        <!--            app:counterEnabled="true"-->
-        <!--            android:inputType="textMultiLine"-->
-        <!--            app:counterMaxLength="10"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
 
-        <!--            >-->
 
-        <!--        <com.google.android.material.textfield.TextInputEditText-->
-        <!--            android:id="@+id/multilinetest"-->
-        <!--            android:maxLines="3"-->
-        <!--            android:gravity="top|left"-->
-        <!--            android:inputType="textMultiLine"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:hint="나의 답변"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent"-->
-        <!--            app:layout_constraintTop_toTopOf="parent"-->
-        <!--            />-->
-        <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+
+
+
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -199,6 +222,23 @@
 <!--                app:layout_constraintStart_toStartOf="parent"-->
 <!--                app:layout_constraintTop_toTopOf="parent" />-->
 <!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
