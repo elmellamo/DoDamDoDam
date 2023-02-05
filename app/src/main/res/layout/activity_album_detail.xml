@@ -89,15 +89,36 @@
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/relLayout3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/relLayout3"
+        android:orientation="vertical"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+
         app:layout_constraintVertical_weight="0.3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_circle"
+        >
+
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/relLayout3_1"
+        app:layout_constraintVertical_weight="0.3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
         android:padding="20dp"
         android:background="#FFF7D2">
 
@@ -136,6 +157,7 @@
             android:id="@+id/image_time_posted"
             android:layout_marginTop="15dp"/>
     </RelativeLayout>
+</androidx.core.widget.NestedScrollView>
 
 
     <RelativeLayout

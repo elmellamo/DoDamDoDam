@@ -79,6 +79,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/memberinfo"
+
+
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textinput_edittext"
@@ -90,6 +92,8 @@
                 android:fontFamily="@font/font_1"
                 android:letterSpacing="0.15"
                 android:hint="이 메 일"
+
+
                 />
         </com.google.android.material.textfield.TextInputLayout>
 

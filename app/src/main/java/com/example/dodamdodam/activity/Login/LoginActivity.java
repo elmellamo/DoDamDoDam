@@ -39,7 +39,7 @@ public class LoginActivity extends BasicActivity {
         //passwordEditText=findViewById(R.id.passwordEditText);
         checkBtn = findViewById(R.id.checkBtn);
         TextInputLayout textInputLayout = findViewById(R.id.emailEditText);
-        email_text = textInputLayout.getEditText().getText().toString();
+        //textInputLayout.getEditText().setText("ur text");
         TextInputLayout textInputLayout2 = findViewById(R.id.passwordEditText);
         password_text = textInputLayout2.getEditText().getText().toString();
 

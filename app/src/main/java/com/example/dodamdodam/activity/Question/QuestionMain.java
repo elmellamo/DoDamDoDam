@@ -3,6 +3,7 @@ package com.example.dodamdodam.activity.Question;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.example.dodamdodam.activity.Setting.SettingMain;
 import com.example.dodamdodam.activity.album.AlbumMain;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -52,7 +54,7 @@ public class QuestionMain extends AppCompatActivity {
     private Button ques_submit_btn,ques_show_btn;
     private ImageButton question_list_btn;
     public String str_ans = null;
-    private EditText et_ques;
+    public EditText et_ques;
 
     private TextView show_question,tv_show_answer1,tv_show_answer2,tv_today_question,tv_no_answer,tv_happy;
 
@@ -62,6 +64,7 @@ public class QuestionMain extends AppCompatActivity {
     private int num,number;
     private long now;
     public ImageButton ALBUMBTN,CALENDARBTN,SETTINGBTN;
+    private String myanswer_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -70,7 +73,7 @@ public class QuestionMain extends AppCompatActivity {
         ALBUMBTN = findViewById(R.id.albumBtn);
         SETTINGBTN = findViewById(R.id.settingBtn);
         CALENDARBTN = findViewById(R.id.calendarBtn2);
-
+        TextInputLayout textInputLayout = findViewById(R.id.et_question);
         user = FirebaseAuth.getInstance().getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("Question");
         userdatabaseReference = FirebaseDatabase.getInstance().getReference("users");
@@ -100,8 +103,8 @@ public class QuestionMain extends AppCompatActivity {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
         tv_show_answer1=findViewById(R.id.tv_show_answer1);
         tv_show_answer2=findViewById(R.id.tv_show_answer2);
-        et_ques=(EditText)findViewById(R.id.et_question);
-
+        et_ques=findViewById(R.id.textinput_edittext);
+        //et_ques.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         et_ques.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int i, KeyEvent keyEvent) {
@@ -114,14 +117,8 @@ public class QuestionMain extends AppCompatActivity {
         });
         //엔터 안 되게끔 일단 해놨는데 확인 못 함
 
-
-
-
-
-
-
-
-        str_ans=et_ques.getText().toString();
+        TextInputLayout textInputLayout2 = findViewById(R.id.et_question);
+        str_ans=textInputLayout2.getEditText().getText().toString();
         ques_submit_btn=findViewById(R.id.ques_submit_btn);
 
         tv_today_question=findViewById(R.id.tv_today_question);
@@ -158,7 +155,7 @@ public class QuestionMain extends AppCompatActivity {
                                     r1.setVisibility(View.VISIBLE);
                                     r2.setVisibility(View.INVISIBLE);
                                     r3.setVisibility(View.INVISIBLE);
-                                    et_ques.setVisibility(View.VISIBLE);
+                                    textInputLayout2.setVisibility(View.VISIBLE);
                                     ques_submit_btn.setVisibility(View.VISIBLE);
                                     tv_show_answer1.setVisibility(View.INVISIBLE);
                                     tv_show_answer2.setVisibility(View.INVISIBLE);
@@ -182,7 +179,7 @@ public class QuestionMain extends AppCompatActivity {
                                 show_question.setText(questionkey);
 
                                 if(childSnapshot.hasChild(user.getUid())){//내 답변이 등록되있을떄
-                                    et_ques.setVisibility(View.INVISIBLE);
+                                    textInputLayout2.setVisibility(View.INVISIBLE);
                                     ques_submit_btn.setVisibility(View.INVISIBLE);
                                     databasesetting.addListenerForSingleValueEvent(new ValueEventListener() {
                                         @Override
@@ -304,20 +301,23 @@ public class QuestionMain extends AppCompatActivity {
 
 
             ques_submit_btn.setOnClickListener(new View.OnClickListener() {
+
                 @Override
                 public void onClick(View view) {
-
                     database.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                             number=Integer.valueOf(snapshot.child("Num").child(user.getUid()).getValue().toString());
-                            et_ques=(EditText)findViewById(R.id.et_question);
-                            str_ans=et_ques.getText().toString();
+                            //et_ques=findViewById(R.id.textinput_edittext);
+                            TextInputLayout textInputLayout2 = findViewById(R.id.et_question);
+                            str_ans=textInputLayout2.getEditText().getText().toString();
+                            tv_show_answer1.setText(str_ans);
+                            tv_show_answer1.setVisibility(View.VISIBLE);
                             databaseReference.child(Integer.toString(number)).child(questionkey).child(user.getUid()).setValue(str_ans);
                             Toast myToast = Toast.makeText(getApplicationContext(),"답변이 등록되었습니다!", Toast.LENGTH_SHORT);
                             myToast.show();
-                            et_ques.setVisibility(View.INVISIBLE);
+                            textInputLayout2.setVisibility(View.INVISIBLE);
                             ques_submit_btn.setVisibility(View.INVISIBLE);
 
                             database.addListenerForSingleValueEvent(new ValueEventListener() {

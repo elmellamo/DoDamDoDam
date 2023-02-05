@@ -179,22 +179,48 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
+<!--                <EditText-->
+<!--                    android:id="@+id/et_question"-->
+<!--                    android:layout_width="210dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginEnd="12dp"-->
+<!--                    android:fontFamily="@font/font_1"-->
+<!--                    android:hint="답변을 입력하세요"-->
+<!--                    android:letterSpacing="0.15"-->
+<!--                    android:maxLength="50"-->
+<!--                    android:textSize="20dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:visibility="visible"-->
+<!--                    app:layout_constraintEnd_toStartOf="@+id/ques_submit_btn"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/tv_show_question"-->
+<!--                    />-->
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/et_question"
                     android:layout_width="210dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="12dp"
-                    android:fontFamily="@font/font_1"
-                    android:hint="답변을 입력하세요"
-                    android:letterSpacing="0.15"
-                    android:maxLength="50"
-                    android:textSize="20dp"
                     android:layout_marginTop="20dp"
-                    android:visibility="visible"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="50"
                     app:layout_constraintEnd_toStartOf="@+id/ques_submit_btn"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_show_question"
-                    />
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/textinput_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:paddingBottom="20dp"
+                        android:textSize="20dp"
+                        android:fontFamily="@font/font_1"
+                        android:letterSpacing="0.15"
+                        android:hint="답 변 을   입 력 해 주 세 요"
+                        android:maxLength="50"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
 
