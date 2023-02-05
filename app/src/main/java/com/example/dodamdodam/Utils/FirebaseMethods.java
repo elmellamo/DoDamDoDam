@@ -19,8 +19,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -30,8 +33,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.TimeZone;
 
@@ -69,15 +74,7 @@ public class FirebaseMethods {
         mContext.startActivity(intent);
     }
 
-    public int getPostCount(DataSnapshot dataSnapshot) {
-        int count = 0;
-        for (DataSnapshot ds : dataSnapshot.child(mContext.getString(R.string.dbname_user_posts))
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).getChildren()) {
 
-            count++;
-        }
-        return count;
-    }
 
     public List<String> changeString(ArrayList<Uri> imgUri){
         pleaseUpload = new ArrayList<String>();
@@ -173,6 +170,65 @@ public class FirebaseMethods {
         myRef.child(mContext.getString(R.string.dbname_posts)).child(newPostKey).setValue(post);
 
         return newPostKey;
+    }
+
+    public void modifyPost(String mod_title, String mod_contents, String postId){
+
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("caption", mod_contents);
+        result.put("post_id", postId);
+        result.put("title", mod_title);
+        result.put("user_id", FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+
+        Query query = myRef
+                .child("posts")
+                .child(postId);
+
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                Map<String, Object> objectMap=(HashMap<String,Object>)dataSnapshot.getValue();
+
+                Log.e("로그", "되고 있나요?");
+                result.put("image_path", objectMap.get("image_path"));
+                result.put("date_created", objectMap.get("date_created"));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("로그", "안되고 있네요ㅎㅎ");
+            }
+        });
+
+
+        myRef.child("posts").child(postId).updateChildren(result).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(mContext, "해당 포스트가 수정에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
+        myRef.child("user_posts").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child(postId).updateChildren(result).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(mContext, "해당 포스트가 수정되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(mContext, "해당 포스트가 수정에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        Intent intent = new Intent(mContext, AlbumMain.class);
+        mContext.startActivity(intent);
+
     }
 
     private String getTimeStamp(){

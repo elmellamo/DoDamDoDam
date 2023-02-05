@@ -77,9 +77,6 @@ public class AlbumAdd extends AppCompatActivity {
         deleteBackgroundLayout = findViewById(R.id.deleteBackgroundLayout);
         delete_layout = findViewById(R.id.delete_layout);
 
-        EditText editText = new EditText(AlbumAdd.this);
-        editText.setHint("내용을 입력하세요.");
-
         setupFirebaseAuth();
 
         post_saves.setOnClickListener(new View.OnClickListener() {
@@ -143,7 +140,7 @@ public class AlbumAdd extends AppCompatActivity {
                                 public void onClick(View view) {
                                     deleteBackgroundLayout.setVisibility(View.GONE);
                                     rItem.getGalleryuri().remove(a_position);
-                                    startToast("해당 포스트가 삭제되었습니다.");
+                                    startToast("해당 사진이 삭제되었습니다.");
                                     mAdapter.notifyItemRemoved(a_position);
                                 }
                             });

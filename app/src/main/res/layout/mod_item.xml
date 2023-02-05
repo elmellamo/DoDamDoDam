@@ -1,0 +1,40 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="15dp"
+    android:layout_marginStart="15dp"
+    android:orientation="vertical">
+    <!-- 무조건 wrap_content해야한다 그래야 리스트 하나가 가득 안차고 여러개 가능 -->
+
+    <ImageView
+        android:id="@+id/mod_imgView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent"
+        android:padding="4dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/mod_progress"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/circular_progress_background"
+        android:indeterminate="false"
+        android:max="120"
+        android:progress="0"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        app:layout_constraintBottom_toBottomOf="@+id/mod_imgView"
+        app:layout_constraintEnd_toEndOf="@+id/mod_imgView"
+        app:layout_constraintStart_toStartOf="@+id/mod_imgView"
+        app:layout_constraintTop_toTopOf="@+id/mod_imgView"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

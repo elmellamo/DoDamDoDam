@@ -143,6 +143,7 @@ public class AlbumMain extends BasicActivity {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
         //Log.e("로그", "팔로잉 개수>>>> "+mFollowing.size());
+        mPosts.clear();
         for(int i = 0; i < mFollowing.size(); i++){
             final int count = i;
 
@@ -166,34 +167,8 @@ public class AlbumMain extends BasicActivity {
                         post.setUser_id(objectMap.get("user_id").toString());
                         post.setDate_created(objectMap.get("date_created").toString());
                         post.setImage_path((List<String>) objectMap.get("image_path"));
-
-
-//                        try {
-//                            final int flag =  Intent.FLAG_GRANT_READ_URI_PERMISSION;
-//                            for(int tmp=0; tmp<post.getImage_path().size(); tmp++){
-//                                final Uri tmpuri = Uri.parse(post.getImage_path().get(tmp));
-//
-//                                Log.e("로그", (post.getImage_path().get(tmp)));
-//
-//                                AlbumMain.this.grantUriPermission(getPackageName(), tmpuri, flag);
-//                                Log.e("로그", "안되고 있겠죠?2");
-//                                AlbumMain.this.getContentResolver().takePersistableUriPermission(tmpuri, flag);
-//                                Log.e("로그", "안되고 있겠죠?3");
-//                            }
-//                            Log.e("로그", "안되고 있겠죠?1");
-//                        }
-//                        catch (SecurityException e) {
-//                            // OK, we were not offered any persistable permissions
-//                        }
-
-
                         mPosts.add(post);
                     }
-
-                    /*
-                    if(mPosts.isEmpty()){
-                        emptytxt.setVisibility(mPosts.size()==0?  View.VISIBLE : View.GONE);
-                    }*/
 
                     if(count >= mFollowing.size() -1){
                         //display our photos
@@ -208,6 +183,7 @@ public class AlbumMain extends BasicActivity {
                             setupGridView();
                         }
                     }
+
                 }
 
                 @Override
@@ -242,6 +218,7 @@ public class AlbumMain extends BasicActivity {
         });
 
         gridView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     private void startToast(String msg){

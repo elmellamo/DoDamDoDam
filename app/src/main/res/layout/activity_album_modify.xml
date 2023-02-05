@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_album_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF7D2"
+    tools:context=".activity.album.AlbumModify">
+
+    <TextView
+        android:id="@+id/Post_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post"
+        android:textStyle="bold"
+        android:textSize="70dp"
+        android:fontFamily="@font/font_title"
+        android:letterSpacing="0.15"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/mod_title"/>
+
+    <EditText
+        android:id="@+id/mod_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="top|left"
+        android:hint="제 목"
+        android:textSize="20dp"
+        android:fontFamily="@font/font_1"
+        app:layout_constraintBottom_toTopOf="@+id/mod_contents_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Post_text" />
+
+    <LinearLayout
+        android:id="@+id/mod_contents_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/mod_gallery_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mod_title">
+
+        <EditText
+            android:id="@+id/mod_contets_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:gravity="top|left"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:hint="내 용"
+            android:textSize="20dp"
+            android:fontFamily="@font/font_1"/>
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mod_gallery_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mod_contents_layout"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/mod_gallery_layout">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/mod_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="저장"
+            android:background="@drawable/white_rounded_button"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,7 +48,7 @@ public class AlbumDetail  extends BasicActivity {
     private ViewPager2 mPager;
     private CircleIndicator3 mindicator;
     private TextView image_title, image_caption, image_time_posted, username;
-    private ConstraintLayout delete_layout;
+    private ConstraintLayout delete_layout, modify_layout;
     private String postId, myId;
     private FirebaseUser user;
     private MyAdapter myAdapter;
@@ -76,7 +76,7 @@ public class AlbumDetail  extends BasicActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         delete_layout = findViewById(R.id.delete_layout);
         mFirebaseMethods = new FirebaseMethods(AlbumDetail.this);
-
+        modify_layout = findViewById(R.id.modify_layout);
 
         setupImage();
         setImage();
@@ -96,6 +96,15 @@ public class AlbumDetail  extends BasicActivity {
             }
         });
 
+        modify_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AlbumDetail.this, AlbumModify.class);
+                intent.putExtra("postId", postId);
+                //intent.putExtra("date_created", )
+                startActivity(intent);
+            }
+        });
         delete_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
