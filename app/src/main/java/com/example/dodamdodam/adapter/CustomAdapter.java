@@ -20,9 +20,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgView_item;
+        ImageView delete_sign;
         public ViewHolder(@NonNull View itemView, final OnItemClickEventListener a_itemClickListener) {
             super(itemView);
             imgView_item = (ImageView) itemView.findViewById(R.id.imgView_item);
+            delete_sign = (ImageView) itemView.findViewById(R.id.del_sign);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
