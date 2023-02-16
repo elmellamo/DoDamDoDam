@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.dodamdodam">
+    package="com.dodamdodam.dodamdodam">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion = "32"/>
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
     <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
     <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,7 +22,7 @@
         >
 
         <activity
-            android:name=".activity.Login.SplashActivity"
+            android:name="com.dodamdodam.dodamdodam.activity.Login.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.DoDamDoDam">
             <intent-filter>
@@ -31,49 +32,49 @@
         </activity>
 
 
-        <activity android:name=".activity.Login.LoginActivity"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.Login.LoginActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.Login.SignUpActivity"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.Login.SignUpActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.Login.PasswordResetActivity"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.Login.PasswordResetActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.Login.MemberInitActivity"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.Login.MemberInitActivity"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.Login.FindLover"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.Login.FindLover"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.Login.PutCode"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.Login.PutCode"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.album.AlbumMain"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.album.AlbumMain"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.album.AlbumAdd"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.album.AlbumAdd"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.Calendar.CalendarMain"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.Calendar.CalendarMain"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.Question.QuestionList"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.Question.QuestionList"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.Question.QuestionMain"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.Question.QuestionMain"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.Setting.SettingMain"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.Setting.SettingMain"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.album.AlbumDetail"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.album.AlbumDetail"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.Question.AnswerPop"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.Question.AnswerPop"
             android:exported="true">
         </activity>
-        <activity android:name=".activity.album.AlbumModify"
+        <activity android:name="com.dodamdodam.dodamdodam.activity.album.AlbumModify"
             android:exported="true">
         </activity>
     </application>
