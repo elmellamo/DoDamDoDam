@@ -34,12 +34,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/album_add"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_weight="0.7"/>
 
         <ImageButton
             android:id="@+id/album_add"
             android:layout_width="0dp"
             android:layout_height="30dp"
+            app:layout_constraintHorizontal_weight="0.3"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"

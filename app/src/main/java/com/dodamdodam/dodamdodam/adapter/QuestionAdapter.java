@@ -58,7 +58,7 @@ public class QuestionAdapter  extends RecyclerView.Adapter<QuestionAdapter.Queti
             super(itemView);
             this.tv_ques=(TextView) itemView.findViewById(R.id.tv_ques);
             this.tv_list_num=(TextView) itemView.findViewById(R.id.tv_list_num);
-            /*
+
             itemView.setClickable(true);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -72,7 +72,7 @@ public class QuestionAdapter  extends RecyclerView.Adapter<QuestionAdapter.Queti
                 }
             });
 
-             */
+
         }
     }
 
