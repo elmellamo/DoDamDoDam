@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "991088109868",
-    "project_id": "dodamdodam-f3450",
-    "storage_bucket": "dodamdodam-f3450.appspot.com"
+    "project_number": "40579004159",
+    "project_id": "dodamplaystore",
+    "storage_bucket": "dodamplaystore.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:991088109868:android:3fb50a0479551fe3562489",
+        "mobilesdk_app_id": "1:40579004159:android:9c4f77c4c617e3cb3a3eca",
         "android_client_info": {
           "package_name": "com.dodamdodam.dodamdodam"
         }
       },
       "oauth_client": [
         {
-          "client_id": "991088109868-54f3rqt5386o7ekjtde88agsohhif7e9.apps.googleusercontent.com",
+          "client_id": "40579004159-m4hiu8d4ch8b47u9i6s8kq7ta15357jk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBIG-v20aIXoIKI3-rAw4wCzsBgpZXB7NQ"
+          "current_key": "AIzaSyCEcuu1BO8r5JohemjegIvxbWWypzv5fbo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "991088109868-54f3rqt5386o7ekjtde88agsohhif7e9.apps.googleusercontent.com",
+              "client_id": "40579004159-m4hiu8d4ch8b47u9i6s8kq7ta15357jk.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
