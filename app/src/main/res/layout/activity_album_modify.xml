@@ -69,7 +69,6 @@
             android:fontFamily="@font/font_1"/>
     </LinearLayout>
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mod_gallery_layout"
         android:layout_width="match_parent"
