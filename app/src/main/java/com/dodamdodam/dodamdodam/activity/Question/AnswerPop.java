@@ -37,10 +37,17 @@ public class AnswerPop extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("Question");
         userdatabaseReference = FirebaseDatabase.getInstance().getReference("users");
         loveruidReference = userdatabaseReference.child(user.getUid());
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        DocumentReference docRef = db.collection("users").document(user.getUid());
         databasesetting = FirebaseDatabase.getInstance().getReference("Setting");
 
+        Intent intent =getIntent();
+        List_Num = intent.getStringExtra("List_Num");
+
+        findLover();
+    }
+
+    private void findLover(){
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference docRef = db.collection("users").document(user.getUid());
 
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -50,19 +57,19 @@ public class AnswerPop extends AppCompatActivity {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
                         LOVERUID = document.getData().get("lover").toString();
-
+                        //Log.e("로그", "LoverUid>> "+ LOVERUID);
+                        setDisplay();
                     } else {
-                        Log.d(TAG, "없다없다없다없다");
+                        Log.e("로그", "없다없다없다없다");
                     }
                 } else {
-                    Log.d(TAG, "get failed with ", task.getException());
+                    Log.e("로그", "get failed with ", task.getException());
                 }
             }
         });//LoverUID받아오기
+    }
 
-        Intent intent =getIntent();
-        List_Num = intent.getStringExtra("List_Num");
-
+    private void setDisplay(){
         databaseReference.child(List_Num).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot1) {
@@ -104,6 +111,5 @@ public class AnswerPop extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
     }
 }
