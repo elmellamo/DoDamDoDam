@@ -71,12 +71,6 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance(); //유저를 받아오기 위해서
 
         findViewById(R.id.signUpBtn).setOnClickListener(onClickListener);
-        // findViewById(R.id.goto_login).setOnClickListener(onClickListener);
-
-//        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-        // Objects.requireNonNull(getSupportActionBar()).setTitle("도담도담");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
@@ -87,9 +81,6 @@ public class SignUpActivity extends AppCompatActivity {
                 case R.id.signUpBtn:
                     signUp();
                     break;
-//                case R.id.goto_login:
-//                    myStartActivity(LoginActivity.class);
-//                    break;
             }
         }
     };

@@ -35,7 +35,6 @@
             android:id="@+id/memberinfo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-
             android:layout_marginBottom="56dp"
             android:gravity="center"
             android:text="회 원 정 보"
@@ -66,7 +65,7 @@
 
         <EditText
             android:id="@+id/birthDayEditText"
-            android:layout_width="361dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:fontFamily="@font/font_1"
