@@ -69,6 +69,7 @@ public class AnswerPop extends AppCompatActivity {
         });//LoverUID받아오기
     }
 
+
     private void setDisplay(){
         databaseReference.child(List_Num).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
