@@ -193,11 +193,11 @@ public class AlbumAdd extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             clipMimeType.ifPresentOrElse(type -> {
                 switch (type) {
-                    case IMAGE_GIF:
                     case IMAGE_PNG:
                     case IMAGE_JPG:
                         pathList.add(currentUri);
                         break;
+                    case IMAGE_GIF:
                     case VIDEO_MP4:
                     case VIDEO_WEBM:
                         startToast("사진만 추가 가능합니다.\n다시 선택해주세요.");
