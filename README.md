@@ -9,4 +9,4 @@
 
 
 <도담도담 시연 영상>
-https://www.youtube.com/watch?v=FQ6g7Xi_qQU&t=10s
+https://www.youtube.com/watch?v=FQ6g7Xi_qQU&t=0s
