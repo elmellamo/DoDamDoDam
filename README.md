@@ -9,4 +9,4 @@
 
 
 <도담도담 시연 영상>
-https://user-images.githubusercontent.com/105416268/223757719-42da4096-7b38-4698-bfd9-ec693bb710a0.mp4
+https://www.youtube.com/watch?v=FQ6g7Xi_qQU&t=10s
