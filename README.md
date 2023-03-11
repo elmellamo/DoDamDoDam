@@ -16,7 +16,7 @@ https://www.youtube.com/watch?v=FQ6g7Xi_qQU&t=1s
 <도담도담 실행 이미지>
 
 ![실행시작](https://user-images.githubusercontent.com/90952132/224460739-015dc2a1-cfc0-4ec9-bb62-b67bb35a192f.jpg)
-- 애니메이션 >> 이거 명우가 적어줘
+- 스플래쉬 화면으로 초기 화면으로 자연스럽게 이동합니다.
 
 ![질문1](https://user-images.githubusercontent.com/90952132/224460741-67f6ceee-d2c7-4b1a-ad05-392063b2edd1.jpg)
 ![질문2](https://user-images.githubusercontent.com/90952132/224460742-f82bbfd2-cae2-4206-810a-729cb463f84d.jpg)
