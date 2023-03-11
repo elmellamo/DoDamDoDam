@@ -1,5 +1,7 @@
 # DoDamDoDam
-구글 플레이스토어에 등록되어 있는 '도담도담' 어플리케이션 코드입니다. (https://play.google.com/store/apps/details?id=com.dodamdodam.dodamdodam)
+구글 플레이스토어에 등록되어 있는 '도담도담' 어플리케이션 코드입니다. 
+(https://play.google.com/store/apps/details?id=com.dodamdodam.dodamdodam)
+
 연인간의 추억을 저장하고 생각을 공유하는 어플리케이션입니다.
 
 사용자들의 정보를 파이어베이스에 저장하고 상대방과 나의 정보만 선별하여 보여줍니다.
@@ -10,3 +12,4 @@
 
 <도담도담 시연 영상>
 https://www.youtube.com/watch?v=FQ6g7Xi_qQU&t=1s
+![DoDam_graphic](https://user-images.githubusercontent.com/90952132/224459451-a0105d9b-7015-48ea-ada3-e389611570a9.png)
