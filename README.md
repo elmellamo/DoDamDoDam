@@ -36,6 +36,8 @@ https://www.youtube.com/watch?v=FQ6g7Xi_qQU&t=1s
 - 앨범 게시물 클릭 시, 뷰페이저를 통해 여러 이미지들을 슬라이드해서 볼 수 있게 구현하였고, 현재 시간과 작성했던 시간의 차이에 맞게 계산하여 게시물 하단에 며칠 전인지 나타나게끔 구현하였습니다.
 
 ![캘린더 1](https://user-images.githubusercontent.com/90952132/224460751-ecf1c957-9f16-4027-b655-63fb7bd98f9b.jpg)
+
+
 ![설정](https://user-images.githubusercontent.com/90952132/224460753-4f2a0939-ca09-4d1f-96ec-cbaf27bfefe5.jpg)
 
 - 명우 파트!
