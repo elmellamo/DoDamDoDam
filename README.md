@@ -12,10 +12,6 @@
 
 <도담도담 시연 영상>
 https://www.youtube.com/watch?v=FQ6g7Xi_qQU&t=1s
-![KakaoTalk_20230311_110937915_12](https://user-images.githubusercontent.com/90952132/224459613-f3c29a79-c543-450d-b2c0-5020f597a734.jpg)
-
-<도담도담 그래픽 이미지>
-![DoDam_graphic](https://user-images.githubusercontent.com/90952132/224459451-a0105d9b-7015-48ea-ada3-e389611570a9.png)
 
 <도담도담 실행 이미지>
 ![실행시작](https://user-images.githubusercontent.com/90952132/224460605-b1dc635e-5b51-4009-80e8-f18d9488ad05.jpg)
