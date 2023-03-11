@@ -14,10 +14,13 @@
 https://www.youtube.com/watch?v=FQ6g7Xi_qQU&t=1s
 
 <도담도담 실행 이미지>
-![실행시작](https://user-images.githubusercontent.com/90952132/224460605-b1dc635e-5b51-4009-80e8-f18d9488ad05.jpg)
-![질문1](https://user-images.githubusercontent.com/90952132/224460609-292cf5b2-fe3c-456e-8747-1e576b32d99f.jpg)
-![질문2](https://user-images.githubusercontent.com/90952132/224460611-cc9f5194-a90f-471a-9cfc-47ae21110ddd.jpg)
-![앨범 1](https://user-images.githubusercontent.com/90952132/224460614-27bb4aa3-8a18-49b8-9485-436673b8e195.jpg)
-![앨범 2](https://user-images.githubusercontent.com/90952132/224460617-44e43d10-9960-4982-9ab3-15d55da72acf.jpg)
-![캘린더 1](https://user-images.githubusercontent.com/90952132/224460619-3e6ff7f0-715f-4000-be4c-a12a74b44443.jpg)
-![설정](https://user-images.githubusercontent.com/90952132/224460624-73c6a003-e1ac-4148-89d9-52072e2b45bb.jpg)
+
+![실행시작](https://user-images.githubusercontent.com/90952132/224460739-015dc2a1-cfc0-4ec9-bb62-b67bb35a192f.jpg)
+![질문1](https://user-images.githubusercontent.com/90952132/224460741-67f6ceee-d2c7-4b1a-ad05-392063b2edd1.jpg)
+![질문2](https://user-images.githubusercontent.com/90952132/224460742-f82bbfd2-cae2-4206-810a-729cb463f84d.jpg)
+![앨범 1](https://user-images.githubusercontent.com/90952132/224460743-cd498ff8-48cd-4e43-86ba-1a0f6e0be638.jpg)
+![앨범 2](https://user-images.githubusercontent.com/90952132/224460744-b69c1523-5693-495d-9401-8b0330391b77.jpg)
+![질문1](https://user-images.githubusercontent.com/90952132/224460745-a4440406-9934-4606-98aa-03e664fda675.jpg)
+![질문2](https://user-images.githubusercontent.com/90952132/224460748-b80cc6ca-1bae-4b94-8137-4a3dfa7bada1.jpg)
+![캘린더 1](https://user-images.githubusercontent.com/90952132/224460751-ecf1c957-9f16-4027-b655-63fb7bd98f9b.jpg)
+![설정](https://user-images.githubusercontent.com/90952132/224460753-4f2a0939-ca09-4d1f-96ec-cbaf27bfefe5.jpg)
