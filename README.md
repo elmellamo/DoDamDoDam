@@ -1,6 +1,6 @@
 # DoDamDoDam🐇🐰
-구글 플레이스토어에 등록되어 있는 '도담도담' 어플리케이션 코드입니다. 
-(https://play.google.com/store/apps/details?id=com.dodamdodam.dodamdodam)
+구글 플레이스토어에 등록되어 있는 '도담도담' 어플리케이션 코드입니다.     
+<https://play.google.com/store/apps/details?id=com.dodamdodam.dodamdodam)>
 
 연인간의 추억을 저장하고 생각을 공유하는 어플리케이션입니다.
 
