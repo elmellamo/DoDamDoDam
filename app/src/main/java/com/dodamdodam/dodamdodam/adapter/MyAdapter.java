@@ -1,6 +1,8 @@
 package com.dodamdodam.dodamdodam.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -45,6 +47,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             super(itemView);
             imgView_item = (SquareImageView) itemView.findViewById(R.id.gridImageView);
             mProgressBar = (ProgressBar) itemView.findViewById(R.id.circle_progress_bar);
+            mProgressBar.setIndeterminate(true);
+            mProgressBar.getIndeterminateDrawable().setColorFilter(Color.rgb(248, 151, 32), PorterDuff.Mode.MULTIPLY);
         }
     }
 

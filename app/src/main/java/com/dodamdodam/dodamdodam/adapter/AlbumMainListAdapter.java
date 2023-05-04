@@ -1,6 +1,8 @@
 package com.dodamdodam.dodamdodam.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -60,6 +62,10 @@ public class AlbumMainListAdapter extends ArrayAdapter {
             viewHolder= new ViewHolder();
             viewHolder.mProgressBar = (ProgressBar)convertView.findViewById(R.id.circle_progress_bar);
             viewHolder.profileImage = (SquareImageView)convertView.findViewById(R.id.gridImageView);
+
+            viewHolder.mProgressBar.setIndeterminate(true);
+            viewHolder.mProgressBar.getIndeterminateDrawable().setColorFilter(Color.rgb(248, 151, 32), PorterDuff.Mode.MULTIPLY);
+
 
             convertView.setTag(viewHolder);
         }
