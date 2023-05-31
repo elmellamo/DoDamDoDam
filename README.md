@@ -10,7 +10,7 @@
 일정을 공유하고 생일 d-day, 만난 날 d+day를 보여주는 공유캘린더도 있습니다.
 
 
-<도담도담 시연 영상>
+<도담도담 시연 영상>     
 https://www.youtube.com/watch?v=FQ6g7Xi_qQU&t=1s
 
 <도담도담 실행 이미지>
