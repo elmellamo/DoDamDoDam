@@ -6,7 +6,7 @@
     android:id="@+id/activity_setting_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF7D2"
+    android:background="@color/bg_color"
     android:orientation="vertical"
 
     android:paddingTop="20dp"
